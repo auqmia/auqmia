@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const ContainerLogin = styled.div`
   width: 100vw;
@@ -19,6 +20,8 @@ export const ContainerLoginForm = styled.form`
   background-color: var(--gray-2);
   border-radius: 7px;
   max-width: 440px;
+
+  animation: backInLeft 1s;
 
   .titulo {
     color: var(--color-primary);
@@ -56,6 +59,15 @@ export const ContainerLoginForm = styled.form`
   }
   .button-login:hover {
     filter: contrast(0.5);
+
+    animation: pulse 1s;
+  }
+  .button-check {
+    transition: ease-in-out 0.5s;
+  }
+  .button-login:hover > .button-check {
+    animation: rubberBand 1s;
+    scale: 1.5;
   }
   .paragrafo-form {
     font-family: var(--font-family);
@@ -65,6 +77,15 @@ export const ContainerLoginForm = styled.form`
     background-color: var(--gray-2);
     color: var(--color-secundary);
   }
+
+  .button-cadastra-se {
+    transition: ease-in-out 0.5s;
+  }
+
+  .button-cadastra-se:hover {
+    animation: pulse 1s;
+  }
+
   .footer-form {
     display: flex;
     align-items: center;
