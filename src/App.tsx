@@ -1,11 +1,14 @@
-import './App.css';
-import Dashboard from './pages/Dashboard';
+import "./App.css";
+import Routes from "./routes";
+import Global from "./styles/Global";
+import AuthProvider from "./contexts/AuthContext";
 
 function App() {
   return (
-    <div>
-      <Dashboard/>
-    </div>
+    <AuthProvider>
+      <Global />
+      <Routes />
+    </AuthProvider>
   );
 }
 
