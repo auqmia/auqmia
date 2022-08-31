@@ -19,7 +19,7 @@ const Login = () => {
           </div>
         </div>
         <button className="button-login">
-          <BsCheckLg />
+          <BsCheckLg className="button-check" />
         </button>
         <div className="footer-form">
           <p className="paragrafo-form">Não possui conta?</p>

@@ -33,12 +33,6 @@ export const ContainerLoginForm = styled.form`
     text-align: center;
     padding: 20px 0px 50px 0px;
   }
-  .titulo:hover {
-
-    animation: bounce 1s;
-
-  }
-
   .container-input {
     width: 90%;
     display: flex;
@@ -68,6 +62,13 @@ export const ContainerLoginForm = styled.form`
 
     animation: pulse 1s;
   }
+  .button-check {
+    transition: ease-in-out 0.5s;
+  }
+  .button-login:hover > .button-check {
+    animation: rubberBand 1s;
+    scale: 1.5;
+  }
   .paragrafo-form {
     font-family: var(--font-family);
     color: var(--gray-3);
@@ -75,6 +76,10 @@ export const ContainerLoginForm = styled.form`
   .button-cadastra-se {
     background-color: var(--gray-2);
     color: var(--color-secundary);
+  }
+
+  .button-cadastra-se {
+    transition: ease-in-out 0.5s;
   }
 
   .button-cadastra-se:hover {
