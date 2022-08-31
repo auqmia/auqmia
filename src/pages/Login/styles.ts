@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const ContainerLogin = styled.div`
   width: 100vw;
@@ -20,6 +21,8 @@ export const ContainerLoginForm = styled.form`
   border-radius: 7px;
   max-width: 440px;
 
+  animation: backInLeft 1s;
+
   .titulo {
     color: var(--color-primary);
     font-weight: var(--font-family);
@@ -30,6 +33,12 @@ export const ContainerLoginForm = styled.form`
     text-align: center;
     padding: 20px 0px 50px 0px;
   }
+  .titulo:hover {
+
+    animation: bounce 1s;
+
+  }
+
   .container-input {
     width: 90%;
     display: flex;
@@ -56,6 +65,8 @@ export const ContainerLoginForm = styled.form`
   }
   .button-login:hover {
     filter: contrast(0.5);
+
+    animation: pulse 1s;
   }
   .paragrafo-form {
     font-family: var(--font-family);
@@ -65,6 +76,11 @@ export const ContainerLoginForm = styled.form`
     background-color: var(--gray-2);
     color: var(--color-secundary);
   }
+
+  .button-cadastra-se:hover {
+    animation: pulse 1s;
+  }
+
   .footer-form {
     display: flex;
     align-items: center;
