@@ -1,24 +1,48 @@
-import InputForm from "../../components/Input";
+import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import { ContainerLoginForm, ContainerLogin } from "./styles";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg } from "react-icons/bs";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schema from "../../validators/loginUser";
+import { IUserLogin } from "../../services/loginUserApi";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserLogin>({
+    resolver: yupResolver(schema),
+  });
+
+  const { loginUser } = useContext(AuthContext);
+
   return (
     <ContainerLogin>
-      <ContainerLoginForm>
+      <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
         <h1 className="titulo">Login</h1>
         <div className="container-input">
           <div className="warp-form">
             <LabelForm>Email</LabelForm>
-            <InputForm inputValue="email@gmail.com" />
+            <Input
+              placeholder="email@gmail.com"
+              type="email"
+              {...register("email")}
+            />
           </div>
           <div className="warp-form">
             <LabelForm>Senha</LabelForm>
-            <InputForm inputValue="Digite aqui sua senha" />
+            <Input
+              placeholder="Digite aqui sua senha"
+              type="password"
+              {...register("password")}
+            />
           </div>
         </div>
-        <button className="button-login">
+        <button type="submit" className="button-login">
           <BsCheckLg />
         </button>
         <div className="footer-form">
