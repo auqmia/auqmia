@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import api, { ICommonHeaderProperties } from "../services/api";
 import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export interface IAuthContexProps {
   children: ReactNode;
@@ -10,12 +11,35 @@ export interface IAuthContexProps {
 interface IAuthContex {
   loginUser: (data: IUserLogin) => Promise<void>;
   user: IUserData;
+  isLogged: boolean;
+  loading: boolean;
 }
 
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
 
 const AuthProvider = ({ children }: IAuthContexProps) => {
   const [user, setUser] = useState<IUserData>({} as IUserData);
+  const [loading, setLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+  const navegate = useNavigate();
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const token = localStorage.getItem("@AuqMia:token");
+      if (token) {
+        try {
+          api.defaults.headers = {
+            Authorization: `bearer ${token}`,
+          } as ICommonHeaderProperties;
+          setIsLogged(true);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      setLoading(false);
+    };
+    loadUser();
+  }, []);
 
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
@@ -30,7 +54,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
           autoClose: 900,
           theme: "dark",
         });
-
+        navegate("/profile", { replace: true });
         localStorage.setItem("@AuqMia:token", accessToken);
       })
       .catch((err) =>
@@ -41,7 +65,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
       );
   };
   return (
-    <AuthContext.Provider value={{ loginUser, user }}>
+    <AuthContext.Provider value={{ loginUser, user, isLogged, loading }}>
       {children}
     </AuthContext.Provider>
   );
