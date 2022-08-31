@@ -8,7 +8,6 @@ const schema = yup.object({
   password: yup
     .string()
     .required("Senha é obrigatória")
-    .min(6, "No mínimo 8 caracteres"),
 });
 
 export default schema;
