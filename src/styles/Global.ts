@@ -4,8 +4,10 @@ export default createGlobalStyle`
   :root {
     --color-primary: #00DEDF;
     --color-secundary:  #CE8EDB;
+  
     --gray-4: #292929;
-    --gray-3:  rgba(119, 159, 156, 0.2);;
+    --gray-3:  rgba(119, 159, 156, 0.2);
+    --gray-2: #242424;
     --gray-0:#f8f9fa;
 
 
@@ -24,10 +26,11 @@ export default createGlobalStyle`
 	padding: 0;
 	border: 0;
 	font-size: 100%;
+  box-sizing: border-box;
 }
 body{
  overflow-x: hidden;
- background-color: #121214;
+ background-color: var(--gray-4);
 }
 body::-webkit-scrollbar {
     border: none;
@@ -40,9 +43,11 @@ body::-webkit-scrollbar {
 button{
   cursor: pointer;
 }
+
 a{
   cursor: pointer;
 }
+
 ul,li{
  list-style: none;
  
