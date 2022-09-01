@@ -10,6 +10,7 @@ export interface IAuthContexProps {
 
 interface IAuthContex {
   loginUser: (data: IUserLogin) => Promise<void>;
+  loginRoute: () => void;
   user: IUserData;
   isLogged: boolean;
   loading: boolean;
@@ -64,8 +65,13 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         })
       );
   };
+
+  const loginRoute = () => {
+    navigate("/login")
+  }
+
   return (
-    <AuthContext.Provider value={{ loginUser, user, isLogged, loading }}>
+    <AuthContext.Provider value={{ loginUser, loginRoute, user, isLogged, loading }}>
       {children}
     </AuthContext.Provider>
   );
