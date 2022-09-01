@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Error } from "../../components/ErrorValidators/styles";
 import schema from "../../validators/loginUser";
 import { IUserLogin } from "../../services/loginUserApi";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
@@ -62,7 +63,9 @@ const Login = () => {
         </button>
         <div className="footer-form">
           <p className="paragraph-form">Não possui conta?</p>
-          <button className="button-register">Cadastra-se</button>
+          <Link to="/register" className="button-register">
+            Cadastra-se
+          </Link>
         </div>
       </ContainerLoginForm>
     </ContainerForm>
