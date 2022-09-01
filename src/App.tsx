@@ -1,15 +1,15 @@
 import "./App.css";
-import Routes from "./routes";
 import Global from "./styles/Global";
 import AuthProvider from "./contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import RoutesMain from "./routes";
 
 function App() {
   return (
     <AuthProvider>
       <Global />
-      <Routes />
+      <RoutesMain />
       <ToastContainer />
     </AuthProvider>
   );
