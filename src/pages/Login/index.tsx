@@ -1,6 +1,6 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
-import { ContainerLoginForm, ContainerLogin } from "./styles";
+import { ContainerLoginForm, ContainerForm } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
@@ -24,7 +24,7 @@ const Login = () => {
   const { loginUser } = useContext(AuthContext);
 
   return (
-    <ContainerLogin>
+    <ContainerForm>
       <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
         <h1 className="titulo">Login</h1>
         <div className="container-input">
@@ -65,7 +65,7 @@ const Login = () => {
           <button className="button-register">Cadastra-se</button>
         </div>
       </ContainerLoginForm>
-    </ContainerLogin>
+    </ContainerForm>
   );
 };
 

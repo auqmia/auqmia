@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import "animate.css";
 
-export const ContainerLogin = styled.div`
+export const ContainerForm = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
