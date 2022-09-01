@@ -31,9 +31,25 @@ export const HeaderMain = styled.header`
     .login-button {
       background: none;
     }
+    .login-button:hover {
+      animation: pulse 1s;
+    }
+    .new-login-button {
+      background: none;
+
+      animation: backInRight 1s;
+    }
 
     .donation-button {
       background: none;
+    }
+    .donation-button:hover {
+      animation: pulse 1s;
+    }
+    .new-donation-button {
+      background: none;
+
+      animation: backInRight 1s;
     }
   }
 `;

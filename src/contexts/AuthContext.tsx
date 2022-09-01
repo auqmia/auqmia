@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import api, { ICommonHeaderProperties } from "../services/api";
 import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
 import { toast } from "react-toastify";
@@ -14,14 +21,20 @@ interface IAuthContex {
   user: IUserData;
   isLogged: boolean;
   loading: boolean;
+  loginButton: boolean;
+  setLoginButton: Dispatch<SetStateAction<boolean>>;
+  donationButton: boolean;
+  setDonationButton: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
 
 const AuthProvider = ({ children }: IAuthContexProps) => {
   const [user, setUser] = useState<IUserData>({} as IUserData);
-  const [loading, setLoading] = useState(true);
-  const [isLogged, setIsLogged] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [loginButton, setLoginButton] = useState<boolean>(true);
+  const [donationButton, setDonationButton] = useState<boolean>(true);
 
   const navegate = useNavigate();
 
@@ -74,7 +87,17 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ loginUser, loginRoute, user, isLogged, loading }}
+      value={{
+        loginUser,
+        loginRoute,
+        user,
+        isLogged,
+        loading,
+        loginButton,
+        setLoginButton,
+        donationButton,
+        setDonationButton,
+      }}
     >
       {children}
     </AuthContext.Provider>
