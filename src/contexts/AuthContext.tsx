@@ -6,7 +6,9 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import api, { ICommonHeaderProperties } from "../services/api";
+import { getAnimalsApi, IAnimals } from "../services/getAnimalsApi";
 import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +20,7 @@ export interface IAuthContexProps {
 interface IAuthContex {
   loginUser: (data: IUserLogin) => Promise<void>;
   loginRoute: () => void;
+  listAnimals: IAnimals[];
   user: IUserData;
   isLogged: boolean;
   loading: boolean;
@@ -30,13 +33,17 @@ interface IAuthContex {
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
 
 const AuthProvider = ({ children }: IAuthContexProps) => {
+  const navigate = useNavigate();
+  const [listAnimals, setListAnimals] = useState([]);
   const [user, setUser] = useState<IUserData>({} as IUserData);
   const [loading, setLoading] = useState<boolean>(true);
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loginButton, setLoginButton] = useState<boolean>(true);
   const [donationButton, setDonationButton] = useState<boolean>(true);
 
-  const navegate = useNavigate();
+  useEffect(() => {
+    getAnimals()
+  },[])
 
   useEffect(() => {
     const loadUser = async () => {
@@ -70,7 +77,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
           autoClose: 900,
           theme: "dark",
         });
-        navegate("/profile", { replace: true });
+        navigate("/profile", { replace: true });
         localStorage.setItem("@AuqMia:token", accessToken);
       })
       .catch((err) =>
@@ -82,8 +89,16 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   };
 
   const loginRoute = () => {
-    navegate("/login");
+    navigate("/login");
   };
+
+  function getAnimals() {
+    getAnimalsApi()
+    .then((res) => {
+      setListAnimals(res)
+    })
+    .catch((err) => console.log(err))
+  }
 
   return (
     <AuthContext.Provider
@@ -97,6 +112,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         setLoginButton,
         donationButton,
         setDonationButton,
+        listAnimals
       }}
     >
       {children}
