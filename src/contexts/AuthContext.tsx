@@ -22,6 +22,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const [user, setUser] = useState<IUserData>({} as IUserData);
   const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
+
   const navegate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
           Authorization: `bearer ${accessToken}`,
         } as ICommonHeaderProperties;
         setUser(userReponse);
+        setIsLogged(true);
         toast.success("Usuário logado com sucesso!", {
           autoClose: 900,
           theme: "dark",
@@ -67,11 +69,13 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   };
 
   const loginRoute = () => {
-    navigate("/login")
-  }
+    navegate("/login");
+  };
 
   return (
-    <AuthContext.Provider value={{ loginUser, loginRoute, user, isLogged, loading }}>
+    <AuthContext.Provider
+      value={{ loginUser, loginRoute, user, isLogged, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
