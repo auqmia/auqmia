@@ -46,6 +46,7 @@ button{
 
 a{
   cursor: pointer;
+  text-decoration: none;
 }
 
 ul,li{
