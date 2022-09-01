@@ -7,8 +7,7 @@ const schema = yup.object({
     .required("Email é obrigatório"),
   password: yup
     .string()
-    .required("Senha obrigatória")
-    .min(3, "No mínimo 8 caracteres"),
+    .required("Senha é obrigatória")
 });
 
 export default schema;

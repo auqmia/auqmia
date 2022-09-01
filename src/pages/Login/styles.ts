@@ -12,7 +12,7 @@ export const ContainerLogin = styled.div`
 export const ContainerLoginForm = styled.form`
   box-sizing: border-box;
   width: 90%;
-  height: 500px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,6 +46,19 @@ export const ContainerLoginForm = styled.form`
     flex-direction: column;
     width: 100%;
   }
+  .div-pass {
+    position: relative;
+  }
+  .eyes {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--color-primary);
+    right: 20px;
+    width: 20px;
+    height: 20px;
+  }
   .button-login {
     width: 50px;
     height: 50px;
@@ -57,6 +70,27 @@ export const ContainerLoginForm = styled.form`
     background-color: var(--color-secundary);
     margin: 20px 0px;
   }
+  .div-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+  .button-back {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-third);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-back {
+    color: #ffffff;
+    width: 40px;
+    height: 30px;
+  }
   .button-login:hover {
     filter: contrast(0.5);
 
@@ -64,28 +98,25 @@ export const ContainerLoginForm = styled.form`
   }
   .button-check {
     transition: ease-in-out 0.5s;
+    width: 20px;
+    height: 20px;
   }
   .button-login:hover > .button-check {
     animation: rubberBand 1s;
     scale: 1.5;
   }
-  .paragrafo-form {
+  .paragraph-form {
     font-family: var(--font-family);
     color: var(--gray-3);
   }
-  .button-cadastra-se {
+  .button-register {
     background-color: var(--gray-2);
     color: var(--color-secundary);
-  }
-
-  .button-cadastra-se {
     transition: ease-in-out 0.5s;
   }
-
-  .button-cadastra-se:hover {
+  .button-register:hover {
     animation: pulse 1s;
   }
-
   .footer-form {
     display: flex;
     align-items: center;
