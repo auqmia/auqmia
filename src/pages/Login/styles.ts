@@ -86,6 +86,20 @@ export const ContainerLoginForm = styled.form`
     align-items: center;
     justify-content: center;
   }
+  .button-back:hover {
+    animation: pulse 1s;
+  }
+
+  .button-back:hover > .icon-back {
+    animation: rubberBand 1s;
+    scale: 1.5;
+  }
+  .icon-back {
+    transition: ease-in-out 0.5s;
+    width: 20px;
+    height: 20px;
+  }
+
   .icon-back {
     color: #ffffff;
     width: 40px;
