@@ -41,7 +41,7 @@ export const ContainerLoginForm = styled.form`
     justify-content: center;
     gap: 10px;
   }
-  .warp-form {
+  .wrap-form {
     display: flex;
     flex-direction: column;
     width: 100%;

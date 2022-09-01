@@ -28,7 +28,7 @@ const Login = () => {
       <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
         <h1 className="titulo">Login</h1>
         <div className="container-input">
-          <div className="warp-form">
+          <div className="wrap-form">
             <LabelForm>Email</LabelForm>
             <Input
               placeholder="email@gmail.com"
@@ -37,7 +37,7 @@ const Login = () => {
             />
             <Error>{errors.email?.message}</Error>
           </div>
-          <div className="warp-form">
+          <div className="wrap-form">
             <LabelForm>Senha</LabelForm>
             <div className="div-pass">
               <Input
