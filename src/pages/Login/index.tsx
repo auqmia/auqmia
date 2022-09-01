@@ -1,6 +1,6 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
-import { ContainerLoginForm, ContainerForm } from "./styles";
+import { Form, ContainerForm } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
@@ -26,10 +26,10 @@ const Login = () => {
 
   return (
     <ContainerForm>
-      <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
-        <h1 className="titulo">Login</h1>
-        <div className="container-input">
-          <div className="wrap-form">
+      <Form onSubmit={handleSubmit(loginUser)}>
+        <h1 className="form__titulo">Login</h1>
+        <div className="form__container">
+          <div className="form__input">
             <LabelForm>Email</LabelForm>
             <Input
               placeholder="email@gmail.com"
@@ -38,36 +38,39 @@ const Login = () => {
             />
             <Error>{errors.email?.message}</Error>
           </div>
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Senha</LabelForm>
-            <div className="div-pass">
+            <div className="input__password">
               <Input
                 placeholder="Digite aqui sua senha"
                 type={visible ? "text" : "password"}
                 {...register("password")}
               />
               {visible ? (
-                <BsEye onClick={() => setVisible(!visible)} className="eyes" />
+                <BsEye
+                  onClick={() => setVisible(!visible)}
+                  className="icon__eyes"
+                />
               ) : (
                 <BsEyeSlash
                   onClick={() => setVisible(!visible)}
-                  className="eyes"
+                  className="icon__eyes"
                 />
               )}
             </div>
             <Error>{errors.password?.message}</Error>
           </div>
         </div>
-        <button type="submit" className="button-login">
+        <button type="submit" className="form__button">
           <BsCheckLg />
         </button>
-        <div className="footer-form">
-          <p className="paragraph-form">Não possui conta?</p>
-          <Link to="/register" className="button-register">
+        <div className="form__footer">
+          <p className="footer__text">Não possui conta?</p>
+          <Link to="/register" className="form__link">
             Cadastra-se
           </Link>
         </div>
-      </ContainerLoginForm>
+      </Form>
     </ContainerForm>
   );
 };

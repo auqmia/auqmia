@@ -5,14 +5,19 @@ export const ContainerForm = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  padding-top: 50px;
+  transition: padding 0.8s ease-in-out;
+
+  @media (min-width: 760px) {
+    padding-top: 100px;
+  }
 `;
 
-export const ContainerLoginForm = styled.form`
+export const Form = styled.form`
   box-sizing: border-box;
   width: 90%;
-  height: 520px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +28,7 @@ export const ContainerLoginForm = styled.form`
 
   animation: backInLeft 1s;
 
-  .titulo {
+  .form__titulo {
     color: var(--color-primary);
     font-weight: var(--font-family);
     font-style: normal;
@@ -33,7 +38,7 @@ export const ContainerLoginForm = styled.form`
     text-align: center;
     padding: 20px 0px 50px 0px;
   }
-  .container-input {
+  .form__container {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -41,15 +46,15 @@ export const ContainerLoginForm = styled.form`
     justify-content: center;
     gap: 10px;
   }
-  .wrap-form {
+  .form__input {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
-  .div-pass {
+  .input__password {
     position: relative;
   }
-  .eyes {
+  .icon__eyes {
     position: absolute;
     top: 15px;
     right: 10px;
@@ -59,7 +64,7 @@ export const ContainerLoginForm = styled.form`
     width: 20px;
     height: 20px;
   }
-  .button-login {
+  .form__button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -70,7 +75,7 @@ export const ContainerLoginForm = styled.form`
     background-color: var(--color-secundary);
     margin: 20px 0px;
   }
-  .button-login:hover {
+  .form__button:hover {
     filter: contrast(0.5);
 
     animation: pulse 1s;
@@ -78,26 +83,27 @@ export const ContainerLoginForm = styled.form`
   .button-check {
     transition: ease-in-out 0.5s;
   }
-  .button-login:hover > .button-check {
+  .form__button:hover > .button-check {
     animation: rubberBand 1s;
     scale: 1.5;
   }
-  .paragraph-form {
+  .footer__text {
     font-family: var(--font-family);
     color: var(--gray-3);
   }
-  .button-register {
+  .form__link {
     background-color: var(--gray-2);
     color: var(--color-secundary);
     transition: ease-in-out 0.5s;
   }
-  .button-register:hover {
+  .form__link:hover {
     animation: pulse 1s;
   }
-  .footer-form {
+  .form__footer {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 5px;
+    padding-bottom: 30px;
   }
 `;
