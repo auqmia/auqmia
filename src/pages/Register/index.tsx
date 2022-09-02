@@ -12,17 +12,25 @@ import {
   BsQuestionCircle,
   BsSuitHeartFill,
 } from "react-icons/bs";
-import { IStatesOptions, IUserRegister } from "../../services/registerUserApi";
+import {
+  ISelectOptions,
+  IStatesData,
+  IUserRegister,
+  statesApi,
+} from "../../services/registerUserApi";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { statesApi } from "../../services/api";
+import Select from "react-select";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
-  const [statesOptions, setStatesOptions] = useState<IStatesOptions[]>(
-    [] as IStatesOptions[]
+  // const [statesData, setStatesData] = useState<IStatesData[]>(
+  //   [] as IStatesData[]
+  // );
+  const [selectOptions, setSelectOptions] = useState<ISelectOptions[]>(
+    [] as ISelectOptions[]
   );
   const { registerUser } = useContext(AuthContext);
 
@@ -33,12 +41,23 @@ const Register = () => {
   } = useForm<IUserRegister>({ resolver: yupResolver(registerSchema) });
 
   useEffect(() => {
-    statesApi.get("estados").then((res) => setStatesOptions(res.data));
+    statesApi.get("estados").then((res) => {
+      const data: IStatesData[] = res.data;
+      const options: ISelectOptions[] = data.map(({ sigla }) => ({
+        value: sigla,
+        label: sigla,
+      }));
+      setSelectOptions(options);
+    });
   }, []);
+
+  function teste(data: IUserRegister) {
+    console.log(data);
+  }
 
   return (
     <ContainerForm>
-      <Form onSubmit={handleSubmit(registerUser)}>
+      <Form onSubmit={handleSubmit(teste)}>
         <h1 className="form__title">Cadastro</h1>
         <div className="form__container">
           <div className="form__input">
@@ -107,13 +126,7 @@ const Register = () => {
 
           <div className="form__input">
             <LabelForm>Estado</LabelForm>
-            <select {...register("state")}>
-              {statesOptions.map(({ id, sigla }) => (
-                <option key={id} value={sigla}>
-                  {sigla}
-                </option>
-              ))}
-            </select>
+            <Select options={selectOptions} />
           </div>
 
           <div className="form__input">
