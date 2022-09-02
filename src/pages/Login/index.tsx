@@ -14,7 +14,7 @@ import { IUserLogin } from "../../services/loginUserApi";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
-  const navegate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,7 +27,7 @@ const Login = () => {
   const { loginUser } = useContext(AuthContext);
 
   const back = () => {
-    navegate("/");
+    navigate("/");
   };
 
   return (
