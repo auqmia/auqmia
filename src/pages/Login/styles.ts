@@ -46,7 +46,7 @@ export const Form = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
   }
   .form__input {
     display: flex;
