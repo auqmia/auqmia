@@ -11,3 +11,10 @@ export interface IUserRegister {
   state: string;
   user_type: string;
 }
+
+export interface IStatesOptions {
+  id: number;
+  sigla: string;
+  nome: string;
+  região: object;
+}
