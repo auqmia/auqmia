@@ -7,7 +7,7 @@ import { HeaderProfile, DivMain } from "./stelys";
 import logo from "../../assets/img/logoHeader.png";
 
 const Profile = () => {
-  const { loading, isLogged } = useContext(AuthContext);
+  const { loading, isLogged, user } = useContext(AuthContext);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -33,15 +33,12 @@ const Profile = () => {
           </div>
           <main className="main-profile">
             <figure>
-              <img
-                src="https://ichef.bbci.co.uk/news/976/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg"
-                alt="img profile"
-              />
+              <img src={user.url} alt="img profile" />
             </figure>
             <div className="data-user">
               <div>
-                <h2 className="name-user">Jose Enilson</h2>
-                <p className="name-user">Panelas, PE</p>
+                <h2 className="name-user">{user.name}</h2>
+                <p className="name-user">{user.location}</p>
               </div>
               <p className="name-user">
                 “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -51,7 +48,7 @@ const Profile = () => {
                 nec gravida.”
               </p>
               <div className="div-email">
-                <p className="name-user">email@gmail.com</p>
+                <p className="name-user">{user.email}</p>
                 <MdOutlineEditNote className="icon-edit" />
               </div>
             </div>
