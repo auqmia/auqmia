@@ -28,6 +28,7 @@ interface IAuthContex {
   setLoginButton: Dispatch<SetStateAction<boolean>>;
   donationButton: boolean;
   setDonationButton: Dispatch<SetStateAction<boolean>>;
+  backProfile: () => void;
   adopted: boolean;
   setAdopted: Dispatch<SetStateAction<boolean>>;
   deleteAnimal: (id: string) => void;
@@ -48,8 +49,6 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   useEffect(() => {
     getAnimals();
   }, [adopted]);
-
-  console.log(adopted);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -93,10 +92,15 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         })
       );
   };
+  const backProfile = () => {
+    navigate("/dashboard");
+    localStorage.removeItem("@AuqMia:token");
+  };
 
   const loginRoute = () => {
     navigate("/login");
   };
+
 
   const getAnimals = async () => {
     await getAnimalsApi()
@@ -104,6 +108,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         setListAnimals(res);
       })
       .catch((err) => console.log(err));
+  }
   };
 
   const deleteAnimal = async (id: string) => {
@@ -114,6 +119,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     });
     await getAnimals();
   };
+
 
   return (
     <AuthContext.Provider
@@ -128,6 +134,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         donationButton,
         setDonationButton,
         listAnimals,
+        backProfile,
         adopted,
         setAdopted,
         deleteAnimal,
