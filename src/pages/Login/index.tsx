@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <ContainerLogin>
       <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
-        <h1 className="titulo">Login</h1>
+        <h1 className="title">Login</h1>
         <div className="container-input">
           <div className="warp-form">
             <LabelForm>Email</LabelForm>
