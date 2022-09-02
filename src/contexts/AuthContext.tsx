@@ -28,6 +28,9 @@ interface IAuthContex {
   setLoginButton: Dispatch<SetStateAction<boolean>>;
   donationButton: boolean;
   setDonationButton: Dispatch<SetStateAction<boolean>>;
+  adopted: boolean;
+  setAdopted: Dispatch<SetStateAction<boolean>>;
+  deleteAnimal: (id: string) => void;
 }
 
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
@@ -40,10 +43,13 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loginButton, setLoginButton] = useState<boolean>(true);
   const [donationButton, setDonationButton] = useState<boolean>(true);
+  const [adopted, setAdopted] = useState<boolean>(true);
 
   useEffect(() => {
-    getAnimals()
-  },[])
+    getAnimals();
+  }, [adopted]);
+
+  console.log(adopted);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -92,13 +98,22 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     navigate("/login");
   };
 
-  function getAnimals() {
-    getAnimalsApi()
-    .then((res) => {
-      setListAnimals(res)
-    })
-    .catch((err) => console.log(err))
-  }
+  const getAnimals = async () => {
+    await getAnimalsApi()
+      .then((res) => {
+        setListAnimals(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteAnimal = async (id: string) => {
+    const token = localStorage.getItem("@AuqMia:token");
+
+    await api.delete(`animals/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    await getAnimals();
+  };
 
   return (
     <AuthContext.Provider
@@ -112,7 +127,10 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         setLoginButton,
         donationButton,
         setDonationButton,
-        listAnimals
+        listAnimals,
+        adopted,
+        setAdopted,
+        deleteAnimal,
       }}
     >
       {children}
