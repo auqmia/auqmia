@@ -93,7 +93,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
       );
   };
   const backProfile = () => {
-    navigate("/dashboard");
+    navigate("/");
     localStorage.removeItem("@AuqMia:token");
   };
 
@@ -101,16 +101,13 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     navigate("/login");
   };
 
-
   const getAnimals = async () => {
     await getAnimalsApi()
       .then((res) => {
         setListAnimals(res);
       })
       .catch((err) => console.log(err));
-  }
   };
-
   const deleteAnimal = async (id: string) => {
     const token = localStorage.getItem("@AuqMia:token");
 
@@ -119,7 +116,6 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     });
     await getAnimals();
   };
-
 
   return (
     <AuthContext.Provider
@@ -144,4 +140,5 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     </AuthContext.Provider>
   );
 };
+
 export default AuthProvider;

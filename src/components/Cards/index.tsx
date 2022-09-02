@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthContext";
 import { IAnimals } from "../../services/getAnimalsApi";
-import { Ul } from "./style";
 
 function Cards() {
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ function Cards() {
   };
 
   return (
-    <Ul>
+    <>
       {listAnimals.map((elem: IAnimals) => (
         <li key={elem.id} className={`list${elem.id}`}>
           <h1>{elem.name}</h1>
@@ -53,7 +52,7 @@ function Cards() {
           <button onClick={() => deleteCard(elem.id)}>Adotar</button>
         </li>
       ))}
-    </Ul>
+    </>
   );
 }
 
