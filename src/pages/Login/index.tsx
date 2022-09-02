@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <ContainerForm>
       <Form onSubmit={handleSubmit(loginUser)}>
-        <h1 className="form__titulo">Login</h1>
+        <h1 className="form__title">Login</h1>
         <div className="form__container">
           <div className="form__input">
             <LabelForm>Email</LabelForm>
