@@ -26,12 +26,14 @@ export const HeaderProfile = styled.header`
     height: 60px;
     border-radius: 50%;
     background-color: var(--color-third);
+    object-fit: cover;
   }
   .button-help {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background-color: var(--color-primary);
+    object-fit: cover;
   }
 `;
 
@@ -54,7 +56,7 @@ export const DivMain = styled.div`
     justify-content: center;
   }
   .main-profile {
-    img {
+    .img-profile {
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -82,7 +84,8 @@ export const DivMain = styled.div`
     .div-more-pets {
       display: flex;
       align-items: center;
-      padding-top: 20px;
+      justify-content: center;
+      padding: 20px 0px;
       gap: 15px;
     }
     .button-more-pets {
@@ -93,6 +96,30 @@ export const DivMain = styled.div`
     }
     .title-more-pets {
       color: var(--color-primary);
+      font-family: var(--font-family);
+      font-size: 20px;
+    }
+    .ul-profile {
+      flex-direction: row;
+      overflow-x: auto;
+      justify-content: flex-start;
+    }
+    .button-requests {
+      background-color: var(--color-secundary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .icon-button {
+      color: var(--gray-0);
+      width: 40px;
+      height: 40px;
+    }
+    .need-help {
+      color: var(--color-secundary);
       font-family: var(--font-family);
       font-size: 20px;
     }
