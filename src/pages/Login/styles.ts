@@ -4,6 +4,7 @@ import "animate.css";
 export const ContainerForm = styled.div`
   width: 100vw;
   height: 100vh;
+  max-height: fit-content;
   display: flex;
   justify-content: center;
   padding-top: 50px;
@@ -28,7 +29,7 @@ export const Form = styled.form`
 
   animation: backInLeft 1s;
 
-  .form__titulo {
+  .form__title {
     color: var(--color-primary);
     font-weight: var(--font-family);
     font-style: normal;
@@ -40,6 +41,7 @@ export const Form = styled.form`
   }
   .form__container {
     width: 90%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +52,73 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
+
+    @media (min-width: 450px) {
+      > .radio--inputs {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
   }
+  .form__input--radio {
+    width: 60%;
+    margin: 0 auto;
+    flex-direction: row;
+    position: relative;
+
+    @media (min-width: 400px) {
+    }
+    > label {
+      margin: 0 5px 0 10px;
+      font-size: 18px;
+      color: var(--gray-0);
+    }
+
+    > label + input {
+      margin-left: 20px;
+    }
+  }
+  .user_type__info--question_mark {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--gray-0);
+  }
+  .user_type__info--question_mark:hover + .user_type__info--text {
+    display: block;
+  }
+  .user_type__info--text {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    z-index: 1;
+
+    width: 260px;
+    height: fit-content;
+    padding: 5px 10px;
+    text-align: justify;
+    font-family: var(--font-family);
+    font-size: 14px;
+    color: var(--gray-0);
+    background-color: var(--gray-2);
+    border: 3px solid var(--gray-3);
+    border-radius: 10px;
+
+    transition: top 0.5s ease-in-out;
+
+    > .user_type__info--heart {
+      float: right;
+      color: var(--color-error);
+    }
+
+    @media (min-width: 450px) {
+      top: 50px;
+      left: -130px;
+    }
+  }
+
   .input__password {
     position: relative;
   }
@@ -72,7 +140,7 @@ export const Form = styled.form`
     align-items: center;
     justify-content: center;
     color: var(--gray-0);
-    background-color: var(--color-secundary);
+    background-color: var(--color-secondary);
     margin: 20px 0px;
   }
   .form__button:hover {
@@ -93,7 +161,7 @@ export const Form = styled.form`
   }
   .form__link {
     background-color: var(--gray-2);
-    color: var(--color-secundary);
+    color: var(--color-secondary);
     transition: ease-in-out 0.5s;
   }
   .form__link:hover {
