@@ -28,6 +28,7 @@ interface IAuthContex {
   setLoginButton: Dispatch<SetStateAction<boolean>>;
   donationButton: boolean;
   setDonationButton: Dispatch<SetStateAction<boolean>>;
+  backProfile: () => void;
 }
 
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
@@ -42,8 +43,8 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const [donationButton, setDonationButton] = useState<boolean>(true);
 
   useEffect(() => {
-    getAnimals()
-  },[])
+    getAnimals();
+  }, []);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -87,6 +88,10 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         })
       );
   };
+  const backProfile = () => {
+    navigate("/dashboard");
+    localStorage.removeItem("@AuqMia:token");
+  };
 
   const loginRoute = () => {
     navigate("/login");
@@ -94,10 +99,10 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
 
   function getAnimals() {
     getAnimalsApi()
-    .then((res) => {
-      setListAnimals(res)
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        setListAnimals(res);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -112,7 +117,8 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         setLoginButton,
         donationButton,
         setDonationButton,
-        listAnimals
+        listAnimals,
+        backProfile,
       }}
     >
       {children}

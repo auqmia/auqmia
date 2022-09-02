@@ -7,7 +7,7 @@ import { HeaderProfile, DivMain } from "./stelys";
 import logo from "../../assets/img/logoHeader.png";
 
 const Profile = () => {
-  const { loading, isLogged, user } = useContext(AuthContext);
+  const { loading, isLogged, user, backProfile } = useContext(AuthContext);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -19,7 +19,9 @@ const Profile = () => {
             <img src={logo} alt="" />
           </figure>
           <div className="div-buttons">
-            <button className="button-logout">Back</button>
+            <button className="button-logout" onClick={() => backProfile()}>
+              Back
+            </button>
             <button className="button-help">
               <FaHandHoldingHeart />
             </button>
