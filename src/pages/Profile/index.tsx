@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
-import logo from "../../assets/img/logoHeader.png";
+import logo from "../../assets/img/logo.png";
 
 const Profile = () => {
   const { loading, isLogged, user } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const Profile = () => {
       <HeaderProfile>
         <div className="div-header">
           <figure>
-            <img src={logo} alt="" />
+            <img src={logo} alt="Logo" />
           </figure>
           <div className="div-buttons">
             <button className="button-logout">Back</button>
