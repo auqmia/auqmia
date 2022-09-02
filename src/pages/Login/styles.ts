@@ -23,7 +23,7 @@ export const ContainerLoginForm = styled.form`
 
   animation: backInLeft 1s;
 
-  .titulo {
+  .title {
     color: var(--color-primary);
     font-weight: var(--font-family);
     font-style: normal;
@@ -33,6 +33,7 @@ export const ContainerLoginForm = styled.form`
     text-align: center;
     padding: 20px 0px 50px 0px;
   }
+
   .container-input {
     width: 90%;
     display: flex;
