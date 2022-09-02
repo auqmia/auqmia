@@ -1,16 +1,30 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Error } from "../../components/ErrorValidators/styles";
-import { Input } from "../../components/Input/style";
+import { Input, InputRadio } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import registerSchema from "../../validators/registerUser";
-import { ContainerForm, ContainerLoginForm } from "../Login/styles";
-import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
-import { IUserRegister } from "../../services/registerUserApi";
-import { useState } from "react";
+import { ContainerForm, Form } from "../Login/styles";
+import {
+  BsCheckLg,
+  BsEyeSlash,
+  BsEye,
+  BsQuestionCircle,
+  BsSuitHeartFill,
+} from "react-icons/bs";
+import { IStatesOptions, IUserRegister } from "../../services/registerUserApi";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { statesApi } from "../../services/api";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
+  const [statesOptions, setStatesOptions] = useState<IStatesOptions[]>(
+    [] as IStatesOptions[]
+  );
+  const { registerUser } = useContext(AuthContext);
 
   const {
     register,
@@ -18,117 +32,161 @@ const Register = () => {
     formState: { errors },
   } = useForm<IUserRegister>({ resolver: yupResolver(registerSchema) });
 
+  useEffect(() => {
+    statesApi.get("estados").then((res) => setStatesOptions(res.data));
+  }, []);
+
   return (
     <ContainerForm>
-      <ContainerLoginForm onSubmit={() => {}}>
-        <h1 className="titulo">Cadastro</h1>
-        <div className="container-input">
-          <div className="wrap-form">
+      <Form onSubmit={handleSubmit(registerUser)}>
+        <h1 className="form__title">Cadastro</h1>
+        <div className="form__container">
+          <div className="form__input">
             <LabelForm>Nome</LabelForm>
             <Input type="text" {...register("name")} />
             <Error>{errors.name?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Email</LabelForm>
             <Input type="text" {...register("email")} />
             <Error>{errors.email?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Senha</LabelForm>
-            <div className="div-pass">
+            <div className="input__password">
               <Input
                 placeholder="Digite aqui sua senha"
                 type={visible ? "text" : "password"}
                 {...register("password")}
               />
               {visible ? (
-                <BsEye onClick={() => setVisible(!visible)} className="eyes" />
+                <BsEye
+                  onClick={() => setVisible(!visible)}
+                  className="icon__eyes"
+                />
               ) : (
                 <BsEyeSlash
                   onClick={() => setVisible(!visible)}
-                  className="eyes"
+                  className="icon__eyes"
                 />
               )}
             </div>
             <Error>{errors.password?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Confirmar Senha</LabelForm>
-            <div className="div-pass">
+            <div className="input__password">
               <Input
                 placeholder="Digite sua senha novamente"
-                type={visible ? "text" : "password"}
+                type={visibleConfirm ? "text" : "password"}
                 {...register("confirm_password")}
               />
-              {visible ? (
-                <BsEye onClick={() => setVisible(!visible)} className="eyes" />
+              {visibleConfirm ? (
+                <BsEye
+                  onClick={() => setVisibleConfirm(!visibleConfirm)}
+                  className="icon__eyes"
+                />
               ) : (
                 <BsEyeSlash
-                  onClick={() => setVisible(!visible)}
-                  className="eyes"
+                  onClick={() => setVisibleConfirm(!visibleConfirm)}
+                  className="icon__eyes"
                 />
               )}
             </div>
             <Error>{errors.confirm_password?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Data de Nascimento</LabelForm>
-            <Input type="date" {...register("name")} />
+            <Input type="date" {...register("birthday")} />
             <Error>{errors.birthday?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Estado</LabelForm>
-            <select {...register("district")}></select>
+            <select {...register("state")}>
+              {statesOptions.map(({ id, sigla }) => (
+                <option key={id} value={sigla}>
+                  {sigla}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Cidade</LabelForm>
             <Input type="text" {...register("city")} />
             <Error>{errors.city?.message}</Error>
           </div>
 
-          <div className="wrap-form">
+          <div className="form__input">
             <LabelForm>Bairro</LabelForm>
             <Input type="text" {...register("district")} />
             <Error>{errors.district?.message}</Error>
           </div>
+
+          <div className="form__input">
+            <LabelForm>Tipo de cadastro</LabelForm>
+            <div className="radio--inputs">
+              <div className="form__input--radio">
+                <InputRadio
+                  type="radio"
+                  id="adopt"
+                  value="adopt"
+                  {...register("user_type")}
+                />
+                <LabelForm htmlFor="adopt">Quero Adotar!</LabelForm>
+              </div>
+
+              <div className="form__input--radio">
+                <InputRadio
+                  type="radio"
+                  id="forAdoption"
+                  value="forAdoption"
+                  {...register("user_type")}
+                />
+                <LabelForm htmlFor="forAdoption">Sou Protetor</LabelForm>
+
+                <BsQuestionCircle className="user_type__info--question_mark" />
+                <div className="user_type__info--text">
+                  <p>
+                    Protetores são pessoas maravilhosas que resgatam bichinhos
+                    das ruas para cuidar e ajudar a achar um lar permanente para
+                    eles!
+                  </p>
+                  <BsSuitHeartFill className="user_type__info--heart" />
+                </div>
+              </div>
+            </div>
+            <Error>{errors.user_type?.message}</Error>
+          </div>
+
+          <div className="form__input">
+            <LabelForm>Foto de Perfil</LabelForm>
+            <Input type="url" {...register("picture")} />
+            <Error>{errors.picture?.message}</Error>
+          </div>
+
+          <div className="form__input">
+            <LabelForm>Sobre você</LabelForm>
+            <Input type="text" {...register("bio")} />
+            <Error>{errors.bio?.message}</Error>
+          </div>
         </div>
 
-        <div className="wrap-form">
-          <LabelForm>Tipo de cadastro</LabelForm>
-          <Input type="radio" id="adopt" {...register("user_type")} />
-          <LabelForm>Quero Adotar!</LabelForm>
-          <Input type="radio" id="forAdoption" {...register("user_type")} />
-          <LabelForm></LabelForm>
-          {/* <Input type="text" {...register("district")} /> */}
-          {/* <Error>{errors.district?.message}</Error> */}
-        </div>
-
-        <div className="wrap-form">
-          <LabelForm>Foto de Perfil</LabelForm>
-          <Input type="url" {...register("picture")} />
-          <Error>{errors.picture?.message}</Error>
-        </div>
-
-        <div className="wrap-form">
-          <LabelForm>Sobre você</LabelForm>
-          <Input type="text" {...register("bio")} />
-          <Error>{errors.bio?.message}</Error>
-        </div>
-
-        <button type="submit" className="button-login">
+        <button type="submit" className="form__button">
           <BsCheckLg />
         </button>
-        <div className="footer-form">
-          <p className="paragraph-form">Não possui conta?</p>
-          <button className="button-register">Cadastra-se</button>
+        <div className="form__footer">
+          <p className="footer__text">Já possui conta?</p>
+          <Link to="/login" className="form__link">
+            Faça o login
+          </Link>
         </div>
-      </ContainerLoginForm>
+      </Form>
     </ContainerForm>
   );
 };
