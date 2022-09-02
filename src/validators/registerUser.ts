@@ -21,17 +21,16 @@ const registerSchema = yup.object({
   picture: yup
     .string()
     .required("Campo obrigatório.")
-    .matches(
-      /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/,
-      "Deve ser uma url válida"
-    ),
+    .url("Deve ser uma url válida"),
   district: yup.string().required("Campo obrigatório."),
   city: yup.string().required("Campo obrigatório."),
   state: yup.string().required("Campo obrigatório."),
-  user_type: yup.string().required("Campo obrigatório."),
+  user_type: yup.string().required("Campo obrigatório.").nullable(),
   birthday: yup
-    .string()
+    .date()
     .required("Campo obrigatório.")
+    .nullable()
+    .max(new Date(), "Como assim você ainda não nasceu?!")
     .test("is-oldEnough", "Você deve ter 18 anos ou mais.", function (value) {
       const currentDate = new Date();
       const birthday = value ? new Date(value) : new Date();
