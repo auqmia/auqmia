@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/Logo.png";
 
 const Profile = () => {
   const { loading, isLogged, user } = useContext(AuthContext);
