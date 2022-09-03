@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export interface IUserRegister {
   name: string;
   email: string;
@@ -12,9 +14,19 @@ export interface IUserRegister {
   user_type: string;
 }
 
-export interface IStatesOptions {
+export interface IStatesData {
   id: number;
   sigla: string;
   nome: string;
   região: object;
 }
+
+export interface ISelectOptions {
+  value: string;
+  label: string;
+}
+
+export const statesApi = axios.create({
+  baseURL: "https://servicodados.ibge.gov.br/api/v1/localidades/",
+  timeout: 5000,
+});
