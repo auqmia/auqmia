@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
+import { RiAddFill } from "react-icons/ri";
+import { Ul } from "../../components/Cards/style";
+import Cards from "../../components/Cards";
+import logout from "../../assets/logout.svg";
+import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
 import ModalUpdateRegister from "../../components/Modais";
 
@@ -21,10 +25,10 @@ const Profile = () => {
           </figure>
           <div className="div-buttons">
             <button className="button-logout" onClick={() => backProfile()}>
-              Back
+              <img className="button-logout" src={logout} alt="" />
             </button>
             <button className="button-help">
-              <FaHandHoldingHeart />
+              <img className="button-help" src={donate} alt="" />
             </button>
           </div>
         </div>
@@ -36,7 +40,7 @@ const Profile = () => {
           </div>
           <main className="main-profile">
             <figure>
-              <img src={user.url} alt="img profile" />
+              <img className="img-profile" src={user.url} alt="img profile" />
             </figure>
             <div className="data-user">
               <div>
@@ -58,8 +62,21 @@ const Profile = () => {
               </div>
             </div>
             <div className="div-more-pets">
-              <button className="button-more-pets"></button>
+              <button className="button-more-pets">
+                <RiAddFill className="icon-button" />
+              </button>
               <h3 className="title-more-pets">Colocar para Adoção</h3>
+            </div>
+            <div>
+              <Ul className="ul-profile">
+                <Cards />
+              </Ul>
+            </div>
+            <div className="div-more-pets">
+              <button className="button-requests">
+                <RiAddFill className="icon-button" />
+              </button>
+              <p className="need-help">Preciso de Ajuda</p>
             </div>
           </main>
         </div>
