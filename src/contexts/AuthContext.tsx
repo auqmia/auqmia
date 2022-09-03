@@ -12,6 +12,8 @@ import { getAnimalsApi, IAnimals } from "../services/getAnimalsApi";
 import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { IUpdateUser, upDateUserApi } from "../services/updateUserApi";
+/* import { string } from "yup"; */
 
 export interface IAuthContexProps {
   children: ReactNode;
@@ -32,6 +34,9 @@ interface IAuthContex {
   adopted: boolean;
   setAdopted: Dispatch<SetStateAction<boolean>>;
   deleteAnimal: (id: string) => void;
+  modalUpdateUser: boolean;
+  setModalUpdateUser: Dispatch<SetStateAction<boolean>>;
+  updateUser: (id: IUpdateUser) => Promise<void>;
 }
 
 export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
@@ -45,6 +50,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const [loginButton, setLoginButton] = useState<boolean>(true);
   const [donationButton, setDonationButton] = useState<boolean>(true);
   const [adopted, setAdopted] = useState<boolean>(true);
+  const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
 
   useEffect(() => {
     getAnimals();
@@ -83,6 +89,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         });
         navigate("/profile", { replace: true });
         localStorage.setItem("@AuqMia:token", accessToken);
+
         localStorage.setItem("@AuqMia:id", `${userReponse.id}`);
       })
       .catch((err) =>
@@ -93,7 +100,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
       );
   };
   const backProfile = () => {
-    navigate("/dashboard");
+    navigate("/");
     localStorage.removeItem("@AuqMia:token");
     localStorage.removeItem("@AuqMia:id");
   };
@@ -119,6 +126,22 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     await getAnimals();
   };
 
+
+  const updateUser = async (value: IUpdateUser) => {
+   await upDateUserApi(value)
+   .then((res) => {
+    console.log(res)
+    setModalUpdateUser(false)
+    toast.success("Usuario atualizado com sucesso!")
+   })
+   .catch((err) => {
+    toast.error("Erro ao atualizar!")
+   })
+   
+  }
+
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -136,10 +159,14 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         adopted,
         setAdopted,
         deleteAnimal,
+        modalUpdateUser,
+        setModalUpdateUser,
+        updateUser
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 export default AuthProvider;
