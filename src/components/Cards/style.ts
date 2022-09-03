@@ -30,7 +30,8 @@ export const Ul = styled.ul`
     align-items: center;
     flex-direction: column;
 
-    max-width: 300px;
+    max-width: 280px;
+    max-height: 450px;
 
     padding: 20px;
 
@@ -39,6 +40,7 @@ export const Ul = styled.ul`
     box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.6);
 
     border-radius: 8px;
+    padding-bottom: 5px;
 
     h1 {
       white-space: nowrap;
@@ -65,7 +67,7 @@ export const Ul = styled.ul`
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: fill;
 
         transition: 1s;
       }
