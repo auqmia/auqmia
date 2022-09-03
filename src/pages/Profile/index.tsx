@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FaHandHoldingHeart } from "react-icons/fa";
@@ -6,8 +6,12 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
 import logo from "../../assets/img/Logo.png";
 
+import RegisterPets from "../../modals/RegisterPets";
+
 const Profile = () => {
   const { loading, isLogged, user, backProfile } = useContext(AuthContext);
+
+  const [isActive, setIsActive] = useState(false)
 
   if (loading) return <div>Carregando...</div>;
 
@@ -55,12 +59,13 @@ const Profile = () => {
               </div>
             </div>
             <div className="div-more-pets">
-              <button className="button-more-pets"></button>
+              <button className="button-more-pets" onClick={() => setIsActive(!isActive)}></button>
               <h3 className="title-more-pets">Colocar para Adoção</h3>
             </div>
           </main>
         </div>
       </DivMain>
+      { isActive && <RegisterPets isActive={isActive} setIsActive={setIsActive} /> }
     </>
   ) : (
     <Navigate to="/login" replace />
