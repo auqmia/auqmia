@@ -10,8 +10,3 @@ const api = axios.create({
 });
 
 export default api;
-
-export const statesApi = axios.create({
-  baseURL: "https://servicodados.ibge.gov.br/api/v1/localidades/",
-  timeout: 5000,
-});
