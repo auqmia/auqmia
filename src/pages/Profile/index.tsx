@@ -5,9 +5,10 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
 import logo from "../../assets/img/Logo.png";
+import ModalUpdateRegister from "../../components/Modais";
 
 const Profile = () => {
-  const { loading, isLogged, user, backProfile } = useContext(AuthContext);
+  const { loading, isLogged, user, backProfile, setModalUpdateUser } = useContext(AuthContext);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -51,7 +52,9 @@ const Profile = () => {
               </p>
               <div className="div-email">
                 <p className="name-user">{user.email}</p>
+                <button onClick={() => setModalUpdateUser(true)}>
                 <MdOutlineEditNote className="icon-edit" />
+                </button>
               </div>
             </div>
             <div className="div-more-pets">
@@ -61,10 +64,13 @@ const Profile = () => {
           </main>
         </div>
       </DivMain>
+      <ModalUpdateRegister />
     </>
   ) : (
     <Navigate to="/login" replace />
   );
+
+  
 };
 
 export default Profile;
