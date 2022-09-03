@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 /* import { MdOutlineEditNote } from "react-icons/md"; */
@@ -12,8 +12,12 @@ import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
 import ModalUpdateRegister from "../../components/Modais";
 
+import RegisterPets from "../../modals/RegisterPets";
+
 const Profile = () => {
   const { loading, isLogged, user, backProfile, setModalUpdateUser } = useContext(AuthContext);
+
+  const [isActive, setIsActive] = useState(false)
 
   if (loading) return <div>Carregando...</div>;
 
@@ -90,6 +94,11 @@ const Profile = () => {
                 </button>
               </div>
             </div>
+ /*
+            <div className="div-more-pets">
+              <button className="button-more-pets" onClick={() => setIsActive(!isActive)}></button>
+              <h3 className="title-more-pets">Colocar para Adoção</h3>
+ */
             <div className="container-pets">
               <div className="div-more-pets">
                 <button className="button-more-pets">
@@ -108,11 +117,16 @@ const Profile = () => {
                 </button>
                 <p className="need-help">Preciso de Ajuda</p>
               </div>
+
             </div>
           </main>
         </div>
       </DivMain>
+
+      { isActive && <RegisterPets isActive={isActive} setIsActive={setIsActive} /> }
+
       <ModalUpdateRegister />
+
     </>
   ) : (
     <Navigate to="/login" replace />

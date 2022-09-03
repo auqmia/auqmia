@@ -77,7 +77,6 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
       .then((res) => {
-        console.log(res);
         const { user: userReponse, accessToken } = res;
         api.defaults.headers = {
           Authorization: `bearer ${accessToken}`,
@@ -90,7 +89,8 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         });
         navigate("/profile", { replace: true });
         localStorage.setItem("@AuqMia:token", accessToken);
-        localStorage.setItem("@AuqMia:id", res.user.id);
+
+        localStorage.setItem("@AuqMia:id", `${userReponse.id}`);
       })
       .catch((err) =>
         toast.error("Senha ou email incorreto", {
@@ -102,6 +102,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const backProfile = () => {
     navigate("/");
     localStorage.removeItem("@AuqMia:token");
+    localStorage.removeItem("@AuqMia:id");
   };
 
   const loginRoute = () => {
@@ -125,6 +126,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     await getAnimals();
   };
 
+
   const updateUser = async (value: IUpdateUser) => {
    await upDateUserApi(value)
    .then((res) => {
@@ -137,6 +139,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
    })
    
   }
+
 
 
   return (
