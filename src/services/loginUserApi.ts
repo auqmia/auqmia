@@ -7,7 +7,7 @@ export interface IUserLogin {
 export interface IUserData {
   url: string;
   email: string;
-  id: number;
+  id: string;
   name: string;
   location: string;
 }

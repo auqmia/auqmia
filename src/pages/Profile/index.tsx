@@ -10,9 +10,10 @@ import Cards from "../../components/Cards";
 import logout from "../../assets/logout.svg";
 import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
+import ModalUpdateRegister from "../../components/Modais";
 
 const Profile = () => {
-  const { loading, isLogged, user, backProfile } = useContext(AuthContext);
+  const { loading, isLogged, user, backProfile, setModalUpdateUser } = useContext(AuthContext);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -56,6 +57,7 @@ const Profile = () => {
                   <h2 className="name-user">{user.name}</h2>
                 </div>
               </div>
+
               <div className="info">
                 <p>Email:</p>
                 <p>Cidade:</p>
@@ -74,6 +76,18 @@ const Profile = () => {
                   <p className="name-user">{user.email}</p>
                   <MdOutlineEditNote className="icon-edit" />
                 </div> */}
+              <p className="name-user">
+                “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
+                luctus consectetur. Pellentesque efficitur sapien lectus,
+                posuere laoreet urna sagittis in. Sed placerat dignissim tortor
+                nec gravida.”
+              </p>
+              <div className="div-email">
+                <p className="name-user">{user.email}</p>
+                <button onClick={() => setModalUpdateUser(true)}>
+                <MdOutlineEditNote className="icon-edit" />
+                </button>
               </div>
             </div>
             <div className="container-pets">
@@ -98,10 +112,13 @@ const Profile = () => {
           </main>
         </div>
       </DivMain>
+      <ModalUpdateRegister />
     </>
   ) : (
     <Navigate to="/login" replace />
   );
+
+  
 };
 
 export default Profile;
