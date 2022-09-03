@@ -28,6 +28,7 @@ const registerSchema = yup.object({
   user_type: yup.string().required("Campo obrigatório.").nullable(),
   birthday: yup
     .date()
+    .typeError("Campo obrigatório.")
     .required("Campo obrigatório.")
     .nullable()
     .max(new Date(), "Como assim você ainda não nasceu?!")
