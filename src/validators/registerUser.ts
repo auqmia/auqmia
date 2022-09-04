@@ -24,7 +24,10 @@ const registerSchema = yup.object({
     .url("Deve ser uma url válida"),
   district: yup.string().required("Campo obrigatório."),
   city: yup.string().required("Campo obrigatório."),
-  state: yup.string().required("Campo obrigatório."),
+  state: yup
+    .string()
+    .required("Campo obrigatório.")
+    .matches(/^[a-zA-Z]{2}$/, "Digite apenas a sigla de dois dígitos."),
   user_type: yup.string().required("Campo obrigatório.").nullable(),
   birthday: yup
     .date()

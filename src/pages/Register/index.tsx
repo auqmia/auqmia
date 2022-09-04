@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Error } from "../../components/ErrorValidators/styles";
-import { Input, InputRadio } from "../../components/Input/style";
+import { Input, InputRadio, RadioDiv } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import registerSchema from "../../validators/registerUser";
 import { ContainerForm, Form } from "../Login/styles";
@@ -12,44 +12,28 @@ import {
   BsQuestionCircle,
   BsSuitHeartFill,
 } from "react-icons/bs";
-import {
-  ISelectOptions,
-  IStatesData,
-  IUserRegister,
-  statesApi,
-} from "../../services/registerUserApi";
-import { useContext, useEffect, useState } from "react";
+import { HiArrowNarrowLeft } from "react-icons/hi";
+import { IUserRegister } from "../../services/registerUserApi";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import Select from "react-select";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
 
+  const { registerUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUserRegister>({ resolver: yupResolver(registerSchema) });
-
-  useEffect(() => {
-    statesApi.get("estados").then((res) => {
-      const data: IStatesData[] = res.data;
-      const options: ISelectOptions[] = data.map(({ sigla }) => ({
-        value: sigla,
-        label: sigla,
-      }));
-      setSelectOptions(options);
-    });
-  }, []);
-
-  function teste(data: IUserRegister) {
-    console.log(data);
-  }
+  } = useForm<IUserRegister>({
+    resolver: yupResolver(registerSchema),
+  });
 
   return (
     <ContainerForm>
-      <Form onSubmit={handleSubmit(teste)}>
+      <Form onSubmit={handleSubmit(registerUser)}>
         <h1 className="form__title">Cadastro</h1>
         <div className="form__container">
           <div className="form__input">
@@ -118,7 +102,12 @@ const Register = () => {
 
           <div className="form__input">
             <LabelForm>Estado</LabelForm>
-            <Select options={selectOptions} />
+            <Input
+              type="text"
+              {...register("state")}
+              placeholder="Digite a Sigla"
+            />
+            <Error>{errors.state?.message}</Error>
           </div>
 
           <div className="form__input">
@@ -137,22 +126,26 @@ const Register = () => {
             <LabelForm>Tipo de cadastro</LabelForm>
             <div className="radio--inputs">
               <div className="form__input--radio">
-                <InputRadio
-                  type="radio"
-                  id="adopt"
-                  value="adopt"
-                  {...register("user_type")}
-                />
+                <RadioDiv>
+                  <InputRadio
+                    type="radio"
+                    id="adopt"
+                    value="adopt"
+                    {...register("user_type")}
+                  />
+                </RadioDiv>
                 <LabelForm htmlFor="adopt">Quero Adotar!</LabelForm>
               </div>
 
               <div className="form__input--radio">
-                <InputRadio
-                  type="radio"
-                  id="forAdoption"
-                  value="forAdoption"
-                  {...register("user_type")}
-                />
+                <RadioDiv>
+                  <InputRadio
+                    type="radio"
+                    id="forAdoption"
+                    value="forAdoption"
+                    {...register("user_type")}
+                  />
+                </RadioDiv>
                 <LabelForm htmlFor="forAdoption">Sou Protetor</LabelForm>
 
                 <BsQuestionCircle className="user_type__info--question_mark" />
@@ -182,13 +175,13 @@ const Register = () => {
           </div>
         </div>
 
-        <button type="submit" className="form__button">
-          <BsCheckLg />
-        </button>
-        <div className="form__footer">
-          <p className="footer__text">Já possui conta?</p>
-          <Link to="/login" className="form__link">
-            Faça o login
+        <div className="form__footer footer--register">
+          <button type="submit" className="form__button">
+            <BsCheckLg className="form__button--icon" />
+          </button>
+          {/* <p className="footer__text">Já possui conta?</p> */}
+          <Link to="/login" className="form__button">
+            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
           </Link>
         </div>
       </Form>

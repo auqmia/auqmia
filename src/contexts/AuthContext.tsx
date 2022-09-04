@@ -69,6 +69,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const registerUser = (data: IUserRegister) => {
     const { confirm_password, ...userData } = data;
+    userData.state = userData.state.toUpperCase();
     api
       .post("/register", userData)
       .then((res) => {
