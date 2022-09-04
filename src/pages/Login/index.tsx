@@ -62,7 +62,7 @@ const Login = () => {
           </div>
         </div>
         <button type="submit" className="form__button">
-          <BsCheckLg />
+          <BsCheckLg className="form__button--icon" />
         </button>
         <div className="form__footer">
           <p className="footer__text">Não possui conta?</p>

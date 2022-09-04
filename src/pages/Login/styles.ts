@@ -3,11 +3,11 @@ import "animate.css";
 
 export const ContainerForm = styled.div`
   width: 100vw;
-  height: 100vh;
-  max-height: fit-content;
+  height: fit-content;
   display: flex;
   justify-content: center;
   padding-top: 50px;
+  padding-bottom: 35px;
   transition: padding 0.8s ease-in-out;
 
   @media (min-width: 760px) {
@@ -54,6 +54,10 @@ export const Form = styled.form`
     width: 100%;
     position: relative;
 
+    > .radio--inputs + p {
+      top: 75px;
+    }
+
     @media (min-width: 450px) {
       > .radio--inputs {
         display: flex;
@@ -65,6 +69,7 @@ export const Form = styled.form`
   .form__input--radio {
     width: 60%;
     margin: 0 auto;
+    display: flex;
     flex-direction: row;
     position: relative;
 
@@ -84,6 +89,7 @@ export const Form = styled.form`
     cursor: pointer;
     font-size: 14px;
     color: var(--gray-0);
+    transform: translateY(7px);
   }
   .user_type__info--question_mark:hover + .user_type__info--text {
     display: block;
@@ -125,10 +131,9 @@ export const Form = styled.form`
   .icon__eyes {
     position: absolute;
     top: 15px;
-    right: 10px;
+    right: 30px;
     cursor: pointer;
     color: var(--color-primary);
-    right: 20px;
     width: 20px;
     height: 20px;
   }
@@ -148,12 +153,16 @@ export const Form = styled.form`
 
     animation: pulse 1s;
   }
-  .button-check {
+  .form__button--icon {
+    font-size: 18px;
     transition: ease-in-out 0.5s;
   }
-  .form__button:hover > .button-check {
+  .form__button:hover > .form__button--icon {
     animation: rubberBand 1s;
     scale: 1.5;
+  }
+  .icon__arrow {
+    font-size: 28px;
   }
   .footer__text {
     font-family: var(--font-family);
@@ -172,6 +181,11 @@ export const Form = styled.form`
     align-items: center;
     flex-direction: column;
     gap: 5px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
+  }
+  .footer--register {
+    flex-direction: row-reverse;
+    gap: 45px;
+    padding-top: 20px;
   }
 `;
