@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ButtonHover = styled.button`
   height: 50px;
+  min-width: 50px;
   padding: 0px 10px;
   border-radius: 25px;
   background-color: var(--color-secondary);

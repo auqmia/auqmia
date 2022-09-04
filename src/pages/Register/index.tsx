@@ -17,6 +17,7 @@ import { IUserRegister } from "../../services/registerUserApi";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { ButtonHover } from "./style";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
@@ -176,9 +177,10 @@ const Register = () => {
         </div>
 
         <div className="form__footer footer--register">
-          <button type="submit" className="form__button">
+          <ButtonHover type="submit">
+            <p>Cadastrar</p>
             <BsCheckLg className="form__button--icon" />
-          </button>
+          </ButtonHover>
           {/* <p className="footer__text">Já possui conta?</p> */}
           <Link to="/login" className="form__button">
             <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
