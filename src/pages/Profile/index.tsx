@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-/* import { MdOutlineEditNote } from "react-icons/md"; */
+import { MdOutlineEditNote } from "react-icons/md";
 import { HeaderProfile, DivMain } from "./stelys";
 import { RiAddFill } from "react-icons/ri";
 import { Ul } from "../../components/Cards/style";
@@ -10,14 +10,15 @@ import Cards from "../../components/Cards";
 import logout from "../../assets/logout.svg";
 import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
-import ModalUpdateRegister from "../../components/Modais";
+import ModalUpdateRegister from "../../components/ModalUpUser";
 
-import RegisterPets from "../../modals/RegisterPets";
+import RegisterPets from "../../components/modalRegisterPets";
 
 const Profile = () => {
-  const { loading, isLogged, user, backProfile, setModalUpdateUser } = useContext(AuthContext);
+  const { loading, isLogged, user, backProfile, setModalUpdateUser } =
+    useContext(AuthContext);
 
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -80,28 +81,28 @@ const Profile = () => {
                   <p className="name-user">{user.email}</p>
                   <MdOutlineEditNote className="icon-edit" />
                 </div> */}
-              <p className="name-user">
-                “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
-                luctus consectetur. Pellentesque efficitur sapien lectus,
-                posuere laoreet urna sagittis in. Sed placerat dignissim tortor
-                nec gravida.”
-              </p>
+                <p className="name-user">
+                  “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
+                  luctus consectetur. Pellentesque efficitur sapien lectus,
+                  posuere laoreet urna sagittis in. Sed placerat dignissim
+                  tortor nec gravida.”
+                </p>
+              </div>
               <div className="div-email">
                 <p className="name-user">{user.email}</p>
                 <button onClick={() => setModalUpdateUser(true)}>
-                <MdOutlineEditNote className="icon-edit" />
+                  <MdOutlineEditNote className="icon-edit" />
                 </button>
               </div>
             </div>
- /*
-            <div className="div-more-pets">
-              <button className="button-more-pets" onClick={() => setIsActive(!isActive)}></button>
-              <h3 className="title-more-pets">Colocar para Adoção</h3>
- */
+
             <div className="container-pets">
               <div className="div-more-pets">
-                <button className="button-more-pets">
+                <button
+                  onClick={() => setIsActive(!isActive)}
+                  className="button-more-pets"
+                >
                   <RiAddFill className="icon-button" />
                 </button>
                 <h3 className="title-more-pets">Colocar para Adoção</h3>
@@ -117,22 +118,20 @@ const Profile = () => {
                 </button>
                 <p className="need-help">Preciso de Ajuda</p>
               </div>
-
             </div>
           </main>
         </div>
       </DivMain>
 
-      { isActive && <RegisterPets isActive={isActive} setIsActive={setIsActive} /> }
+      {isActive && (
+        <RegisterPets isActive={isActive} setIsActive={setIsActive} />
+      )}
 
       <ModalUpdateRegister />
-
     </>
   ) : (
     <Navigate to="/login" replace />
   );
-
-  
 };
 
 export default Profile;

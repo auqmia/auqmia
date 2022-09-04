@@ -13,6 +13,7 @@ import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IUpdateUser, upDateUserApi } from "../services/updateUserApi";
+import { getUsers } from "../services/getUser";
 /* import { string } from "yup"; */
 
 export interface IAuthContexProps {
@@ -53,10 +54,6 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
 
   useEffect(() => {
-    getAnimals();
-  }, [adopted]);
-
-  useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem("@AuqMia:token");
       if (token) {
@@ -64,6 +61,10 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
           api.defaults.headers = {
             Authorization: `bearer ${token}`,
           } as ICommonHeaderProperties;
+          getUsers().then((res) => {
+            setUser(res);
+          });
+          getAnimals();
           setIsLogged(true);
         } catch (err) {
           console.log(err);
@@ -126,21 +127,18 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
     await getAnimals();
   };
 
-
   const updateUser = async (value: IUpdateUser) => {
-   await upDateUserApi(value)
-   .then((res) => {
-    console.log(res)
-    setModalUpdateUser(false)
-    toast.success("Usuario atualizado com sucesso!")
-   })
-   .catch((err) => {
-    toast.error("Erro ao atualizar!")
-   })
-   
-  }
-
-
+    await upDateUserApi(value)
+      .then((res) => {
+        console.log(res);
+        setUser(res);
+        setModalUpdateUser(false);
+        toast.success("Usuario atualizado com sucesso!");
+      })
+      .catch((err) => {
+        toast.error("Erro ao atualizar!");
+      });
+  };
 
   return (
     <AuthContext.Provider
@@ -161,7 +159,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         deleteAnimal,
         modalUpdateUser,
         setModalUpdateUser,
-        updateUser
+        updateUser,
       }}
     >
       {children}

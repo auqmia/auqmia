@@ -60,17 +60,7 @@ export const ContainerLoginForm = styled.form`
     width: 20px;
     height: 20px;
   }
-  .button-login {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-0);
-    background-color: var(--color-secundary);
-    margin: 20px 0px;
-  }
+
   .div-button {
     display: flex;
     align-items: center;
@@ -78,48 +68,7 @@ export const ContainerLoginForm = styled.form`
     width: 100%;
     gap: 15px;
   }
-  .button-back {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--color-third);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .button-back:hover {
-    animation: pulse 1s;
-  }
 
-  .button-back:hover > .icon-back {
-    animation: rubberBand 1s;
-    scale: 1.5;
-  }
-  .icon-back {
-    transition: ease-in-out 0.5s;
-    width: 20px;
-    height: 20px;
-  }
-
-  .icon-back {
-    color: #ffffff;
-    width: 40px;
-    height: 30px;
-  }
-  .button-login:hover {
-    filter: contrast(0.5);
-
-    animation: pulse 1s;
-  }
-  .button-check {
-    transition: ease-in-out 0.5s;
-    width: 20px;
-    height: 20px;
-  }
-  .button-login:hover > .button-check {
-    animation: rubberBand 1s;
-    scale: 1.5;
-  }
   .paragraph-form {
     font-family: var(--font-family);
     color: var(--gray-3);
@@ -137,5 +86,62 @@ export const ContainerLoginForm = styled.form`
     align-items: center;
     flex-direction: column;
     gap: 5px;
+  }
+`;
+
+export const ButtonBack = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-third);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :hover {
+    animation: pulse 1s;
+  }
+
+  :hover > .icon-back {
+    animation: rubberBand 1s;
+    scale: 1.5;
+  }
+  .icon-back {
+    transition: ease-in-out 0.5s;
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-back {
+    color: #ffffff;
+    width: 40px;
+    height: 30px;
+  }
+`;
+
+export const ButtonCheck = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-0);
+  background-color: var(--color-secundary);
+  margin: 20px 0px;
+
+  :hover {
+    filter: contrast(0.5);
+
+    animation: pulse 1s;
+  }
+  .button-check {
+    transition: ease-in-out 0.5s;
+    width: 20px;
+    height: 20px;
+  }
+  :hover > .button-check {
+    animation: rubberBand 1s;
+    scale: 1.5;
   }
 `;

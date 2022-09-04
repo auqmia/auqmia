@@ -1,6 +1,11 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
-import { ContainerLoginForm, ContainerLogin } from "./styles";
+import {
+  ContainerLoginForm,
+  ContainerLogin,
+  ButtonCheck,
+  ButtonBack,
+} from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
@@ -65,12 +70,16 @@ const Login = () => {
           </div>
         </div>
         <div className="div-button">
-          <button type="button" className="button-back" onClick={() => back()}>
+          <ButtonBack
+            type="button"
+            className="button-back"
+            onClick={() => back()}
+          >
             <MdArrowBack className="icon-back" />
-          </button>
-          <button type="submit" className="button-login">
+          </ButtonBack>
+          <ButtonCheck type="submit" className="button-login">
             <BsCheckLg className="button-check" />
-          </button>
+          </ButtonCheck>
         </div>
         <div className="footer-form">
           <p className="paragraph-form">Não possui conta?</p>

@@ -158,6 +158,9 @@ export const DivMain = styled.div`
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .title-more-pets {
       color: var(--color-primary);
@@ -207,13 +210,13 @@ export const DivMain = styled.div`
       width: 100vw;
       justify-content: center;
       max-width: 1200px;
-      gap: 20px;
+      gap: 10%;
       .container-pets {
         max-width: 60%;
       }
 
       .div-container-info {
-        max-width: 450px;
+        max-width: 30%;
         min-width: 300px;
       }
 
