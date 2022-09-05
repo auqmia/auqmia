@@ -1,6 +1,14 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
-import { Form, ContainerForm } from "./styles";
+import {
+  ContainerLoginForm,
+  ContainerLogin,
+  ButtonCheck,
+  ButtonBack,
+  Form,
+  ContainerForm
+} from "./styles";
+
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
@@ -68,6 +76,19 @@ const Login = () => {
             <Error>{errors.password?.message}</Error>
           </div>
         </div>
+        /*
+        <div className="div-button">
+          <ButtonBack
+            type="button"
+            className="button-back"
+            onClick={() => back()}
+          >
+            <MdArrowBack className="icon-back" />
+          </ButtonBack>
+          <ButtonCheck type="submit" className="button-login">
+            <BsCheckLg className="button-check" />
+          </ButtonCheck>
+          */
         <div className="form__buttons">
           <button
             type="button"

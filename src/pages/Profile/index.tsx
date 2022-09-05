@@ -10,9 +10,9 @@ import Cards from "../../components/Cards";
 import logout from "../../assets/logout.svg";
 import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
-import ModalUpdateRegister from "../../components/Modais";
+import ModalUpdateRegister from "../../components/ModalUpUser";
 
-import RegisterPets from "../../modals/RegisterPets";
+import RegisterPets from "../../components/modalRegisterPets";
 
 const Profile = () => {
   const { loading, isLogged, user, backProfile, setModalUpdateUser } =
@@ -86,7 +86,7 @@ const Profile = () => {
                   Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
                   luctus consectetur. Pellentesque efficitur sapien lectus,
                   posuere laoreet urna sagittis in. Sed placerat dignissim
-                  tortor nec gravida."
+                  tortor nec."
                 </p>
               </div>
               <div className="div-email">
