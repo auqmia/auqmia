@@ -71,22 +71,22 @@ const Profile = () => {
               </div>
               <div className="data-user">
                 <p className="name-user">
-                  “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
                   luctus consectetur. Pellentesque efficitur sapien lectus,
                   posuere laoreet urna sagittis in. Sed placerat dignissim
-                  tortor nec gravida.”
+                  tortor nec gravida."
                 </p>
                 {/*   <div className="div-email">
                   <p className="name-user">{user.email}</p>
                   <MdOutlineEditNote className="icon-edit" />
                 </div> */}
                 <p className="name-user">
-                  “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
                   luctus consectetur. Pellentesque efficitur sapien lectus,
                   posuere laoreet urna sagittis in. Sed placerat dignissim
-                  tortor nec gravida.”
+                  tortor nec."
                 </p>
               </div>
               <div className="div-email">

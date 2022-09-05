@@ -78,10 +78,10 @@ export const HeaderProfile = styled.header`
 export const DivMain = styled.div`
   width: 100vw;
   display: flex;
-  width: 100%;
   overflow-x: hidden;
   justify-content: center;
   max-width: 1200px;
+  margin: auto;
 
   .div-wrap {
     width: 90%;

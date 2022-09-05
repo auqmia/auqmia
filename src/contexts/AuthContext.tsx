@@ -15,12 +15,13 @@ import { useNavigate } from "react-router-dom";
 import { IUpdateUser, upDateUserApi } from "../services/updateUserApi";
 import { getUsers } from "../services/getUser";
 /* import { string } from "yup"; */
+import { IUserRegister } from "../services/registerUserApi";
 
-export interface IAuthContexProps {
+export interface IAuthContextProps {
   children: ReactNode;
 }
 
-interface IAuthContex {
+interface IAuthContext {
   loginUser: (data: IUserLogin) => Promise<void>;
   loginRoute: () => void;
   listAnimals: IAnimals[];
@@ -38,11 +39,12 @@ interface IAuthContex {
   modalUpdateUser: boolean;
   setModalUpdateUser: Dispatch<SetStateAction<boolean>>;
   updateUser: (id: IUpdateUser) => Promise<void>;
+  registerUser: (data: IUserRegister) => void;
 }
 
-export const AuthContext = createContext<IAuthContex>({} as IAuthContex);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
-const AuthProvider = ({ children }: IAuthContexProps) => {
+const AuthProvider = ({ children }: IAuthContextProps) => {
   const navigate = useNavigate();
   const [listAnimals, setListAnimals] = useState([]);
   const [user, setUser] = useState<IUserData>({} as IUserData);
@@ -94,12 +96,13 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         localStorage.setItem("@AuqMia:id", `${userReponse.id}`);
       })
       .catch((err) =>
-        toast.error("Senha ou email incorreto", {
+        toast.error("Senha ou email incorreto.", {
           autoClose: 900,
           theme: "dark",
         })
       );
   };
+
   const backProfile = () => {
     navigate("/");
     localStorage.removeItem("@AuqMia:token");
@@ -140,6 +143,27 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
       });
   };
 
+  const registerUser = (data: IUserRegister) => {
+    const { confirm_password, ...userData } = data;
+    userData.state = userData.state.toUpperCase();
+    api
+      .post("/register", userData)
+      .then((res) => {
+        toast.success("Usuário registrado com sucesso!", {
+          autoClose: 900,
+          theme: "dark",
+        });
+        navigate("/login", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Não foi possível fazer o cadastro.", {
+          autoClose: 900,
+          theme: "dark",
+        });
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -160,6 +184,7 @@ const AuthProvider = ({ children }: IAuthContexProps) => {
         modalUpdateUser,
         setModalUpdateUser,
         updateUser,
+        registerUser,
       }}
     >
       {children}

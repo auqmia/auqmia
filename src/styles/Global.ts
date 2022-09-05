@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   :root {
     --color-primary: #00DEDF;
-    --color-secundary:  #CE8EDB;
+    --color-secondary:  #CE8EDB;
     --color-third: #ce8edb6b;
   
     --gray-5:#1E1E1E;
@@ -49,6 +49,7 @@ button{
 
 a{
   cursor: pointer;
+  text-decoration: none;
 }
 
 ul,li{
