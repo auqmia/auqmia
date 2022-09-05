@@ -1,16 +1,17 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
-import { ContainerLoginForm, ContainerLogin } from "./styles";
+import { Form, ContainerForm } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
-import { MdArrowBack } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Error } from "../../components/ErrorValidators/styles";
 import { useNavigate } from "react-router-dom";
 import schema from "../../validators/loginUser";
 import { IUserLogin } from "../../services/loginUserApi";
+import { Link } from "react-router-dom";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
@@ -31,11 +32,11 @@ const Login = () => {
   };
 
   return (
-    <ContainerLogin>
-      <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
-        <h1 className="title">Login</h1>
-        <div className="container-input">
-          <div className="warp-form">
+    <ContainerForm>
+      <Form onSubmit={handleSubmit(loginUser)}>
+        <h1 className="form__title">Login</h1>
+        <div className="form__container">
+          <div className="form__input">
             <LabelForm>Email</LabelForm>
             <Input
               placeholder="email@gmail.com"
@@ -44,40 +45,49 @@ const Login = () => {
             />
             <Error>{errors.email?.message}</Error>
           </div>
-          <div className="warp-form">
+          <div className="form__input">
             <LabelForm>Senha</LabelForm>
-            <div className="div-pass">
+            <div className="input__password">
               <Input
                 placeholder="Digite aqui sua senha"
                 type={visible ? "text" : "password"}
                 {...register("password")}
               />
               {visible ? (
-                <BsEye onClick={() => setVisible(!visible)} className="eyes" />
+                <BsEye
+                  onClick={() => setVisible(!visible)}
+                  className="icon__eyes"
+                />
               ) : (
                 <BsEyeSlash
                   onClick={() => setVisible(!visible)}
-                  className="eyes"
+                  className="icon__eyes"
                 />
               )}
             </div>
             <Error>{errors.password?.message}</Error>
           </div>
         </div>
-        <div className="div-button">
-          <button type="button" className="button-back" onClick={() => back()}>
-            <MdArrowBack className="icon-back" />
+        <div className="form__buttons">
+          <button
+            type="button"
+            className="form__button button--back"
+            onClick={() => back()}
+          >
+            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
           </button>
-          <button type="submit" className="button-login">
-            <BsCheckLg className="button-check" />
+          <button type="submit" className="form__button">
+            <BsCheckLg className="form__button--icon" />
           </button>
         </div>
-        <div className="footer-form">
-          <p className="paragraph-form">Não possui conta?</p>
-          <button className="button-register">Cadastra-se</button>
+        <div className="form__footer">
+          <p className="footer__text">Não possui conta?</p>
+          <Link to="/register" className="form__link">
+            Cadastra-se
+          </Link>
         </div>
-      </ContainerLoginForm>
-    </ContainerLogin>
+      </Form>
+    </ContainerForm>
   );
 };
 

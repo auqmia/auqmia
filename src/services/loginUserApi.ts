@@ -11,15 +11,15 @@ export interface IUserData {
   name: string;
   location: string;
 }
-export interface IUserLoginrResponse {
+export interface IUserLoginResponse {
   accessToken: string;
   user: IUserData;
 }
 
 export async function loginUsers(
   params: IUserLogin
-): Promise<IUserLoginrResponse> {
-  const { data } = await api.post<IUserLoginrResponse>("login", params);
+): Promise<IUserLoginResponse> {
+  const { data } = await api.post<IUserLoginResponse>("login", params);
 
   return data;
 }
