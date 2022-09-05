@@ -13,12 +13,14 @@ import logo from "../../assets/img/Logo.png";
 import ModalUpdateRegister from "../../components/ModalUpUser";
 
 import RegisterPets from "../../components/modalRegisterPets";
+import RegisterSupplies from "../../components/modalRegisterSupplies";
 
 const Profile = () => {
   const { loading, isLogged, user, backProfile, setModalUpdateUser } =
     useContext(AuthContext);
 
-  const [isActive, setIsActive] = useState(false);
+  const [isActiveModalPet, setIsActiveModalPet] = useState(false);
+  const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -100,7 +102,7 @@ const Profile = () => {
             <div className="container-pets">
               <div className="div-more-pets">
                 <button
-                  onClick={() => setIsActive(!isActive)}
+                  onClick={() => setIsActiveModalPet(!isActiveModalPet)}
                   className="button-more-pets"
                 >
                   <RiAddFill className="icon-button" />
@@ -113,7 +115,7 @@ const Profile = () => {
                 </Ul>
               </div>
               <div className="div-more-pets">
-                <button className="button-requests">
+                <button className="button-requests" onClick={() => setIsActiveModalSupplies(!isActiveModalSupplies)}>
                   <RiAddFill className="icon-button" />
                 </button>
                 <p className="need-help">Preciso de Ajuda</p>
@@ -123,11 +125,16 @@ const Profile = () => {
         </div>
       </DivMain>
 
-      {isActive && (
-        <RegisterPets isActive={isActive} setIsActive={setIsActive} />
+      {isActiveModalPet && (
+        <RegisterPets isActive={isActiveModalPet} setIsActive={setIsActiveModalPet} />
+      )}
+
+      {isActiveModalSupplies && (
+        <RegisterSupplies isActive={isActiveModalSupplies} setIsActive={setIsActiveModalSupplies} />
       )}
 
       <ModalUpdateRegister />
+
     </>
   ) : (
     <Navigate to="/login" replace />
