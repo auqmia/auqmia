@@ -1,12 +1,8 @@
 import { Input } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import {
-  ContainerLoginForm,
-  ContainerLogin,
-  ButtonCheck,
-  ButtonBack,
   Form,
-  ContainerForm
+  ContainerForm,
 } from "./styles";
 
 import { useContext, useState } from "react";
@@ -76,8 +72,8 @@ const Login = () => {
             <Error>{errors.password?.message}</Error>
           </div>
         </div>
-        /*
-        <div className="div-button">
+
+        {/* <div className="div-button">
           <ButtonBack
             type="button"
             className="button-back"
@@ -87,8 +83,8 @@ const Login = () => {
           </ButtonBack>
           <ButtonCheck type="submit" className="button-login">
             <BsCheckLg className="button-check" />
-          </ButtonCheck>
-          */
+          </ButtonCheck> */}
+
         <div className="form__buttons">
           <button
             type="button"

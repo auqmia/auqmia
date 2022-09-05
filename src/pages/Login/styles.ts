@@ -221,52 +221,53 @@ export const ButtonCheck = styled.button`
   margin: 20px 0px;
 
   :hover {
-  .button--back {
-    background-color: var(--color-third);
-  }
+    .button--back {
+      background-color: var(--color-third);
+    }
 
-  .form__button:hover {
-    filter: contrast(0.5);
+    .form__button:hover {
+      filter: contrast(0.5);
 
-    animation: pulse 1s;
-  }
-  .form__button--icon {
-    font-size: 18px;
-    transition: ease-in-out 0.5s;
-  }
-  :hover > .button-check {
-    animation: rubberBand 1s;
-    scale: 1.5;
- }
-  .form__button:hover > .form__button--icon {
-    animation: rubberBand 1s;
-    scale: 1.5;
-  }
-  .icon__arrow {
-    font-size: 30px;
-  }
-  .footer__text {
-    font-family: var(--font-family);
-    color: var(--gray-3);
-  }
-  .form__link {
-    background-color: var(--gray-2);
-    color: var(--color-secondary);
-    transition: ease-in-out 0.5s;
-  }
-  .form__link:hover {
-    animation: pulse 1s;
-  }
-  .form__footer {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-    padding-bottom: 20px;
-  }
-  .footer--register {
-    flex-direction: row-reverse;
-    gap: 45px;
-    padding-top: 20px;
+      animation: pulse 1s;
+    }
+    .form__button--icon {
+      font-size: 18px;
+      transition: ease-in-out 0.5s;
+    }
+    :hover > .button-check {
+      animation: rubberBand 1s;
+      scale: 1.5;
+    }
+    .form__button:hover > .form__button--icon {
+      animation: rubberBand 1s;
+      scale: 1.5;
+    }
+    .icon__arrow {
+      font-size: 30px;
+    }
+    .footer__text {
+      font-family: var(--font-family);
+      color: var(--gray-3);
+    }
+    .form__link {
+      background-color: var(--gray-2);
+      color: var(--color-secondary);
+      transition: ease-in-out 0.5s;
+    }
+    .form__link:hover {
+      animation: pulse 1s;
+    }
+    .form__footer {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
+      padding-bottom: 20px;
+    }
+    .footer--register {
+      flex-direction: row-reverse;
+      gap: 45px;
+      padding-top: 20px;
+    }
   }
 `;

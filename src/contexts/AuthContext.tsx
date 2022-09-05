@@ -77,6 +77,10 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     loadUser();
   }, []);
 
+  useEffect(() => {
+    getAnimals();
+  }, []);
+
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
       .then((res) => {
