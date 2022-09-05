@@ -14,7 +14,7 @@ import { IUserLogin } from "../../services/loginUserApi";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
-  const navegate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,13 +27,13 @@ const Login = () => {
   const { loginUser } = useContext(AuthContext);
 
   const back = () => {
-    navegate("/");
+    navigate("/");
   };
 
   return (
     <ContainerLogin>
       <ContainerLoginForm onSubmit={handleSubmit(loginUser)}>
-        <h1 className="titulo">Login</h1>
+        <h1 className="title">Login</h1>
         <div className="container-input">
           <div className="warp-form">
             <LabelForm>Email</LabelForm>

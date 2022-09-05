@@ -5,8 +5,11 @@ export interface IUserLogin {
   password: string;
 }
 export interface IUserData {
+  url: string;
   email: string;
-  id: number;
+  id: string;
+  name: string;
+  location: string;
 }
 export interface IUserLoginrResponse {
   accessToken: string;

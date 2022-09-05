@@ -23,7 +23,7 @@ export const ContainerLoginForm = styled.form`
 
   animation: backInLeft 1s;
 
-  .titulo {
+  .title {
     color: var(--color-primary);
     font-weight: var(--font-family);
     font-style: normal;
@@ -33,6 +33,7 @@ export const ContainerLoginForm = styled.form`
     text-align: center;
     padding: 20px 0px 50px 0px;
   }
+
   .container-input {
     width: 90%;
     display: flex;
@@ -86,6 +87,20 @@ export const ContainerLoginForm = styled.form`
     align-items: center;
     justify-content: center;
   }
+  .button-back:hover {
+    animation: pulse 1s;
+  }
+
+  .button-back:hover > .icon-back {
+    animation: rubberBand 1s;
+    scale: 1.5;
+  }
+  .icon-back {
+    transition: ease-in-out 0.5s;
+    width: 20px;
+    height: 20px;
+  }
+
   .icon-back {
     color: #ffffff;
     width: 40px;
