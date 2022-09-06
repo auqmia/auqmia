@@ -26,6 +26,7 @@ const Profile = () => {
     lisAnimalsUser,
     setIsShowModalPet,
     isShowModalPet,
+    listSupplies,
   } = useContext(AuthContext);
 
   const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
@@ -145,6 +146,14 @@ const Profile = () => {
                 </button>
                 <p className="need-help">Preciso de Ajuda</p>
               </div>
+              <ul className="list-supplies">
+                  {listSupplies.map((element) => (
+                    <li key={element.id} className="li-supplies">
+                      <p>{element.product}</p>
+                      <p>{element.quantity}</p>
+                    </li>
+                  ))}
+                </ul>
             </div>
           </main>
         </div>
