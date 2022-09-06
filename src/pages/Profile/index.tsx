@@ -1,26 +1,35 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { MdOutlineEditNote } from "react-icons/md";
+
 import { HeaderProfile, DivMain } from "./stelys";
 import { RiAddFill } from "react-icons/ri";
 import { Ul } from "../../components/Cards/style";
 import logoAqMia from "../../assets/img/LogoAuqMia.png";
-import Cards from "../../components/Cards";
+
 import logout from "../../assets/logout.svg";
 import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
 import ModalUpdateRegister from "../../components/ModalUpUser";
+import { FaUserEdit, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import RegisterPets from "../../components/modalRegisterPets";
 import RegisterSupplies from "../../components/modalRegisterSupplies";
 
 const Profile = () => {
-  const { loading, isLogged, user, backProfile, setModalUpdateUser } =
-    useContext(AuthContext);
+  const {
+    loading,
+    isLogged,
+    user,
+    backProfile,
+    setModalUpdateUser,
+    lisAnimalsUser,
+    setIsShowModalPet,
+    isShowModalPet,
+  } = useContext(AuthContext);
 
-  const [isActiveModalPet, setIsActiveModalPet] = useState(false);
   const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
+  const [isShowInfo, setIsShowInfo] = useState(false);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -56,53 +65,51 @@ const Profile = () => {
                 <figure>
                   <img
                     className="img-profile"
-                    src={user.url}
+                    src={user?.picture}
                     alt="img profile"
                   />
                 </figure>
                 <div className="div-name-location">
-                  <h2 className="name-user">{user.name}</h2>
+                  <h2 className="name-user">{user?.name}</h2>
+                  <div className="div-align">
+                    <h3 className="name-user">
+                      {`${user.address?.city}, ${user.address?.state}`}
+                    </h3>
+                    {!isShowInfo ? (
+                      <FaChevronDown
+                        onClick={() => setIsShowInfo(!isShowInfo)}
+                      />
+                    ) : (
+                      <FaChevronUp onClick={() => setIsShowInfo(!isShowInfo)} />
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className="info">
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Estado:</p>
-                <p>Cidade:</p>
-              </div>
+              {isShowInfo && (
+                <div className="div-user-info">
+                  <div className="div-align-icon">
+                    <p>Email: {user?.email}</p>
+
+                    <FaUserEdit
+                      onClick={() => setModalUpdateUser(true)}
+                      className="icon--edit"
+                    />
+                  </div>
+                  <p>Cidade: {user.address?.city}</p>
+                  <p>Estado: {user.address?.state}</p>
+                  <p>Bairro: {user.address?.district}</p>
+                </div>
+              )}
               <div className="data-user">
-                <p className="name-user">
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
-                  luctus consectetur. Pellentesque efficitur sapien lectus,
-                  posuere laoreet urna sagittis in. Sed placerat dignissim
-                  tortor nec gravida."
-                </p>
-                {/*   <div className="div-email">
-                  <p className="name-user">{user.email}</p>
-                  <MdOutlineEditNote className="icon-edit" />
-                </div> */}
-                <p className="name-user">
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
-                  luctus consectetur. Pellentesque efficitur sapien lectus,
-                  posuere laoreet urna sagittis in. Sed placerat dignissim
-                  tortor nec."
-                </p>
-              </div>
-              <div className="div-email">
-                <p className="name-user">{user.email}</p>
-                <button onClick={() => setModalUpdateUser(true)}>
-                  <MdOutlineEditNote className="icon-edit" />
-                </button>
+                <p className="name-user">{user?.bio}</p>
               </div>
             </div>
 
             <div className="container-pets">
               <div className="div-more-pets">
                 <button
-                  onClick={() => setIsActiveModalPet(!isActiveModalPet)}
+                  onClick={() => setIsShowModalPet(!isShowModalPet)}
                   className="button-more-pets"
                 >
                   <RiAddFill className="icon-button" />
@@ -111,11 +118,29 @@ const Profile = () => {
               </div>
               <div className="container-ul">
                 <Ul className="ul-profile">
-                  <Cards />
+                  {lisAnimalsUser.map((elem) => (
+                    <li key={elem.id} className={`list${elem.id}`}>
+                      <h1>{elem.name}</h1>
+                      <figure>
+                        <img src={elem.url} alt="foto" />
+                      </figure>
+                      <div>
+                        <h5>Animal: {elem.type}</h5>
+                        <span>Gênero: {elem.genre}</span>
+                        <p>Descrição: {elem.description}</p>
+                      </div>
+                      <button>Adotar</button>
+                    </li>
+                  ))}
                 </Ul>
               </div>
               <div className="div-more-pets">
-                <button className="button-requests" onClick={() => setIsActiveModalSupplies(!isActiveModalSupplies)}>
+                <button
+                  className="button-requests"
+                  onClick={() =>
+                    setIsActiveModalSupplies(!isActiveModalSupplies)
+                  }
+                >
                   <RiAddFill className="icon-button" />
                 </button>
                 <p className="need-help">Preciso de Ajuda</p>
@@ -125,16 +150,16 @@ const Profile = () => {
         </div>
       </DivMain>
 
-      {isActiveModalPet && (
-        <RegisterPets isActive={isActiveModalPet} setIsActive={setIsActiveModalPet} />
-      )}
+      {isShowModalPet && <RegisterPets />}
 
       {isActiveModalSupplies && (
-        <RegisterSupplies isActive={isActiveModalSupplies} setIsActive={setIsActiveModalSupplies} />
+        <RegisterSupplies
+          isActive={isActiveModalSupplies}
+          setIsActive={setIsActiveModalSupplies}
+        />
       )}
 
       <ModalUpdateRegister />
-
     </>
   ) : (
     <Navigate to="/login" replace />

@@ -41,8 +41,17 @@ export const ContainerModal = styled.div`
       padding-left: 20px;
       gap: 20px;
       .custom-radio {
+        width: 60%;
+        margin: 0 auto;
         display: flex;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+
         gap: 5px;
+        .input--radio-register-pets {
+          transform: translateY(0px);
+        }
       }
     }
 

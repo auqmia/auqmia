@@ -16,6 +16,7 @@ import { IUpdateUser, upDateUserApi } from "../services/updateUserApi";
 import { getUsers } from "../services/getUser";
 /* import { string } from "yup"; */
 import { IUserRegister } from "../services/registerUserApi";
+import { getAnimalsId } from "../services/getAnimalsId";
 
 export interface IAuthContextProps {
   children: ReactNode;
@@ -40,13 +41,18 @@ interface IAuthContext {
   setModalUpdateUser: Dispatch<SetStateAction<boolean>>;
   updateUser: (id: IUpdateUser) => Promise<void>;
   registerUser: (data: IUserRegister) => void;
+  lisAnimalsUser: IAnimals[];
+  registerPet: (data: {}) => void;
+  setIsShowModalPet: Dispatch<SetStateAction<boolean>>;
+  isShowModalPet: boolean;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider = ({ children }: IAuthContextProps) => {
   const navigate = useNavigate();
-  const [listAnimals, setListAnimals] = useState([]);
+  const [listAnimals, setListAnimals] = useState<IAnimals[]>([]);
+  const [lisAnimalsUser, setLisAnimalsUser] = useState<IAnimals[]>([]);
   const [user, setUser] = useState<IUserData>({} as IUserData);
   const [loading, setLoading] = useState<boolean>(true);
   const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -54,6 +60,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [donationButton, setDonationButton] = useState<boolean>(true);
   const [adopted, setAdopted] = useState<boolean>(true);
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
+  const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -63,10 +70,10 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
           api.defaults.headers = {
             Authorization: `bearer ${token}`,
           } as ICommonHeaderProperties;
-          getUsers().then((res) => {
+          getUsers().then((res: any) => {
             setUser(res);
           });
-          getAnimals();
+          getAnimalsId().then((res) => setLisAnimalsUser(res));
           setIsLogged(true);
         } catch (err) {
           console.log(err);
@@ -75,7 +82,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       setLoading(false);
     };
     loadUser();
-  }, []);
+  }, [isShowModalPet]);
 
   useEffect(() => {
     getAnimals();
@@ -134,16 +141,47 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     await getAnimals();
   };
 
-  const updateUser = async (value: IUpdateUser) => {
-    await upDateUserApi(value)
-      .then((res) => {
-        console.log(res);
+  const registerPet = (data: {}) => {
+    const token = localStorage.getItem("@AuqMia:token");
+    const id = localStorage.getItem("@AuqMia:id");
+    const req = { userID: id, ...data };
+
+    if (token) {
+      api
+        .post("/animals", req, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          toast.success("Animal cadastrado com sucesso!", {
+            autoClose: 900,
+            theme: "dark",
+          });
+          setIsShowModalPet(!isShowModalPet);
+        })
+        .catch((err) => {
+          toast.error("Aconteceu algum erro, verefique os dados!", {
+            autoClose: 900,
+            theme: "dark",
+          });
+        });
+    }
+  };
+
+  const updateUser = async (data: any) => {
+    await upDateUserApi(data)
+      .then((res: any) => {
         setUser(res);
         setModalUpdateUser(false);
-        toast.success("Usuario atualizado com sucesso!");
+        toast.success("Usuario atualizado com sucesso!", {
+          autoClose: 900,
+          theme: "dark",
+        });
       })
       .catch((err) => {
-        toast.error("Erro ao atualizar!");
+        toast.error("Erro ao atualizar!", {
+          autoClose: 900,
+          theme: "dark",
+        });
       });
   };
 
@@ -161,7 +199,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Não foi possível fazer o cadastro.", {
+        toast.error("Não foi possível fazer o cadastro!", {
           autoClose: 900,
           theme: "dark",
         });
@@ -189,6 +227,10 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         setModalUpdateUser,
         updateUser,
         registerUser,
+        lisAnimalsUser,
+        registerPet,
+        setIsShowModalPet,
+        isShowModalPet,
       }}
     >
       {children}

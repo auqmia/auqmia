@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
 import { Input } from "../Input/style";
 import { LabelForm } from "../Label/style";
 import { ContainerModal } from "./styles";
@@ -7,31 +6,16 @@ import { TitleForm } from "../titleForm/style";
 import { ButtonBack, ButtonCheck } from "../../pages/Login/styles";
 import { DivButton } from "../ModalUpUser/styles";
 import { BsCheckLg } from "react-icons/bs";
+import { InputRadio, RadioDiv } from "../Input/style";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import { MdArrowBack } from "react-icons/md";
 
-interface IActive {
-  isActive: boolean;
-  setIsActive: (a: boolean) => void;
-}
-
-const RegisterPets = ({ isActive, setIsActive }: IActive) => {
-  const token = localStorage.getItem("@AuqMia:token");
-  const id = localStorage.getItem("@AuqMia:id");
-
+const RegisterPets = () => {
   const { register, handleSubmit } = useForm();
 
-  function onSubmit(data: {}) {
-    const req = { userID: id, ...data };
-
-    if (token) {
-      api
-        .post("/animals", req, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    }
-  }
+  const { registerPet, setIsShowModalPet, isShowModalPet } =
+    useContext(AuthContext);
 
   return (
     <ContainerModal>
@@ -40,48 +24,60 @@ const RegisterPets = ({ isActive, setIsActive }: IActive) => {
           <TitleForm>Cadastrar Pet</TitleForm>
         </div>
 
-        <form className="Form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="Form" onSubmit={handleSubmit(registerPet)}>
           <LabelForm>Nome</LabelForm>
           <Input id="name" placeholder="Digite um nome" {...register("name")} />
           <p className="title-radio">Tipo</p>
           <div className="div-input-radio">
             <div className="custom-radio">
-              <input
-                type="radio"
-                id="tipo"
-                value="Gato"
-                {...register("type")}
-              />
+              <RadioDiv>
+                <InputRadio
+                  className="input--radio-register-pets"
+                  type="radio"
+                  id="tipo"
+                  value="Gato"
+                  {...register("type")}
+                />
+              </RadioDiv>
               <label>Gato</label>
             </div>
             <div className="custom-radio">
-              <input
-                type="radio"
-                id="css"
-                value="Cachorro"
-                {...register("type")}
-              />
+              <RadioDiv>
+                <InputRadio
+                  className="input--radio-register-pets"
+                  type="radio"
+                  id="css"
+                  value="Cachorro"
+                  {...register("type")}
+                />
+              </RadioDiv>
               <label>Cachorro</label>
             </div>
           </div>
           <p className="title-radio">Gênero</p>
           <div className="div-input-radio">
             <div className="custom-radio">
-              <input
-                type="radio"
-                id="genero"
-                value="Femia"
-                {...register("genre")}
-              />
+              <RadioDiv>
+                <InputRadio
+                  className="input--radio-register-pets"
+                  type="radio"
+                  id="genero"
+                  value="Femea"
+                  {...register("genre")}
+                />
+              </RadioDiv>
               <label>Fêmia</label>
             </div>
             <div className="custom-radio">
-              <input
-                type="radio"
-                id="css"
-                value="Macho"
-                {...register("genre")}
-              />
+              <RadioDiv>
+                <InputRadio
+                  className="input--radio-register-pets"
+                  type="radio"
+                  id="genero"
+                  value="Macho"
+                  {...register("genre")}
+                />
+              </RadioDiv>
               <label>Macho</label>
             </div>
           </div>
@@ -100,11 +96,14 @@ const RegisterPets = ({ isActive, setIsActive }: IActive) => {
             {...register("description")}
           />
           <DivButton>
-            <ButtonBack type="button" onClick={() => setIsActive(!isActive)}>
-              <MdArrowBack className="icon-back" />
+            <ButtonBack
+              type="button"
+              onClick={() => setIsShowModalPet(!isShowModalPet)}
+            >
+              <MdArrowBack className="icon__arrow" />
             </ButtonBack>
             <ButtonCheck type="submit">
-              <BsCheckLg className="button-check" />
+              <BsCheckLg className="icon__check" />
             </ButtonCheck>
           </DivButton>
         </form>
