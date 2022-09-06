@@ -76,19 +76,6 @@ const Login = () => {
             <Error>{errors.password?.message}</Error>
           </div>
         </div>
-
-        {/* <div className="div-button">
-          <ButtonBack
-            type="button"
-            className="button-back"
-            onClick={() => back()}
-          >
-            <MdArrowBack className="icon-back" />
-          </ButtonBack>
-          <ButtonCheck type="submit" className="button-login">
-            <BsCheckLg className="button-check" />
-          </ButtonCheck> */}
-
         <div className="form__buttons">
           <ButtonBack
             className="form__button"

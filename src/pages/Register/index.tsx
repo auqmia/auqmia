@@ -176,16 +176,21 @@ const Register = () => {
           </div>
         </div>
 
-        <div className="form__footer footer--register">
+        {/*  <DivFooter className="form__footer footer--register">  */}
+        <div className="form__buttons"> 
+          <Link to="/login" className="form__button">
+            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
+          </Link>
           <ButtonHover type="submit">
             <p>Cadastrar</p>
             <BsCheckLg className="form__button--icon" />
           </ButtonHover>
-          {/* <p className="footer__text">Já possui conta?</p> */}
-          <Link to="/login" className="form__button">
+           {/* <Link to="/login" className="form__button">
             <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
           </Link>
+        </DivFooter>  */}
         </div>
+
       </Form>
     </ContainerForm>
   );
