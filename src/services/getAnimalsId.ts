@@ -11,7 +11,7 @@ export interface IAnimals {
 
 export async function getAnimalsId(): Promise<IAnimals[]> {
   const id = localStorage.getItem("@AuqMia:id");
-  const { data } = await api.get<IAnimals[]>(`/animals?userID=${id}`);
+  const { data } = await api.get<IAnimals[]>(`/animals?userId=${id}`);
 
   return data;
 }
