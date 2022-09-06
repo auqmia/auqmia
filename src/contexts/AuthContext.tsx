@@ -182,8 +182,9 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const updateUser = async (data: any) => {
     await upDateUserApi(data)
       .then((res: any) => {
+        console.log(res);
         setUser(res);
-        setModalUpdateUser(false);
+        setModalUpdateUser(!modalUpdateUser);
         toast.success("Usuário atualizado com sucesso!", {
           autoClose: 900,
           theme: "dark",

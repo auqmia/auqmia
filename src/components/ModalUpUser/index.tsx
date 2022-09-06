@@ -8,17 +8,13 @@ import { LabelForm } from "../Label/style";
 import { TitleForm } from "../titleForm/style";
 import { ContainerModal, DivButton } from "./styles";
 import { BsCheckLg, BsEye, BsEyeSlash } from "react-icons/bs";
-import registerSchema from "../../validators/registerUser";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import { MdArrowBack } from "react-icons/md";
 
 function ModalUpdateRegister() {
   const { modalUpdateUser, setModalUpdateUser, updateUser, user } =
     useContext(AuthContext);
-  const { register, handleSubmit } = useForm<IUpdateUser>({
-    resolver: yupResolver(registerSchema),
-  });
+  const { register, handleSubmit } = useForm<IUpdateUser>();
 
   const [visible, setVisible] = useState(false);
 

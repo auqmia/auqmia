@@ -15,8 +15,7 @@ import { MdArrowBack } from "react-icons/md";
 const RegisterPets = () => {
   const { register, handleSubmit } = useForm();
 
-  const { registerPet, setIsShowModalPet, isShowModalPet } =
-    useContext(AuthContext);
+  const { registerPet, setIsShowModalPet, isShowModalPet } = useContext(AuthContext);
 
   return (
     <ContainerModal>

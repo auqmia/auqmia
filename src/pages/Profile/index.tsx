@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { HeaderProfile } from "./style";
@@ -6,21 +6,14 @@ import logoAqMia from "../../assets/img/LogoAuqMia.png";
 import logout from "../../assets/logout.svg";
 import donate from "../../assets/donate.svg";
 import logo from "../../assets/img/Logo.png";
-import ModalUpdateRegister from "../../components/ModalUpUser";
 
-import RegisterSupplies from "../../components/modalRegisterSupplies";
 import ProfileForAdoption from "../ProfileForAdoption";
 import ProfileAdoptPet from "../ProfileAdoptPet";
+import RegisterPets from "../../components/modalRegisterPets";
 
 const Profile = () => {
-  const {
-    loading,
-    isLogged,
-    user,
-    backProfile,
-  } = useContext(AuthContext);
-
-  const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
+  const { loading, isLogged, user, backProfile, isShowModalPet } =
+    useContext(AuthContext);
 
   if (loading) return <div>Carregando...</div>;
 
@@ -46,30 +39,13 @@ const Profile = () => {
         </div>
       </HeaderProfile>
 
-      {/* {isShowModalPet && <RegisterPets />} */}
-
+      {isShowModalPet && <RegisterPets />}
 
       {user.user_type === "forAdoption" ? (
         <ProfileForAdoption />
       ) : (
         <ProfileAdoptPet />
       )}
-
-      {/* {isActiveModalPet && (
-        <RegisterPets
-          isActive={isActiveModalPet}
-          setIsActive={setIsActiveModalPet}
-        />
-      )} */}
-
-      {isActiveModalSupplies && (
-        <RegisterSupplies
-          isActive={isActiveModalSupplies}
-          setIsActive={setIsActiveModalSupplies}
-        />
-      )}
-
-      <ModalUpdateRegister />
     </>
   ) : (
     <Navigate to="/login" replace />

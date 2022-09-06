@@ -1,15 +1,24 @@
 import { DivMain } from "./style";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { MdOutlineEditNote } from "react-icons/md";
 import { RiAddFill } from "react-icons/ri";
 import { Ul } from "../../components/Cards/style";
-import Cards from "../../components/Cards";
+import { FaUserEdit, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import RegisterSupplies from "../../components/modalRegisterSupplies";
+import ModalUpdateRegister from "../../components/ModalUpUser";
 
 const ProfileForAdoption = () => {
-  const { user, setModalUpdateUser } = useContext(AuthContext);
+  const {
+    user,
+    setModalUpdateUser,
+    lisAnimalsUser,
+    setIsShowModalPet,
+    isShowModalPet,
+    listSupplies,
+    modalUpdateUser,
+  } = useContext(AuthContext);
 
-  const [isActiveModalPet, setIsActiveModalPet] = useState(false);
+  const [isShowInfo, setIsShowInfo] = useState(false);
   const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
 
   return (
@@ -24,42 +33,49 @@ const ProfileForAdoption = () => {
               <figure>
                 <img
                   className="img-profile"
-                  src={user.picture}
+                  src={user?.picture}
                   alt="img profile"
                 />
               </figure>
               <div className="div-name-location">
-                <h2 className="name-user">{user.name}</h2>
+                <h2 className="name-user">{user?.name}</h2>
+                <div className="div-align">
+                  <h3 className="name-user">
+                    {`${user.address?.city}, ${user.address?.state}`}
+                  </h3>
+                  {!isShowInfo ? (
+                    <FaChevronDown onClick={() => setIsShowInfo(!isShowInfo)} />
+                  ) : (
+                    <FaChevronUp onClick={() => setIsShowInfo(!isShowInfo)} />
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="info">
-              <p>Email:</p>
-              <p>Cidade:</p>
-              <p>Estado:</p>
-              <p></p>
-            </div>
+            {isShowInfo && (
+              <div className="div-user-info">
+                <div className="div-align-icon">
+                  <p>Email: {user?.email}</p>
+
+                  <FaUserEdit
+                    onClick={() => setModalUpdateUser(!modalUpdateUser)}
+                    className="icon--edit"
+                  />
+                </div>
+                <p>Cidade: {user.address?.city}</p>
+                <p>Estado: {user.address?.state}</p>
+                <p>Bairro: {user.address?.district}</p>
+              </div>
+            )}
             <div className="data-user">
-              <p className="name-user">
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vivamus lobortis id eros at auctor. Praesent in nibh et sapien
-                luctus consectetur. Pellentesque efficitur sapien lectus,
-                posuere laoreet urna sagittis in. Sed placerat dignissim tortor
-                nec gravida."
-              </p>
-            </div>
-            <div className="div-email">
-              <p className="name-user">{user.email}</p>
-              <button onClick={() => setModalUpdateUser(true)}>
-                <MdOutlineEditNote className="icon-edit" />
-              </button>
+              <p className="name-user">{user?.bio}</p>
             </div>
           </div>
 
           <div className="container-pets">
             <div className="div-more-pets">
               <button
-                onClick={() => setIsActiveModalPet(!isActiveModalPet)}
+                onClick={() => setIsShowModalPet(!isShowModalPet)}
                 className="button-more-pets"
               >
                 <RiAddFill className="icon-button" />
@@ -68,7 +84,20 @@ const ProfileForAdoption = () => {
             </div>
             <div className="container-ul">
               <Ul className="ul-profile">
-                <Cards />
+                {lisAnimalsUser?.map((elem) => (
+                  <li key={elem.id} className={`list${elem.id}`}>
+                    <h1>{elem.name}</h1>
+                    <figure>
+                      <img src={elem.url} alt="foto" />
+                    </figure>
+                    <div>
+                      <h5>Animal: {elem.type}</h5>
+                      <span>Gênero: {elem.genre}</span>
+                      <p>Descrição: {elem.description}</p>
+                    </div>
+                    <button>Adotar</button>
+                  </li>
+                ))}
               </Ul>
             </div>
             <div className="div-more-pets">
@@ -80,9 +109,25 @@ const ProfileForAdoption = () => {
               </button>
               <p className="need-help">Preciso de Ajuda</p>
             </div>
+            <ul className="list-supplies">
+              {listSupplies.map((element) => (
+                <li key={element.id} className="li-supplies">
+                  <p>{element.product}</p>
+                  <p>{element.quantity}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </main>
       </div>
+      {isActiveModalSupplies && (
+        <RegisterSupplies
+          isActive={isActiveModalSupplies}
+          setIsActive={setIsActiveModalSupplies}
+        />
+      )}
+
+      {modalUpdateUser && <ModalUpdateRegister />}
     </DivMain>
   );
 };

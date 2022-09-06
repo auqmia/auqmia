@@ -30,6 +30,17 @@ export const DivMain = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
+      .div-info {
+        margin-bottom: 20px;
+      }
+
+      .div-align {
+        display: flex;
+        color: var(--color-secondary);
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+      }
     }
     .img-profile {
       width: 80px;
@@ -40,13 +51,17 @@ export const DivMain = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      gap: 10px;
     }
     .data-user {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+
       gap: 10px;
+      color: var(--color-secondary);
     }
-    .info {
+    .div-user-info {
       color: var(--gray-0);
       background-color: var(--gray-2);
       padding: 10px;
@@ -54,6 +69,17 @@ export const DivMain = styled.div`
       flex-direction: column;
       justify-content: center;
       border-radius: 5px;
+
+      .div-align-icon {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .icon--edit {
+        cursor: pointer;
+      }
     }
     .name-user {
       color: var(--color-secondary);
@@ -78,6 +104,15 @@ export const DivMain = styled.div`
       padding: 20px 0px;
       gap: 15px;
     }
+
+    .div-button-more-pets {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px 0px;
+      gap: 15px;
+    }
+
     .button-more-pets {
       background-color: var(--color-primary);
       width: 50px;
@@ -92,6 +127,21 @@ export const DivMain = styled.div`
       font-family: var(--font-family);
       font-size: 20px;
     }
+
+    .list-supplies {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      gap: 8px;
+    }
+
+    .li-supplies {
+       display: flex;
+       justify-content: space-between;
+       width: 100%;
+    }
+
     .ul-profile {
       flex-direction: row;
       overflow-x: auto;
@@ -133,15 +183,17 @@ export const DivMain = styled.div`
       width: 100vw;
       display: flex;
       width: 100vw;
-      justify-content: center;
+      justify-content: space-around;
+
       max-width: 1200px;
-      gap: 10%;
+      gap: 5%;
+
       .container-pets {
-        max-width: 60%;
+        max-width: 65%;
       }
 
       .div-container-info {
-        max-width: 30%;
+        max-width: 300px;
         min-width: 300px;
       }
 
@@ -151,6 +203,9 @@ export const DivMain = styled.div`
       .div-info {
         display: flex;
         gap: 10px;
+      }
+      .data-user {
+        margin-left: 10px;
       }
       .ul-profile {
         overflow-x: auto;
@@ -169,7 +224,6 @@ export const DivMain = styled.div`
           background-color: var(--gray-0);
           scroll-margin-top: 10px;
           border-radius: 5px;
-          margin-top: 5px;
         }
       }
     }

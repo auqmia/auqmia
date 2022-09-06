@@ -18,13 +18,7 @@ export async function upDateUserApi(params: IUpdateUser) {
   const token = localStorage.getItem("@AuqMia:token");
   const id = localStorage.getItem("@AuqMia:id");
 
-  const { state, district, city, ...restData } = params;
-  const userData = {
-    address: { state: state.toUpperCase(), city, district },
-    ...restData,
-  };
-
-  const { data } = await api.patch(`/users/${id}`, userData, {
+  const { data } = await api.patch(`/users/${id}`, params, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

@@ -24,7 +24,7 @@ const ProfileAdoptPet = () => {
           <div className="info__name">
             <h2>{name}</h2>
             <p>
-              {address.city}, {address.state}
+              {address?.city}, {address?.state}
             </p>
           </div>
         </div>
@@ -33,9 +33,9 @@ const ProfileAdoptPet = () => {
           <MdOutlineEditNote />
           <p>Email: {email}</p>
           <p>Data de nascimento: {birthday}</p>
-          <p>Estado: {address.state}</p>
-          <p>Cidade: {address.city}</p>
-          <p>Bairro: {address.district}</p>
+          <p>Estado: {address?.state}</p>
+          <p>Cidade: {address?.city}</p>
+          <p>Bairro: {address?.district}</p>
         </div>
       </div>
 
