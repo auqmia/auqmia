@@ -144,7 +144,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const registerPet = (data: {}) => {
     const token = localStorage.getItem("@AuqMia:token");
     const id = localStorage.getItem("@AuqMia:id");
-    const req = { userID: id, ...data };
+    const req = { userId: id, ...data };
 
     if (token) {
       api

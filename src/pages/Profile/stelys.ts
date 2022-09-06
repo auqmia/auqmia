@@ -234,9 +234,11 @@ export const DivMain = styled.div`
       width: 100vw;
       display: flex;
       width: 100vw;
-      justify-content: center;
+      justify-content: space-around;
+
       max-width: 1200px;
       gap: 5%;
+
       .container-pets {
         max-width: 65%;
       }

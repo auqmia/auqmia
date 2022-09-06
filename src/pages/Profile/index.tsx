@@ -118,7 +118,7 @@ const Profile = () => {
               </div>
               <div className="container-ul">
                 <Ul className="ul-profile">
-                  {lisAnimalsUser.map((elem) => (
+                  {lisAnimalsUser?.map((elem) => (
                     <li key={elem.id} className={`list${elem.id}`}>
                       <h1>{elem.name}</h1>
                       <figure>

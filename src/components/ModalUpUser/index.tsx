@@ -63,7 +63,7 @@ function ModalUpdateRegister() {
           <Input
             type="text"
             placeholder="Atualize sua foto"
-            {...register("url")}
+            {...register("picture")}
           />
           <DivButton>
             <ButtonBack
