@@ -23,16 +23,39 @@ export const ContainerModal = styled.div<Props>`
     max-height: 550px;
     background-color: var(--gray-5);
     display: flex;
+    overflow-y: auto;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
     padding: 20px 0px;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   .header-modal {
     color: var(--color-primary);
   }
   .Form {
     width: 90%;
+  }
+  .form__input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+  }
+
+  .input__password {
+    position: relative;
+  }
+  .icon__eyes {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    color: var(--color-primary);
+    width: 20px;
+    height: 20px;
   }
 `;
 
