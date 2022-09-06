@@ -138,7 +138,13 @@ export const Form = styled.form`
     width: 20px;
     height: 20px;
   }
-
+  .form__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
   .form__button {
     width: 50px;
     height: 50px;
@@ -150,32 +156,25 @@ export const Form = styled.form`
     background-color: var(--color-secondary);
     margin: 20px 0px;
   }
-
-  .form__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 15px;
-  }
-
-  .paragraph-form {
-    font-family: var(--font-family);
-    color: var(--gray-3);
-  }
-  .button-register {
-    background-color: var(--gray-2);
-    color: var(--color-secundary);
-    transition: ease-in-out 0.5s;
-  }
-  .button-register:hover {
+  .form__button:hover {
     animation: pulse 1s;
   }
-  .footer-form {
+
+  .form__footer {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 30px;
+  }
+  .footer__text {
+    font-family: var(--font-family);
+    color: var(--gray-3);
+  }
+  .form__link {
+    background-color: var(--gray-2);
+    color: var(--color-secondary);
+    transition: ease-in-out 0.5s;
   }
 `;
 
@@ -217,7 +216,7 @@ export const ButtonCheck = styled.button`
   align-items: center;
   justify-content: center;
   color: var(--gray-0);
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
   margin: 20px 0px;
 
   :hover {
