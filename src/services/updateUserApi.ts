@@ -1,20 +1,28 @@
 import api from "./api";
-/* import { IUserData } from "./loginUserApi"; */
 
 export interface IUpdateUser {
   name: string;
   email: string;
   password: string;
   picture: string;
-  /* bairro: string;
-  cidade: string;
-  estado: string; */
+  birthday: string;
+  bio: string;
+  district: string;
+  city: string;
+  state: string;
 }
 
 export async function upDateUserApi(params: IUpdateUser) {
   const token = localStorage.getItem("@AuqMia:token");
   const id = localStorage.getItem("@AuqMia:id");
-  const { data } = await api.patch<IUpdateUser>(`/users/${id}`, params, {
+
+  const { state, district, city, ...restData } = params;
+  const userData = {
+    address: { state: state.toUpperCase(), city, district },
+    ...restData,
+  };
+
+  const { data } = await api.patch(`/users/${id}`, userData, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

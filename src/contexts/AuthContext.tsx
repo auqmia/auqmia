@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IUpdateUser, upDateUserApi } from "../services/updateUserApi";
 import { getUsers } from "../services/getUser";
-/* import { string } from "yup"; */
 import { IUserRegister } from "../services/registerUserApi";
 import { getAnimalsId } from "../services/getAnimalsId";
 import { getSuppliesApi, ISupplies } from "../services/getSuppliesApi";
@@ -63,7 +62,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [adopted, setAdopted] = useState<boolean>(true);
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
-  const [listSupplies, setListSupplies] = useState<ISupplies[]>([])
+  const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -95,20 +94,20 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
       .then((res) => {
-        const { user: userReponse, accessToken } = res;
+        const { user: userResponse, accessToken } = res;
         api.defaults.headers = {
           Authorization: `bearer ${accessToken}`,
         } as ICommonHeaderProperties;
-        setUser(userReponse);
+        setUser(userResponse);
         setIsLogged(true);
-        toast.success("Usuário logado com sucesso!", {
+        toast.success("Login realizado com sucesso!", {
           autoClose: 900,
           theme: "dark",
         });
         navigate("/profile", { replace: true });
         localStorage.setItem("@AuqMia:token", accessToken);
 
-        localStorage.setItem("@AuqMia:id", `${userReponse.id}`);
+        localStorage.setItem("@AuqMia:id", `${userResponse.id}`);
       })
       .catch((err) =>
         toast.error("Senha ou email incorreto.", {
@@ -138,12 +137,12 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const getSupplies = async () => {
     await getSuppliesApi()
-    .then((res) => {
-      setListSupplies(res)
-      console.log(res)
-    })
-    .catch((err) => console.log(err))
-  }
+      .then((res) => {
+        setListSupplies(res);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const deleteAnimal = async (id: string) => {
     const token = localStorage.getItem("@AuqMia:token");
@@ -185,7 +184,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       .then((res: any) => {
         setUser(res);
         setModalUpdateUser(false);
-        toast.success("Usuario atualizado com sucesso!", {
+        toast.success("Usuário atualizado com sucesso!", {
           autoClose: 900,
           theme: "dark",
         });
@@ -199,12 +198,15 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   };
 
   const registerUser = (data: IUserRegister) => {
-    const { confirm_password, ...userData } = data;
-    userData.state = userData.state.toUpperCase();
+    const { confirm_password, state, district, city, ...restData } = data;
+    const userData = {
+      address: { state: state.toUpperCase(), city, district },
+      ...restData,
+    };
     api
       .post("/register", userData)
       .then((res) => {
-        toast.success("Usuário registrado com sucesso!", {
+        toast.success("Usuário cadastrado com sucesso!", {
           autoClose: 900,
           theme: "dark",
         });
