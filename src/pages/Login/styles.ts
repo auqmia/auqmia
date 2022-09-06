@@ -147,7 +147,7 @@ export const Form = styled.form`
     align-items: center;
     justify-content: center;
     color: var(--gray-0);
-    background-color: var(--color-secondary);
+    background-color: var(--color-third);
     margin: 20px 0px;
   }
 
@@ -165,7 +165,7 @@ export const Form = styled.form`
   }
   .button-register {
     background-color: var(--gray-2);
-    color: var(--color-secundary);
+    color: var(--color-secondary);
     transition: ease-in-out 0.5s;
   }
   .button-register:hover {
@@ -192,17 +192,17 @@ export const ButtonBack = styled.button`
     animation: pulse 1s;
   }
 
-  :hover > .icon-back {
+  :hover > .icon__arrow {
     animation: rubberBand 1s;
     scale: 1.5;
   }
-  .icon-back {
+  .icon__arrow {
     transition: ease-in-out 0.5s;
     width: 20px;
     height: 20px;
   }
 
-  .icon-back {
+  .icon__arrow {
     color: #ffffff;
     width: 40px;
     height: 30px;
@@ -217,57 +217,63 @@ export const ButtonCheck = styled.button`
   align-items: center;
   justify-content: center;
   color: var(--gray-0);
-  background-color: var(--color-secundary);
+  background-color: var(--color-secondary);
   margin: 20px 0px;
 
+  .icon__check {
+    transition: ease-in-out 0.5s;
+    width: 22px;
+    height: 22px;
+    font-size: 20px;
+  }
+  .icon__check:hover {
+    animation: pulse 1s;
+  }
+
   :hover {
-    .button--back {
-      background-color: var(--color-third);
-    }
+    filter: contrast(0.5);
+    animation: pulse 1s;
 
-    .form__button:hover {
-      filter: contrast(0.5);
-
-      animation: pulse 1s;
-    }
-    .form__button--icon {
-      font-size: 18px;
-      transition: ease-in-out 0.5s;
-    }
-    :hover > .button-check {
+    > .icon__check {
       animation: rubberBand 1s;
       scale: 1.5;
     }
-    .form__button:hover > .form__button--icon {
-      animation: rubberBand 1s;
-      scale: 1.5;
-    }
-    .icon__arrow {
-      font-size: 30px;
-    }
-    .footer__text {
-      font-family: var(--font-family);
-      color: var(--gray-3);
-    }
-    .form__link {
-      background-color: var(--gray-2);
-      color: var(--color-secondary);
-      transition: ease-in-out 0.5s;
-    }
-    .form__link:hover {
-      animation: pulse 1s;
-    }
-    .form__footer {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: 5px;
-      padding-bottom: 20px;
-    }
-    .footer--register {
-      flex-direction: row-reverse;
-      gap: 45px;
-      padding-top: 20px;
-    }
+  }
+`;
+
+export const DivFooter = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 20px;
+
+  .form__button:hover {
+    filter: contrast(0.5);
+
+    animation: pulse 1s;
+  }
+  .form__button:hover > .form__button--icon {
+    animation: rubberBand 1s;
+    scale: 1.5;
+  }
+
+  .footer__text {
+    font-family: var(--font-family);
+    color: var(--gray-3);
+  }
+  .form__link {
+    background-color: var(--gray-2);
+    color: var(--color-secondary);
+    transition: ease-in-out 0.5s;
+  }
+  .form__link:hover {
+    animation: pulse 1s;
+  }
+
+  .footer--register {
+    flex-direction: row-reverse;
+    gap: 45px;
+    padding-top: 20px;
   }
 `;
