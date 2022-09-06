@@ -5,11 +5,13 @@ export interface IUpdateUser {
   email: string;
   password: string;
   picture: string;
+  address: {
+    state: string;
+    city: string;
+    district: string;
+  };
   birthday: string;
   bio: string;
-  district: string;
-  city: string;
-  state: string;
 }
 
 export async function upDateUserApi(params: IUpdateUser) {
