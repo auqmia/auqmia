@@ -17,6 +17,7 @@ import { getUsers } from "../services/getUser";
 /* import { string } from "yup"; */
 import { IUserRegister } from "../services/registerUserApi";
 import { getAnimalsId } from "../services/getAnimalsId";
+import { getSuppliesApi, ISupplies } from "../services/getSuppliesApi";
 
 export interface IAuthContextProps {
   children: ReactNode;
@@ -26,6 +27,7 @@ interface IAuthContext {
   loginUser: (data: IUserLogin) => Promise<void>;
   loginRoute: () => void;
   listAnimals: IAnimals[];
+  listSupplies: ISupplies[];
   user: IUserData;
   isLogged: boolean;
   loading: boolean;
@@ -61,6 +63,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [adopted, setAdopted] = useState<boolean>(true);
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
+  const [listSupplies, setListSupplies] = useState<ISupplies[]>([])
 
   useEffect(() => {
     const loadUser = async () => {
@@ -86,6 +89,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
 
   useEffect(() => {
     getAnimals();
+    getSupplies();
   }, []);
 
   const loginUser = async (data: IUserLogin) => {
@@ -131,6 +135,15 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       })
       .catch((err) => console.log(err));
   };
+
+  const getSupplies = async () => {
+    await getSuppliesApi()
+    .then((res) => {
+      setListSupplies(res)
+      console.log(res)
+    })
+    .catch((err) => console.log(err))
+  }
 
   const deleteAnimal = async (id: string) => {
     const token = localStorage.getItem("@AuqMia:token");
@@ -231,6 +244,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         registerPet,
         setIsShowModalPet,
         isShowModalPet,
+        listSupplies,
       }}
     >
       {children}

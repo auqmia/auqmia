@@ -179,6 +179,15 @@ export const DivMain = styled.div`
       padding: 20px 0px;
       gap: 15px;
     }
+
+    .div-button-more-pets {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px 0px;
+      gap: 15px;
+    }
+
     .button-more-pets {
       background-color: var(--color-primary);
       width: 50px;
@@ -193,6 +202,21 @@ export const DivMain = styled.div`
       font-family: var(--font-family);
       font-size: 20px;
     }
+
+    .list-supplies {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      gap: 8px;
+    }
+
+    .li-supplies {
+       display: flex;
+       justify-content: space-between;
+       width: 100%;
+    }
+
     .ul-profile {
       flex-direction: row;
       overflow-x: auto;
