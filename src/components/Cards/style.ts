@@ -88,13 +88,22 @@ export const Ul = styled.ul`
 
       h5 {
         font-size: 1.2rem;
+
+        color: var(--gray-0);
       }
 
       span {
         font-size: 1.2rem;
+
+        color: var(--gray-0);
       }
 
       p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        color: var(--gray-0);
       }
     }
 

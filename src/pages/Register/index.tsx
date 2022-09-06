@@ -4,7 +4,7 @@ import { Error } from "../../components/ErrorValidators/styles";
 import { Input, InputRadio, RadioDiv } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import registerSchema from "../../validators/registerUser";
-import { ContainerForm, Form } from "../Login/styles";
+import { ContainerForm, DivFooter, Form } from "../Login/styles";
 import {
   BsCheckLg,
   BsEyeSlash,
@@ -176,16 +176,15 @@ const Register = () => {
           </div>
         </div>
 
-        <div className="form__footer footer--register">
+        <DivFooter className="form__footer footer--register">
           <ButtonHover type="submit">
             <p>Cadastrar</p>
             <BsCheckLg className="form__button--icon" />
           </ButtonHover>
-          {/* <p className="footer__text">Já possui conta?</p> */}
           <Link to="/login" className="form__button">
             <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
           </Link>
-        </div>
+        </DivFooter>
       </Form>
     </ContainerForm>
   );

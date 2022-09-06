@@ -1,20 +1,15 @@
 import Logo from "../../assets/img/Logo.png";
 import LogoAuqMia from "../../assets/img/LogoAuqMia.png";
-import loginButtonImg from "../../assets/img/ButtonsImg/loginButton.png";
-import newLoginButtonImg from "../../assets/img/ButtonsImg/newLoginButton.png";
-import donationButtonImg from "../../assets/img/ButtonsImg/donationButton.png";
-import newDonationButtonImg from "../../assets/img/ButtonsImg/newDonationButton.png";
 import footprints from "../../assets/img/footprints.png";
-import { HeaderMain } from "./styles";
+import { ButtonHoverDonation, ButtonHoverLogin, HeaderMain } from "./styles";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { BiLogInCircle } from "react-icons/bi";
+import { GiReceiveMoney } from "react-icons/gi";
+
 function Header() {
   const {
     loginRoute,
-    loginButton,
-    setLoginButton,
-    donationButton,
-    setDonationButton,
   } = useContext(AuthContext);
   return (
     <HeaderMain>
@@ -32,42 +27,15 @@ function Header() {
           </figure>
         </div>
         <div className="buttons-div">
-          {loginButton ? (
-            <button
-              className="login-button"
-              onClick={() => setLoginButton(!loginButton)}
-            >
-              <img
-                src={loginButtonImg}
-                alt="Login Button"
-                className="login-button-img"
-              />
-            </button>
-          ) : (
-            <button className="new-login-button" onClick={() => loginRoute()}>
-              <img src={newLoginButtonImg} alt="Login Button" />
-            </button>
-          )}
+          <ButtonHoverLogin onClick={() => loginRoute()}>
+            <p className="login">Login</p>
+            <BiLogInCircle className="form__button--icon" />
+          </ButtonHoverLogin>
 
-          {donationButton ? (
-            <button
-              className="donation-button"
-              onClick={() => setDonationButton(!donationButton)}
-            >
-              <img
-                src={donationButtonImg}
-                alt="Donation Button"
-                className="donation-button-img"
-              />
-            </button>
-          ) : (
-            <button
-              className="new-donation-button"
-              /* onClick={() => setDonationButton(!donationButton)} */
-            >
-              <img src={newDonationButtonImg} alt="Donation Button" />
-            </button>
-          )}
+          <ButtonHoverDonation onClick={() => loginRoute()}>
+            <p className="donation">Quero ajudar</p>
+            <GiReceiveMoney className="form__button--icon" />
+          </ButtonHoverDonation>
         </div>
       </section>
     </HeaderMain>
