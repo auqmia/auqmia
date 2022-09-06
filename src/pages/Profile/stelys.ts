@@ -105,6 +105,17 @@ export const DivMain = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
+      .div-info {
+        margin-bottom: 20px;
+      }
+
+      .div-align {
+        display: flex;
+        color: var(--color-secondary);
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+      }
     }
     .img-profile {
       width: 80px;
@@ -115,13 +126,17 @@ export const DivMain = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      gap: 10px;
     }
     .data-user {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+
       gap: 10px;
+      color: var(--color-secondary);
     }
-    .info {
+    .div-user-info {
       color: var(--gray-0);
       background-color: var(--gray-2);
       padding: 10px;
@@ -129,9 +144,20 @@ export const DivMain = styled.div`
       flex-direction: column;
       justify-content: center;
       border-radius: 5px;
+
+      .div-align-icon {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .icon--edit {
+        cursor: pointer;
+      }
     }
     .name-user {
-      color: var(--color-secundary);
+      color: var(--color-secondary);
       font-family: var(--font-family);
     }
     .div-email {
@@ -185,7 +211,7 @@ export const DivMain = styled.div`
       }
     }
     .button-requests {
-      background-color: var(--color-secundary);
+      background-color: var(--color-secondary);
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -199,7 +225,7 @@ export const DivMain = styled.div`
       height: 40px;
     }
     .need-help {
-      color: var(--color-secundary);
+      color: var(--color-secondary);
       font-family: var(--font-family);
       font-size: 20px;
     }
@@ -210,13 +236,13 @@ export const DivMain = styled.div`
       width: 100vw;
       justify-content: center;
       max-width: 1200px;
-      gap: 10%;
+      gap: 5%;
       .container-pets {
-        max-width: 60%;
+        max-width: 65%;
       }
 
       .div-container-info {
-        max-width: 30%;
+        max-width: 300px;
         min-width: 300px;
       }
 
@@ -226,6 +252,9 @@ export const DivMain = styled.div`
       .div-info {
         display: flex;
         gap: 10px;
+      }
+      .data-user {
+        margin-left: 10px;
       }
       .ul-profile {
         overflow-x: auto;
@@ -244,7 +273,6 @@ export const DivMain = styled.div`
           background-color: var(--gray-0);
           scroll-margin-top: 10px;
           border-radius: 5px;
-          margin-top: 5px;
         }
       }
     }

@@ -3,6 +3,9 @@ import { LabelForm } from "../../components/Label/style";
 import {
   Form,
   ContainerForm,
+  ButtonBack,
+  ButtonCheck,
+  DivFooter,
 } from "./styles";
 
 import { useContext, useState } from "react";
@@ -15,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import schema from "../../validators/loginUser";
 import { IUserLogin } from "../../services/loginUserApi";
 import { Link } from "react-router-dom";
+
 import { HiArrowNarrowLeft } from "react-icons/hi";
 
 const Login = () => {
@@ -86,23 +90,23 @@ const Login = () => {
           </ButtonCheck> */}
 
         <div className="form__buttons">
-          <button
+          <ButtonBack
+            className="form__button"
             type="button"
-            className="form__button button--back"
             onClick={() => back()}
           >
             <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
-          </button>
-          <button type="submit" className="form__button">
-            <BsCheckLg className="form__button--icon" />
-          </button>
+          </ButtonBack>
+          <ButtonCheck type="submit">
+            <BsCheckLg className="icon__check" />
+          </ButtonCheck>
         </div>
-        <div className="form__footer">
+        <DivFooter className="form__footer">
           <p className="footer__text">Não possui conta?</p>
           <Link to="/register" className="form__link">
             Cadastra-se
           </Link>
-        </div>
+        </DivFooter>
       </Form>
     </ContainerForm>
   );

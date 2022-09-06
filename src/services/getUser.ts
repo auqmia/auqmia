@@ -1,4 +1,5 @@
 import api from "./api";
+/* import { IUserData } from "./loginUserApi"; */
 
 export async function getUsers(): Promise<any> {
   const id = localStorage.getItem("@AuqMia:id");

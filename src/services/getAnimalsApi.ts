@@ -1,17 +1,16 @@
 import api from "./api";
 
 export interface IAnimals {
-    id: string;
-    name: string;
-    type: string;
-    url: string;
-    genre: string;
-    description: string;
+  id: string;
+  name: string;
+  type: string;
+  url: string;
+  genre: string;
+  description: string;
 }
 
-export async function getAnimalsApi(){
-    
-    const {data} = await api.get("/animals");
+export async function getAnimalsApi(): Promise<IAnimals[]> {
+  const { data } = await api.get<IAnimals[]>("/animals");
 
-    return data;
+  return data;
 }

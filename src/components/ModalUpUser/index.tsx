@@ -71,10 +71,10 @@ function ModalUpdateRegister() {
               className="close"
               onClick={() => setModalUpdateUser(false)}
             >
-              <MdArrowBack className="icon-back" />
+              <MdArrowBack className="icon__arrow" />
             </ButtonBack>
             <ButtonCheck type="submit">
-              <BsCheckLg className="button-check" />
+              <BsCheckLg className="icon__check" />
             </ButtonCheck>
           </DivButton>
         </form>
