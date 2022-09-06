@@ -5,11 +5,19 @@ export interface IUserLogin {
   password: string;
 }
 export interface IUserData {
-  url: string;
-  email: string;
   id: string;
   name: string;
-  location: string;
+  email: string;
+  password: string;
+  bio: string;
+  birthday: string;
+  picture: string;
+  address: {
+    district: string;
+    city: string;
+    state: string;
+  };
+  user_type: string;
 }
 export interface IUserLoginResponse {
   accessToken: string;
