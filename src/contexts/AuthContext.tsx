@@ -6,7 +6,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
 import api, { ICommonHeaderProperties } from "../services/api";
 import { getAnimalsApi, IAnimals } from "../services/getAnimalsApi";
 import { IUserData, IUserLogin, loginUsers } from "../services/loginUserApi";
@@ -44,10 +43,12 @@ interface IAuthContext {
   registerUser: (data: IUserRegister) => void;
   lisAnimalsUser: IAnimals[];
   registerPet: (data: {}) => void;
-  setIsShowModalPet: Dispatch<SetStateAction<boolean>>;
   isOpenModalSupplies: boolean;
-  setIsOpenModalSupplis: Dispatch<SetStateAction<boolean>>;
+  setIsShowModalPet: Dispatch<SetStateAction<boolean>>;
   isShowModalPet: boolean;
+  setIsOpenModalSupplis: Dispatch<SetStateAction<boolean>>;
+  isPageDonate: boolean;
+  setIsPageDonate: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -66,6 +67,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
   const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
   const [isOpenModalSupplies, setIsOpenModalSupplis] = useState(false);
+  const [isPageDonate, setIsPageDonate] = useState<boolean>(true);
 
   useEffect(() => {
     getAnimals();
@@ -146,14 +148,6 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       })
       .catch((err) => console.log(err));
   };
-
-  /*   const getSupplies = async () => {
-    await getSuppliesApi()
-      .then((res) => {
-        setListSupplies(res);
-      })
-      .catch((err) => console.log(err));
-  }; */
 
   const deleteAnimal = async (id: string) => {
     const token = localStorage.getItem("@AuqMia:token");
@@ -261,6 +255,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         listSupplies,
         isOpenModalSupplies,
         setIsOpenModalSupplis,
+        isPageDonate,
+        setIsPageDonate,
       }}
     >
       {children}

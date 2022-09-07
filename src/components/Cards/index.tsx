@@ -24,8 +24,7 @@ function Cards() {
         autoClose: 900,
         theme: "dark",
       });
-
-      /* setTimeout(() => deleteAnimal(id), 1000); */
+      
       deleteAnimal(id);
     } else {
       navigate("/login", { replace: true });
