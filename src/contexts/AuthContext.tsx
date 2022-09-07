@@ -45,6 +45,8 @@ interface IAuthContext {
   lisAnimalsUser: IAnimals[];
   registerPet: (data: {}) => void;
   setIsShowModalPet: Dispatch<SetStateAction<boolean>>;
+  isOpenModalSupplies: boolean;
+  setIsOpenModalSupplis: Dispatch<SetStateAction<boolean>>;
   isShowModalPet: boolean;
 }
 
@@ -63,6 +65,11 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
   const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
+  const [isOpenModalSupplies, setIsOpenModalSupplis] = useState(false);
+
+  useEffect(() => {
+    getAnimals();
+  }, []);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -72,10 +79,17 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
           api.defaults.headers = {
             Authorization: `bearer ${token}`,
           } as ICommonHeaderProperties;
+
           getUsers().then((res: any) => {
             setUser(res);
           });
+
           getAnimalsId().then((res) => setLisAnimalsUser(res));
+
+          getSuppliesApi().then((res) => {
+            setListSupplies(res);
+          });
+
           setIsLogged(true);
         } catch (err) {
           console.log(err);
@@ -84,12 +98,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       setLoading(false);
     };
     loadUser();
-  }, [isShowModalPet]);
-
-  useEffect(() => {
-    getAnimals();
-    getSupplies();
-  }, []);
+  }, [isShowModalPet, isOpenModalSupplies]);
 
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
@@ -98,15 +107,18 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         api.defaults.headers = {
           Authorization: `bearer ${accessToken}`,
         } as ICommonHeaderProperties;
+
         setUser(userResponse);
         setIsLogged(true);
+
         toast.success("Login realizado com sucesso!", {
           autoClose: 900,
           theme: "dark",
         });
-        navigate("/profile", { replace: true });
-        localStorage.setItem("@AuqMia:token", accessToken);
 
+        navigate("/profile", { replace: true });
+
+        localStorage.setItem("@AuqMia:token", accessToken);
         localStorage.setItem("@AuqMia:id", `${userResponse.id}`);
       })
       .catch((err) =>
@@ -135,14 +147,13 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       .catch((err) => console.log(err));
   };
 
-  const getSupplies = async () => {
+  /*   const getSupplies = async () => {
     await getSuppliesApi()
       .then((res) => {
         setListSupplies(res);
-        console.log(res);
       })
       .catch((err) => console.log(err));
-  };
+  }; */
 
   const deleteAnimal = async (id: string) => {
     const token = localStorage.getItem("@AuqMia:token");
@@ -248,6 +259,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         setIsShowModalPet,
         isShowModalPet,
         listSupplies,
+        isOpenModalSupplies,
+        setIsOpenModalSupplis,
       }}
     >
       {children}
