@@ -5,9 +5,10 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { Main } from "./style";
 import { Link } from "react-router-dom";
 import { getThreeAnimals, IAnimals } from "../../services/getAnimalsApi";
+import ModalUpdateRegister from "../../components/ModalUpUser";
 
 const ProfileAdoptPet = () => {
-  const { user, setModalUpdateUser } = useContext(AuthContext);
+  const { user, setModalUpdateUser, modalUpdateUser } = useContext(AuthContext);
   const { name, picture, email, birthday, address, bio } = user;
   const [birthDate] = useState(() => {
     const date = new Date(birthday);
@@ -43,7 +44,10 @@ const ProfileAdoptPet = () => {
         </div>
 
         <div className="user__moreInfo">
-          <MdOutlineEditNote className="icon__edit" />
+          <MdOutlineEditNote
+            className="icon__edit"
+            onClick={() => setModalUpdateUser(!modalUpdateUser)}
+          />
           <p>
             Email: <span> {email}</span>
           </p>
@@ -98,6 +102,7 @@ const ProfileAdoptPet = () => {
           </div>
         </div>
       </section>
+      {modalUpdateUser && <ModalUpdateRegister />}
     </Main>
   );
 };
