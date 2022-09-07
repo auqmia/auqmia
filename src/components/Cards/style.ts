@@ -84,24 +84,33 @@ export const Ul = styled.ul`
 
       margin-top: 10px;
 
+      h4,
       h5 {
-        font-size: 1.2rem;
-
-        color: var(--gray-0);
-      }
-
-      span {
-        font-size: 1.2rem;
-
-        color: var(--gray-0);
-      }
-
-      p {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
+        font-size: 1.2rem;
+        font-weight: 500;
+
         color: var(--gray-0);
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+
+        color: var(--gray-0);
+
+        span {
+          font-weight: bold;
+        }
       }
     }
 

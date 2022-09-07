@@ -24,7 +24,7 @@ function Cards() {
         autoClose: 900,
         theme: "dark",
       });
-      
+
       deleteAnimal(id);
     } else {
       navigate("/login", { replace: true });
@@ -44,9 +44,15 @@ function Cards() {
             <img src={elem.url} alt="foto" />
           </figure>
           <div>
-            <h5>Animal: {elem.type}</h5>
-            <span>Gênero: {elem.genre}</span>
-            <p>Descrição: {elem.description}</p>
+            <h4>
+              <span>Animal:</span> {elem.type}
+            </h4>
+            <h5>
+              <span>Gênero:</span> {elem.genre}
+            </h5>
+            <h6>
+              <span>Descrição:</span> {elem.description}
+            </h6>
           </div>
           <button onClick={() => deleteCard(elem.id)}>Adotar</button>
         </li>

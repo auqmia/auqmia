@@ -38,7 +38,7 @@ const Donate = () => {
         console.log(error);
       }
     }
-  }, [data, token]);
+  }, [token]);
 
   return (
     <>

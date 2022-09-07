@@ -37,8 +37,13 @@ function Header() {
     <HeaderMain>
       <section>
         <div className="logo-div">
-          <img className="logo-AuqMia" src={LogoAuqMia} alt="LogoAuqMia" />
-          <img className="logo" src={Logo} alt="Logo" />
+          <img
+            className="logo-AuqMia"
+            src={LogoAuqMia}
+            alt="LogoAuqMia"
+            onClick={() => home()}
+          />
+          <img className="logo" src={Logo} alt="Logo" onClick={() => home()} />
         </div>
         <div className="mid-div">
           <h1>
