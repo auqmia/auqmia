@@ -57,7 +57,6 @@ export const HeaderMain = styled.header`
           font-size: 1.5rem;
 
           color: var(--gray-0);
-          /* text-shadow: 0.1em 0.1em 0.2em var(--color-primary); */
         }
       }
 
@@ -83,41 +82,86 @@ export const HeaderMain = styled.header`
     .buttons-div {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      /* justify-content: center; */
+      align-items: flex-end;
 
       gap: 10px;
-
-      .login-button {
-        background: none;
-      }
-      .login-button:hover {
-        animation: pulse 1s;
-      }
-      .login-button-img {
-        height: 40px;
-      }
-
-      .new-login-button {
-        background: none;
-
-        animation: backInRight 1s;
-      }
-
-      .donation-button {
-        background: none;
-      }
-      .donation-button:hover {
-        animation: pulse 1s;
-      }
-      .donation-button-img {
-        height: 40px;
-      }
-
-      .new-donation-button {
-        background: none;
-
-        animation: backInRight 1s;
-      }
     }
+  }
+`;
+
+export const ButtonHoverLogin = styled.button`
+  height: 50px;
+  min-width: 50px;
+  max-width: max-content;
+  padding: 0px 10px;
+  border-radius: 25px;
+  background-color: var(--color-secondary);
+  font-size: 24px;
+  font-family: var(--font-family);
+  color: var(--gray-0);
+  gap: 5px;
+  transition: width 1s;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  > .login {
+    max-width: 0;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    color: var(--color-secondary);
+    transition: color 1.2s, max-width 1.5s;
+  }
+
+  > svg {
+    display: inline-block;
+  }
+
+  :hover > .login {
+    max-width: 120px;
+    color: var(--gray-0);
+  }
+`;
+
+export const ButtonHoverDonation = styled.button`
+  height: 50px;
+  min-width: 50px;
+  max-width: max-content;
+  padding: 0px 10px;
+  border-radius: 25px;
+  background-color: var(--color-primary);
+  font-size: 24px;
+  font-family: var(--font-family);
+  color: var(--gray-0);
+  gap: 5px;
+  transition: width 1s;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 5px;
+
+  > .donation {
+    max-width: 0;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    color: var(--color-secondary);
+    transition: color 1.2s, max-width 1.5s;
+    
+  }
+
+  > svg {
+    display: inline-block;
+  }
+
+  :hover .donation {
+    max-width: 150px;
+    color: var(--gray-0);
   }
 `;

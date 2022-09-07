@@ -3,9 +3,10 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   :root {
     --color-primary: #00DEDF;
-    --color-secundary:  #CE8EDB;
+    --color-secondary:  #CE8EDB;
     --color-third: #ce8edb6b;
   
+    --gray-5:#1E1E1E;
     --gray-4: #292929;
     --gray-3:  rgba(119, 159, 156, 0.2);
     --gray-2: #242424;
@@ -34,11 +35,12 @@ body{
  overflow-x: hidden;
  background-color: var(--gray-4);
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     border: none;
-    width: 8px;
+    width: 5px;
+    height: 5px;
 }
-  body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: var(--gray-3);
     border-radius: 5px;
 }
@@ -48,6 +50,7 @@ button{
 
 a{
   cursor: pointer;
+  text-decoration: none;
 }
 
 ul,li{

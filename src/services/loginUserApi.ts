@@ -5,21 +5,29 @@ export interface IUserLogin {
   password: string;
 }
 export interface IUserData {
-  url: string;
-  email: string;
   id: string;
   name: string;
-  location: string;
+  email: string;
+  password: string;
+  bio: string;
+  birthday: string;
+  picture: string;
+  address: {
+    district: string;
+    city: string;
+    state: string;
+  };
+  user_type: string;
 }
-export interface IUserLoginrResponse {
+export interface IUserLoginResponse {
   accessToken: string;
   user: IUserData;
 }
 
 export async function loginUsers(
   params: IUserLogin
-): Promise<IUserLoginrResponse> {
-  const { data } = await api.post<IUserLoginrResponse>("login", params);
+): Promise<IUserLoginResponse> {
+  const { data } = await api.post<IUserLoginResponse>("login", params);
 
   return data;
 }
