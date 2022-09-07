@@ -4,7 +4,7 @@ import { Error } from "../../components/ErrorValidators/styles";
 import { Input, InputRadio, RadioDiv } from "../../components/Input/style";
 import { LabelForm } from "../../components/Label/style";
 import registerSchema from "../../validators/registerUser";
-import { ContainerForm, Form } from "../Login/styles";
+import { ButtonBack, ButtonCheck, ContainerForm, Form } from "../Login/styles";
 import {
   BsCheckLg,
   BsEyeSlash,
@@ -17,7 +17,6 @@ import { IUserRegister } from "../../services/registerUserApi";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { ButtonHover } from "./style";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
@@ -176,21 +175,16 @@ const Register = () => {
           </div>
         </div>
 
-        {/*  <DivFooter className="form__footer footer--register">  */}
-        <div className="form__buttons"> 
-          <Link to="/login" className="form__button">
-            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
+        <div className="form__buttons">
+          <Link to="/login">
+            <ButtonBack>
+              <HiArrowNarrowLeft className="icon__arrow" />
+            </ButtonBack>
           </Link>
-          <ButtonHover type="submit">
-            <p>Cadastrar</p>
-            <BsCheckLg className="form__button--icon" />
-          </ButtonHover>
-           {/* <Link to="/login" className="form__button">
-            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
-          </Link>
-        </DivFooter>  */}
+          <ButtonCheck type="submit">
+            <BsCheckLg className="icon__check" />
+          </ButtonCheck>
         </div>
-
       </Form>
     </ContainerForm>
   );

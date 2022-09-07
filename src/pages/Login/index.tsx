@@ -77,12 +77,8 @@ const Login = () => {
           </div>
         </div>
         <div className="form__buttons">
-          <ButtonBack
-            className="form__button"
-            type="button"
-            onClick={() => back()}
-          >
-            <HiArrowNarrowLeft className="form__button--icon icon__arrow" />
+          <ButtonBack type="button" onClick={() => back()}>
+            <HiArrowNarrowLeft className="icon__arrow" />
           </ButtonBack>
           <ButtonCheck type="submit">
             <BsCheckLg className="icon__check" />

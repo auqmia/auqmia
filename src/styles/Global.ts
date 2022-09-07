@@ -35,11 +35,12 @@ body{
  overflow-x: hidden;
  background-color: var(--gray-4);
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     border: none;
-    width: 8px;
+    width: 5px;
+    height: 5px;
 }
-  body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: var(--gray-3);
     border-radius: 5px;
 }
