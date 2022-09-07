@@ -1,16 +1,40 @@
 import Logo from "../../assets/img/Logo.png";
 import LogoAuqMia from "../../assets/img/LogoAuqMia.png";
-import footprints from "../../assets/img/footprints.png";
 import { ButtonHoverDonation, ButtonHoverLogin, HeaderMain } from "./styles";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { BiLogInCircle } from "react-icons/bi";
-import { GiReceiveMoney } from "react-icons/gi";
+import { BiHomeHeart, BiLogInCircle } from "react-icons/bi";
+import { FaHandHoldingHeart } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  const {
-    loginRoute,
-  } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { loginRoute, isPageDonate, setIsPageDonate } = useContext(AuthContext);
+
+  const token = localStorage.getItem("@AuqMia:token");
+
+  const logout = () => {
+    navigate("/", { replace: true });
+
+    localStorage.clear();
+  };
+
+  const donate = () => {
+    if (token) {
+      navigate("/donate", { replace: true });
+      setIsPageDonate(!isPageDonate);
+    } else {
+      navigate("/login", { replace: true });
+    }
+  };
+
+  const home = () => {
+    navigate("/", { replace: true });
+    setIsPageDonate(!isPageDonate);
+  };
+
   return (
     <HeaderMain>
       <section>
@@ -22,20 +46,31 @@ function Header() {
           <h1>
             Respeitar os animais é uma obrigação, amá-los é um privilégio.
           </h1>
-          <figure className="footprints-figure">
-            <img src={footprints} alt="Pegadas" className="footprints-img" />
-          </figure>
         </div>
         <div className="buttons-div">
-          <ButtonHoverLogin onClick={() => loginRoute()}>
-            <p className="login">Login</p>
-            <BiLogInCircle className="form__button--icon" />
-          </ButtonHoverLogin>
+          {token ? (
+            <ButtonHoverLogin onClick={() => logout()}>
+              <p className="logout">Logout</p>
+              <ImExit className="form__button--icon" />
+            </ButtonHoverLogin>
+          ) : (
+            <ButtonHoverLogin onClick={() => loginRoute()}>
+              <p className="login">Login</p>
+              <BiLogInCircle className="form__button--icon" />
+            </ButtonHoverLogin>
+          )}
 
-          <ButtonHoverDonation onClick={() => loginRoute()}>
-            <p className="donation">Quero ajudar</p>
-            <GiReceiveMoney className="form__button--icon" />
-          </ButtonHoverDonation>
+          {isPageDonate ? (
+            <ButtonHoverDonation onClick={() => donate()}>
+              <p className="donation">Quero ajudar</p>
+              <FaHandHoldingHeart className="form__button--icon" />
+            </ButtonHoverDonation>
+          ) : (
+            <ButtonHoverDonation onClick={() => home()}>
+              <p className="home">Home</p>
+              <BiHomeHeart className="form__button--icon" />
+            </ButtonHoverDonation>
+          )}
         </div>
       </section>
     </HeaderMain>
