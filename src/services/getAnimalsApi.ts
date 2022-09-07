@@ -1,6 +1,7 @@
 import api from "./api";
 
 export interface IAnimals {
+  userId: string;
   id: string;
   name: string;
   type: string;
