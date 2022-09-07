@@ -16,10 +16,11 @@ const ProfileForAdoption = () => {
     isShowModalPet,
     listSupplies,
     modalUpdateUser,
+    isOpenModalSupplies,
+    setIsOpenModalSupplis,
   } = useContext(AuthContext);
 
   const [isShowInfo, setIsShowInfo] = useState(false);
-  const [isActiveModalSupplies, setIsActiveModalSupplies] = useState(false);
 
   return (
     <DivMain>
@@ -103,29 +104,31 @@ const ProfileForAdoption = () => {
             <div className="div-more-pets">
               <button
                 className="button-requests"
-                onClick={() => setIsActiveModalSupplies(!isActiveModalSupplies)}
+                onClick={() => setIsOpenModalSupplis(!isOpenModalSupplies)}
               >
                 <RiAddFill className="icon-button" />
               </button>
               <p className="need-help">Preciso de Ajuda</p>
             </div>
             <ul className="list-supplies">
+              <div className="div__header--supplies">
+                <h2>Nome do Produto</h2>
+                <p>Quantidade</p>
+              </div>
               {listSupplies.map((element) => (
-                <li key={element.id} className="li-supplies">
-                  <p>{element.product}</p>
-                  <p>{element.quantity}</p>
+                <li key={element.id} className="li__supplies">
+                  <div className="div__info--supplies">
+                    <p>{element.product}</p>
+                    <p>{`${element.quantity}kg`}</p>
+                  </div>
+                  <div className="div__line"></div>
                 </li>
               ))}
             </ul>
           </div>
         </main>
       </div>
-      {isActiveModalSupplies && (
-        <RegisterSupplies
-          isActive={isActiveModalSupplies}
-          setIsActive={setIsActiveModalSupplies}
-        />
-      )}
+      {isOpenModalSupplies && <RegisterSupplies />}
 
       {modalUpdateUser && <ModalUpdateRegister />}
     </DivMain>

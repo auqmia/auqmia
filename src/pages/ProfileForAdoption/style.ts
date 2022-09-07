@@ -128,20 +128,6 @@ export const DivMain = styled.div`
       font-size: 20px;
     }
 
-    .list-supplies {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      gap: 8px;
-    }
-
-    .li-supplies {
-       display: flex;
-       justify-content: space-between;
-       width: 100%;
-    }
-
     .ul-profile {
       flex-direction: row;
       overflow-x: auto;
@@ -178,7 +164,36 @@ export const DivMain = styled.div`
       font-family: var(--font-family);
       font-size: 20px;
     }
+    .list-supplies {
+      color: var(--gray-0);
+      min-width: 200px;
+      max-width: 300px;
+      width: 100%;
+      .div__header--supplies {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .li__supplies {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
 
+      .div__info--supplies {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0px 5px;
+      }
+      .div__line {
+        background-color: var(--color-secondary);
+        height: 2px;
+        width: 100%;
+      }
+    }
     @media (min-width: 768px) {
       width: 100vw;
       display: flex;
