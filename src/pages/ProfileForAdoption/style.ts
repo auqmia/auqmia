@@ -167,8 +167,9 @@ export const DivMain = styled.div`
     .list-supplies {
       color: var(--gray-0);
       min-width: 200px;
-      max-width: 300px;
+      max-width: 80%;
       width: 100%;
+      margin: auto;
       .div__header--supplies {
         width: 100%;
         display: flex;
@@ -186,7 +187,7 @@ export const DivMain = styled.div`
         display: flex;
         justify-content: space-between;
         width: 100%;
-        padding: 0px 5px;
+        padding: 0px 20px;
       }
       .div__line {
         background-color: var(--color-secondary);
