@@ -212,9 +212,9 @@ export const DivMain = styled.div`
     }
 
     .li-supplies {
-       display: flex;
-       justify-content: space-between;
-       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
 
     .ul-profile {
@@ -265,6 +265,7 @@ export const DivMain = styled.div`
 
       .container-pets {
         max-width: 65%;
+        min-width: 50%;
       }
 
       .div-container-info {
