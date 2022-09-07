@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import Cards from "../../components/Cards";
 import { Ul } from "../../components/Cards/style";
 import Header from "../../components/Header";
+import LocationFilter from "../../components/LocationFilter";
 import { AuthContext } from "../../contexts/AuthContext";
 
 function Dashboard() {
@@ -14,6 +15,7 @@ function Dashboard() {
   return (
     <>
       <Header />
+      <LocationFilter />
       <Ul>
         <Cards />
       </Ul>
