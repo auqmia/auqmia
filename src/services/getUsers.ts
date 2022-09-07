@@ -1,5 +1,4 @@
 import api from "./api";
-/* import { IUserData } from "./loginUserApi"; */
 
 export async function getUsersAll(): Promise<any> {
   const token = localStorage.getItem("@AuqMia:token");
