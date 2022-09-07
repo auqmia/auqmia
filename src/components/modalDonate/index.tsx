@@ -1,5 +1,6 @@
 import api from "../../services/api";
 import { AiOutlineClose } from "react-icons/ai";
+import { ContainerModal } from "../modalRegisterPets/styles";
 import { IData } from "../../pages/Donate";
 
 interface IDataProps {
@@ -12,33 +13,36 @@ const ModalDonate = ({ donate, setIsActive, isActive }: IDataProps) => {
   const token = localStorage.getItem("@AuqMia:token");
 
   function remove(id: number) {
-    if(token) {
+    if (token) {
       api.delete(`/supplies/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
-    };
+    }
   }
 
   return (
-    <>
-      <div>
-        <p>Doar</p>
-        <button onClick={() => setIsActive(!isActive)}>
-          <AiOutlineClose />
+    <ContainerModal>
+      <section>
+        <div>
+          <p>Doar</p>
+          <button onClick={() => setIsActive(!isActive)}>
+            <AiOutlineClose />
+          </button>
+        </div>
+        <div>
+          <span>{donate.product}</span>
+          <span>{donate.quantity}</span>
+        </div>
+        <button
+          onClick={() => {
+            remove(donate.id);
+            setIsActive(!isActive);
+          }}
+        >
+          OK
         </button>
-      </div>
-      <div>
-        <span>{donate.product}</span>
-        <span>{donate.quantity}</span>
-      </div>
-      <button onClick={() => {
-        remove(donate.id);
-        setIsActive(!isActive);
-        }}
-      >
-        OK
-      </button>
-    </>
+      </section>
+    </ContainerModal>
   );
 };
 
