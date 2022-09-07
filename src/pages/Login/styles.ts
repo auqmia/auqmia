@@ -145,20 +145,6 @@ export const Form = styled.form`
     width: 100%;
     gap: 15px;
   }
-  .form__button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-0);
-    background-color: var(--color-third);
-    margin: 20px 0px;
-  }
-  .form__button:hover {
-    animation: pulse 1s;
-  }
 
   .form__footer {
     display: flex;
