@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UlDonate, DivMainDonarte } from "./style";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import ModalDonate from "../../components/modalDonate";
 import { getUsersAll } from "../../services/getUsers";
 import { FaHandHoldingHeart } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export interface IData {
   userId?: string;
@@ -19,6 +20,12 @@ const Donate = () => {
   const [donate, setDonate] = useState<IData>({} as IData);
   const [users, setUsers] = useState([]);
   const token = localStorage.getItem("@AuqMia:token");
+
+  const { setIsPageDonate } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsPageDonate(false);
+  }, []);
 
   useEffect(() => {
     if (token) {

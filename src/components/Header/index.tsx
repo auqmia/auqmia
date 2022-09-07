@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Header() {
   const navigate = useNavigate();
 
-  const { loginRoute, isPageDonate, setIsPageDonate } = useContext(AuthContext);
+  const { loginRoute, isPageDonate } = useContext(AuthContext);
 
   const token = localStorage.getItem("@AuqMia:token");
 
@@ -24,7 +24,6 @@ function Header() {
   const donate = () => {
     if (token) {
       navigate("/donate", { replace: true });
-      setIsPageDonate(!isPageDonate);
     } else {
       navigate("/login", { replace: true });
     }
@@ -32,7 +31,6 @@ function Header() {
 
   const home = () => {
     navigate("/", { replace: true });
-    setIsPageDonate(!isPageDonate);
   };
 
   return (
