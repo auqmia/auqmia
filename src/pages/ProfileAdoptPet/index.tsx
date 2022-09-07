@@ -4,6 +4,7 @@ import { BiHomeHeart } from "react-icons/bi";
 import { MdOutlineEditNote } from "react-icons/md";
 import { Main } from "./style";
 import { Link } from "react-router-dom";
+import { getThreeAnimals, IAnimals } from "../../services/getAnimalsApi";
 
 const ProfileAdoptPet = () => {
   const { user, setModalUpdateUser } = useContext(AuthContext);
@@ -15,9 +16,12 @@ const ProfileAdoptPet = () => {
       month < 10 ? `0${month}` : month
     }/${date.getFullYear()}`;
   });
+  const [showPets, setShowPets] = useState<IAnimals[]>([] as IAnimals[]);
+
   useEffect(() => {
-    console.log(birthDate);
-  });
+    getThreeAnimals().then((res) => setShowPets(res));
+  }, []);
+
   return (
     <Main>
       <div className="mobile__title">
@@ -70,6 +74,7 @@ const ProfileAdoptPet = () => {
 
       <section className="section__right">
         <div className="user__bio">
+          <h3>Sobre Mim</h3>
           <p>{bio}</p>
         </div>
 
@@ -82,7 +87,15 @@ const ProfileAdoptPet = () => {
             <p className="pets__text">Procure um pet para adotar!</p>
           </div>
 
-          <div className="pets__cards">Exibir fotos de pets!</div>
+          <div className="pets__cards">
+            {showPets &&
+              showPets.map(({ url, name, id }) => (
+                <div key={id} className="pet__card">
+                  <img src={url} alt="pet fofo" className="card__img" />
+                  <p>{name}</p>
+                </div>
+              ))}
+          </div>
         </div>
       </section>
     </Main>
