@@ -26,11 +26,18 @@ export const HeaderMain = styled.header`
       .logo {
         height: 120px;
       }
+      .logo:hover {
+        cursor: pointer;
+      }
 
       .logo-AuqMia {
         display: none;
 
         height: 120px;
+      }
+
+      .logo-AuqMia:hover {
+        cursor: pointer;
       }
 
       @media (min-width: 768px) {
@@ -99,7 +106,8 @@ export const ButtonHoverLogin = styled.button`
   justify-content: center;
   gap: 5px;
 
-  > .login, .logout {
+  > .login,
+  .logout {
     max-width: 0;
     overflow: hidden;
     display: inline-block;
@@ -117,14 +125,15 @@ export const ButtonHoverLogin = styled.button`
   }
 
   @media (min-width: 400px) {
-    :hover .login, :hover .logout {
+    :hover .login,
+    :hover .logout {
       max-width: 120px;
       color: var(--gray-0);
     }
   }
 `;
 
-export const ButtonHoverDonation = styled.button`
+export const ButtonHoverDonation = styled.a`
   height: 50px;
   min-width: 50px;
   max-width: max-content;
@@ -143,7 +152,8 @@ export const ButtonHoverDonation = styled.button`
   justify-content: center;
   gap: 5px;
 
-  > .donation, .home {
+  > .donation,
+  .home {
     max-width: 0;
     overflow: hidden;
     display: inline-block;
@@ -158,7 +168,8 @@ export const ButtonHoverDonation = styled.button`
   }
 
   @media (min-width: 400px) {
-    :hover .donation, :hover .home {
+    :hover .donation,
+    :hover .home {
       max-width: 150px;
       color: var(--gray-0);
     }

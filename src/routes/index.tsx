@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
+import Donate from "../pages/Donate";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
-import Donate from "../pages/Donate";
 
 const RoutesMain = () => {
   return (
@@ -13,6 +13,7 @@ const RoutesMain = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<Register />} />
       <Route path="/donate" element={<Donate />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
