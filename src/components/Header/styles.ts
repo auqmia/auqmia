@@ -4,6 +4,8 @@ export const HeaderMain = styled.header`
   display: flex;
   justify-content: center;
 
+  max-height: 120px;
+
   animation: fadeInLeft 1s;
 
   padding: 0px 40px;
@@ -24,11 +26,18 @@ export const HeaderMain = styled.header`
       .logo {
         height: 120px;
       }
+      .logo:hover {
+        cursor: pointer;
+      }
 
       .logo-AuqMia {
         display: none;
 
         height: 120px;
+      }
+
+      .logo-AuqMia:hover {
+        cursor: pointer;
       }
 
       @media (min-width: 768px) {
@@ -43,6 +52,7 @@ export const HeaderMain = styled.header`
 
     .mid-div {
       display: flex;
+      align-items: center;
 
       h1 {
         display: none;
@@ -52,29 +62,12 @@ export const HeaderMain = styled.header`
           display: flex;
           text-align: center;
 
-          width: 300px;
+          width: 100%;
+          max-width: 450px;
 
           font-size: 1.5rem;
 
           color: var(--gray-0);
-        }
-      }
-
-      .footprints-figure {
-        display: none;
-
-        max-width: 200px;
-        max-height: 120px;
-      }
-      .footprints-img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-
-      @media (min-width: 476px) {
-        .footprints-figure {
-          display: block;
         }
       }
     }
@@ -82,10 +75,15 @@ export const HeaderMain = styled.header`
     .buttons-div {
       display: flex;
       flex-direction: column;
-      /* justify-content: center; */
       align-items: flex-end;
 
       gap: 10px;
+    }
+
+    @media (min-width: 400px) {
+      .buttons-div {
+        min-width: 200px;
+      }
     }
   }
 `;
@@ -108,26 +106,34 @@ export const ButtonHoverLogin = styled.button`
   justify-content: center;
   gap: 5px;
 
-  > .login {
+  > .login,
+  .logout {
     max-width: 0;
     overflow: hidden;
     display: inline-block;
     white-space: nowrap;
     color: var(--color-secondary);
     transition: color 1.2s, max-width 1.5s;
+
+    display: flex;
+    text-align: center;
   }
 
   > svg {
     display: inline-block;
+    font-size: 28px;
   }
 
-  :hover > .login {
-    max-width: 120px;
-    color: var(--gray-0);
+  @media (min-width: 400px) {
+    :hover .login,
+    :hover .logout {
+      max-width: 120px;
+      color: var(--gray-0);
+    }
   }
 `;
 
-export const ButtonHoverDonation = styled.button`
+export const ButtonHoverDonation = styled.a`
   height: 50px;
   min-width: 50px;
   max-width: max-content;
@@ -146,22 +152,26 @@ export const ButtonHoverDonation = styled.button`
   justify-content: center;
   gap: 5px;
 
-  > .donation {
+  > .donation,
+  .home {
     max-width: 0;
     overflow: hidden;
     display: inline-block;
     white-space: nowrap;
     color: var(--color-secondary);
     transition: color 1.2s, max-width 1.5s;
-    
   }
 
   > svg {
     display: inline-block;
+    font-size: 28px;
   }
 
-  :hover .donation {
-    max-width: 150px;
-    color: var(--gray-0);
+  @media (min-width: 400px) {
+    :hover .donation,
+    :hover .home {
+      max-width: 150px;
+      color: var(--gray-0);
+    }
   }
 `;

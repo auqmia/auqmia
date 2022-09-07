@@ -8,7 +8,7 @@ import {
   DivFooter,
 } from "./styles";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { BsCheckLg, BsEyeSlash, BsEye } from "react-icons/bs";
 import { useForm } from "react-hook-form";
@@ -38,6 +38,12 @@ const Login = () => {
   const back = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("@AuqMia:token");
+
+    token && navigate("/ ", { replace: true });
+  }, []);
 
   return (
     <ContainerForm>

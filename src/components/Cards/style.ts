@@ -17,8 +17,6 @@ export const Ul = styled.ul`
   @media (min-width: 620px) {
     flex-direction: row;
     flex-wrap: wrap;
-    & {
-    }
   }
 
   .remove-card {
@@ -37,7 +35,7 @@ export const Ul = styled.ul`
 
     background-color: var(--gray-3);
 
-    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.2);
 
     border-radius: 8px;
     padding-bottom: 5px;
@@ -86,24 +84,33 @@ export const Ul = styled.ul`
 
       margin-top: 10px;
 
+      h4,
       h5 {
-        font-size: 1.2rem;
-
-        color: var(--gray-0);
-      }
-
-      span {
-        font-size: 1.2rem;
-
-        color: var(--gray-0);
-      }
-
-      p {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
+        font-size: 1.2rem;
+        font-weight: 500;
+
         color: var(--gray-0);
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+
+        color: var(--gray-0);
+
+        span {
+          font-weight: bold;
+        }
       }
     }
 
@@ -122,6 +129,10 @@ export const Ul = styled.ul`
     button:hover {
       animation: pulse 1s;
     }
+  }
+
+  li:hover {
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.6);
   }
 
   li:hover > figure > img {

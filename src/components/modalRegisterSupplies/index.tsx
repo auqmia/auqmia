@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import { TitleForm } from "../titleForm/style";
 import { ButtonBack, ButtonCheck } from "../../pages/Login/styles";
+import Select from "../Select";
 
 const RegisterSupplies = () => {
   const token = localStorage.getItem("@AuqMia:token");
@@ -18,8 +19,14 @@ const RegisterSupplies = () => {
   const [quantity, setQuantity] = useState("");
   const [userData, setUserData] = useState({});
 
-  const { isOpenModalSupplies, setIsOpenModalSupplis } =
-    useContext(AuthContext);
+  const { isOpenModalSupplies, setIsOpenModalSupplis } = useContext(AuthContext);
+
+  const productList = [
+    "Areia Higiênica",
+    "Ração para Gato",
+    "Ração para Cachorro",
+  ];
+  const quantityList = ["2kg", "5kg", "10kg", "20kg", "30kg"];
 
   useEffect( () => {
     if (token) {
@@ -60,37 +67,19 @@ const RegisterSupplies = () => {
   return (
     <ContainerModal>
       <ModalRegisterSupplies>
-        <div>
-          <TitleForm>Cadastrar Suprimentos</TitleForm>
-        </div>
+        <TitleForm>Cadastrar Suprimentos</TitleForm>
 
-        <form onSubmit={handleSubmit}>
-          <select
-            id="product"
-            onChange={(event) => setProduct(event.target.value)}
-          >
-            <option value="">--Selecione--</option>
-            <option value="Areia de Gato">Areia de Gato</option>
-            <option value="Ração de Gato">Ração de Gato</option>
-            <option value="Ração de Cachorro">Ração de Cachorro</option>
-          </select>
-
-          <select
-            id="quantity"
-            onChange={(event) => setQuantity(event.target.value)}
-          >
-            <option value="">--Selecione--</option>
-            <option value="1">1kg</option>
-            <option value="2">2kg</option>
-            <option value="3">3kg</option>
-            <option value="4">4kg</option>
-            <option value="5">5kg</option>
-            <option value="6">6kg</option>
-            <option value="7">7kg</option>
-            <option value="8">8kg</option>
-            <option value="9">9kg</option>
-            <option value="10">10kg</option>
-          </select>
+        <form className="supplies__form" onSubmit={handleSubmit}>
+          <Select
+            label="Produto"
+            options={productList}
+            onClick={(e) => setProduct(e.target.id)}
+          />
+          <Select
+            label="Quantidade"
+            options={quantityList}
+            onClick={(e) => setQuantity(e.target.id)}
+          />
           <DivButton className="div-button">
             <ButtonBack
               type="button"

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UlDonate, DivMainDonarte } from "./style";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import ModalDonate from "../../components/modalDonate";
 import { getUsersAll } from "../../services/getUsers";
 import { FaHandHoldingHeart } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export interface IData {
   userId?: string;
@@ -20,6 +21,12 @@ const Donate = () => {
   const [users, setUsers] = useState([]);
   const token = localStorage.getItem("@AuqMia:token");
 
+  const { setIsPageDonate } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsPageDonate(false);
+  }, []);
+
   useEffect(() => {
     if (token) {
       try {
@@ -31,31 +38,12 @@ const Donate = () => {
         console.log(error);
       }
     }
-  }, [data, token]);
+  }, [token]);
 
   return (
     <>
       <Header />
-
       <DivMainDonarte>
-        {/* <ul>
-          {data?.map((elem) => (
-            <li key={elem.id}>
-              <div>
-                <span>{elem.product}</span>
-                <span>{elem.quantity}</span>
-              </div>
-              <button onClick={() => {
-                setIsActive(!isActive);
-                setDonate({id: elem.id, product: elem.product, quantity: elem.quantity})
-                }}
-              >
-                Ajudar
-              </button>
-            </li>
-          ))}
-        </ul> */}
-
         <UlDonate>
           <div className="div__title--help">
             <h1 className="title__help--users">Doações</h1>
@@ -79,11 +67,6 @@ const Donate = () => {
                     <button
                       onClick={() => {
                         setIsActive(!isActive);
-                        /* setDonate({
-                          id: elem.id,
-                          product: elem.product,
-                          quantity: elem.quantity,
-                        }); */
                       }}
                     >
                       Ajudar <FaHandHoldingHeart />
