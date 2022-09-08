@@ -189,20 +189,17 @@ export const Main = styled.main`
           width: 200px;
           height: 250px;
           position: relative;
+          overflow: hidden;
+          border-radius: 20px;
 
           :hover {
             animation: pulse 1s;
-
-            > .card__img {
-              scale: 1.2;
-            }
           }
 
           > .card__img {
             width: 200px;
             height: 250px;
             object-fit: cover;
-            border-radius: 20px;
           }
 
           > p {

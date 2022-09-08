@@ -19,7 +19,7 @@ const RegisterSupplies = () => {
   const [quantity, setQuantity] = useState("");
   const [userData, setUserData] = useState({});
 
-  const { isOpenModalSupplies, setIsOpenModalSupplis } =
+  const { isOpenModalSupplies, setIsOpenModalSupplies } =
     useContext(AuthContext);
 
   const productList = [
@@ -50,7 +50,7 @@ const RegisterSupplies = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          setIsOpenModalSupplis(!isOpenModalSupplies);
+          setIsOpenModalSupplies(!isOpenModalSupplies);
           toast.success("Suplemento cadastrado com sucesso!", {
             autoClose: 900,
             theme: "dark",
@@ -73,18 +73,20 @@ const RegisterSupplies = () => {
         <form className="supplies__form" onSubmit={handleSubmit}>
           <Select
             label="Produto"
+            showLabel={true}
             options={productList}
             onClick={(e) => setProduct(e.target.id)}
           />
           <Select
             label="Quantidade"
+            showLabel={true}
             options={quantityList}
             onClick={(e) => setQuantity(e.target.id)}
           />
           <DivButton className="div-button">
             <ButtonBack
               type="button"
-              onClick={() => setIsOpenModalSupplis(!isOpenModalSupplies)}
+              onClick={() => setIsOpenModalSupplies(!isOpenModalSupplies)}
             >
               <MdArrowBack className="icon__arrow" />
             </ButtonBack>

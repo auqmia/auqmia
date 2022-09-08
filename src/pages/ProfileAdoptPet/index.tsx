@@ -10,13 +10,7 @@ import ModalUpdateRegister from "../../components/ModalUpUser";
 const ProfileAdoptPet = () => {
   const { user, setModalUpdateUser, modalUpdateUser } = useContext(AuthContext);
   const { name, picture, email, birthday, address, bio } = user;
-  const [birthDate] = useState(() => {
-    const date = new Date(birthday);
-    const month = date.getMonth() + 1;
-    return `${date.getDate()}/${
-      month < 10 ? `0${month}` : month
-    }/${date.getFullYear()}`;
-  });
+
   const [showPets, setShowPets] = useState<IAnimals[]>([] as IAnimals[]);
 
   useEffect(() => {
@@ -52,7 +46,7 @@ const ProfileAdoptPet = () => {
             Email: <span> {email}</span>
           </p>
           <p>
-            Data de nascimento: <span>{birthDate}</span>
+            Data de nascimento: <span>{birthday}</span>
           </p>
           <p>
             Estado: <span>{address?.state}</span>

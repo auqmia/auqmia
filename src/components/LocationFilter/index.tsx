@@ -1,36 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { getAnimalsUserId } from "../../services/getAnimalsId";
 import { getUsersAll } from "../../services/getUsers";
 import { IUserData } from "../../services/loginUserApi";
 import Select from "../Select";
 import { FilterDiv } from "./style";
-
-interface IAnimals {
-  userId: string;
-  id: string;
-  name: string;
-  type: string;
-  url: string;
-  genre: string;
-  description: string;
-}
+import { BiSearchAlt, BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const LocationFilter = () => {
   const [usersStates, setUsersStates] = useState<string[]>([] as string[]);
   const [usersCities, setUsersCities] = useState<string[]>([] as string[]);
-  const [users, setUsers] = useState<IUserData[]>([] as IUserData[]);
-  const [teste, setTeste] = useState<IAnimals[]>([] as IAnimals[]);
   const [inputState, setInputState] = useState<string>("");
   const [inputCity, setInputCity] = useState<string>("");
 
-  const { listAnimals } = useContext(AuthContext);
+  const { listAnimals, setFilteredAnimals } = useContext(AuthContext);
 
   useEffect(() => {
     getUsersAll().then((res: IUserData[]) => {
       const states = res.map(({ address: { state } }) => state);
       const cities = res.map(({ address: { city } }) => city);
-      setUsers(res);
       setUsersCities(cities);
       setUsersStates(states);
     });
@@ -38,39 +26,56 @@ const LocationFilter = () => {
 
   async function submit(event: any) {
     event.preventDefault();
+
     if (inputCity === "Selecione uma opção:") {
       setInputCity("");
     } else if (inputState === "Selecione uma opção:") {
       setInputState("");
     }
-    if (inputCity === "") {
-      const filteredUsers = users.filter(
-        ({ address: { state } }) => state === inputState
+
+    if (inputCity == "" && inputState == "") {
+      setFilteredAnimals(listAnimals);
+    } else if (inputCity != "" && inputState != "") {
+      const filter = listAnimals.filter(
+        ({ city, state }) => city === inputCity && state === inputState
       );
-
-      filteredUsers.forEach(({ id }) => {
-        getAnimalsUserId(id).then((res) => setTeste([...res, ...teste]));
-      });
-
-      console.log(teste);
+      setFilteredAnimals(filter);
+    } else if (inputCity == "") {
+      const filter = listAnimals.filter(({ state }) => state === inputState);
+      setFilteredAnimals(filter);
+    } else if (inputState == "") {
+      const filter = listAnimals.filter(({ city }) => city === inputCity);
+      setFilteredAnimals(filter);
     }
   }
 
   return (
     <FilterDiv>
-      <form onSubmit={submit}>
+      <h2 className="filter__title">Procurar pela localização</h2>
+      <form className="filter__form" onSubmit={submit}>
         <Select
-          options={["Selecione uma opção:", ...usersStates]}
+          options={["Selecione um estado...", ...usersStates]}
           label="Estados"
+          showLabel={false}
           onClick={(e) => setInputState(e.target.id)}
         />
         <Select
-          options={["Selecione uma opção:", ...usersCities]}
+          options={["Selecione uma cidade...", ...usersCities]}
           label="Cidades"
+          showLabel={false}
           onClick={(e) => setInputCity(e.target.id)}
         />
 
-        <button type="submit">ok</button>
+        <div className="filter__buttons">
+          <button className="filter__button" type="submit">
+            <BiSearchAlt />
+          </button>
+
+          <Link to="/profile" className="filter__button button--link">
+            <BiUserCircle />
+            <p className="link__text">Perfil</p>
+          </Link>
+        </div>
       </form>
     </FilterDiv>
   );

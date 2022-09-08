@@ -8,6 +8,8 @@ export interface IAnimals {
   url: string;
   genre: string;
   description: string;
+  state: string;
+  city: string;
 }
 
 export async function getAnimalsId(): Promise<IAnimals[]> {

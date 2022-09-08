@@ -38,13 +38,21 @@ const Register = () => {
         <div className="form__container">
           <div className="form__input">
             <LabelForm>Nome</LabelForm>
-            <Input type="text" {...register("name")} />
+            <Input
+              type="text"
+              {...register("name")}
+              placeholder="Digite seu nome"
+            />
             <Error>{errors.name?.message}</Error>
           </div>
 
           <div className="form__input">
             <LabelForm>Email</LabelForm>
-            <Input type="text" {...register("email")} />
+            <Input
+              type="text"
+              {...register("email")}
+              placeholder="Digite seu email"
+            />
             <Error>{errors.email?.message}</Error>
           </div>
 
@@ -112,13 +120,21 @@ const Register = () => {
 
           <div className="form__input">
             <LabelForm>Cidade</LabelForm>
-            <Input type="text" {...register("city")} />
+            <Input
+              type="text"
+              {...register("city")}
+              placeholder="Digite sua cidade"
+            />
             <Error>{errors.city?.message}</Error>
           </div>
 
           <div className="form__input">
             <LabelForm>Bairro</LabelForm>
-            <Input type="text" {...register("district")} />
+            <Input
+              type="text"
+              {...register("district")}
+              placeholder="Digite seu bairro"
+            />
             <Error>{errors.district?.message}</Error>
           </div>
 
@@ -164,13 +180,21 @@ const Register = () => {
 
           <div className="form__input">
             <LabelForm>Foto de Perfil</LabelForm>
-            <Input type="url" {...register("picture")} />
+            <Input
+              type="url"
+              {...register("picture")}
+              placeholder="Digite a url da foto"
+            />
             <Error>{errors.picture?.message}</Error>
           </div>
 
           <div className="form__input">
             <LabelForm>Sobre você</LabelForm>
-            <Input type="text" {...register("bio")} />
+            <Input
+              type="text"
+              {...register("bio")}
+              placeholder="Conte um pouco sobre você..."
+            />
             <Error>{errors.bio?.message}</Error>
           </div>
         </div>

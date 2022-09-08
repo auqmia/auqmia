@@ -25,6 +25,8 @@ interface IAuthContext {
   loginUser: (data: IUserLogin) => Promise<void>;
   loginRoute: () => void;
   listAnimals: IAnimals[];
+  filteredAnimals: IAnimals[];
+  setFilteredAnimals: Dispatch<SetStateAction<IAnimals[]>>;
   listSupplies: ISupplies[];
   user: IUserData;
   isLogged: boolean;
@@ -46,7 +48,7 @@ interface IAuthContext {
   isOpenModalSupplies: boolean;
   setIsShowModalPet: Dispatch<SetStateAction<boolean>>;
   isShowModalPet: boolean;
-  setIsOpenModalSupplis: Dispatch<SetStateAction<boolean>>;
+  setIsOpenModalSupplies: Dispatch<SetStateAction<boolean>>;
   isPageDonate: boolean;
   setIsPageDonate: Dispatch<SetStateAction<boolean>>;
   data: IData[];
@@ -60,6 +62,7 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 const AuthProvider = ({ children }: IAuthContextProps) => {
   const navigate = useNavigate();
   const [listAnimals, setListAnimals] = useState<IAnimals[]>([]);
+  const [filteredAnimals, setFilteredAnimals] = useState<IAnimals[]>([]);
   const [lisAnimalsUser, setLisAnimalsUser] = useState<IAnimals[]>([]);
   const [user, setUser] = useState<IUserData>({} as IUserData);
   const [loading, setLoading] = useState<boolean>(true);
@@ -70,8 +73,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
   const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
-  const [isOpenModalSupplies, setIsOpenModalSupplis] = useState(false);
-  const [isPageDonate, setIsPageDonate] = useState<boolean>(true);
+  const [isOpenModalSupplies, setIsOpenModalSupplies] = useState(false);
+  const [isPageDonate, setIsPageDonate] = useState<boolean>(false);
   const [data, setData] = useState<IData[]>([]);
   const [isActive, setIsActive] = useState(false);
 
@@ -153,6 +156,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
     await getAnimalsApi()
       .then((res) => {
         setListAnimals(res);
+        setFilteredAnimals(res);
       })
       .catch((err) => console.log(err));
   };
@@ -169,7 +173,12 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const registerPet = (data: {}) => {
     const token = localStorage.getItem("@AuqMia:token");
     const id = localStorage.getItem("@AuqMia:id");
-    const req = { userId: id, ...data };
+    const req = {
+      userId: id,
+      ...data,
+      city: user.address.city,
+      state: user.address.state,
+    };
 
     if (token) {
       api
@@ -184,7 +193,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
           setIsShowModalPet(!isShowModalPet);
         })
         .catch((err) => {
-          toast.error("Aconteceu algum erro, verefique os dados!", {
+          toast.error("Aconteceu algum erro, verifique os dados!", {
             autoClose: 900,
             theme: "dark",
           });
@@ -195,7 +204,6 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const updateUser = async (data: any) => {
     await upDateUserApi(data)
       .then((res: any) => {
-        console.log(res);
         setUser(res);
         setModalUpdateUser(!modalUpdateUser);
         toast.success("Usuário atualizado com sucesso!", {
@@ -262,9 +270,11 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         isShowModalPet,
         listSupplies,
         isOpenModalSupplies,
-        setIsOpenModalSupplis,
+        setIsOpenModalSupplies,
         isPageDonate,
         setIsPageDonate,
+        filteredAnimals,
+        setFilteredAnimals,
         data,
         setData,
         isActive,
