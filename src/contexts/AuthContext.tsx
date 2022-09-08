@@ -76,7 +76,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    getAnimals();
+    getAnimals().then((res) => res);
   }, []);
 
   useEffect(() => {
