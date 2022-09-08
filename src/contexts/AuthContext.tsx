@@ -16,7 +16,7 @@ import { getUsers } from "../services/getUser";
 import { IUserRegister } from "../services/registerUserApi";
 import { getAnimalsId } from "../services/getAnimalsId";
 import { getSuppliesApi, ISupplies } from "../services/getSuppliesApi";
-
+import { IData } from "../pages/Donate";
 export interface IAuthContextProps {
   children: ReactNode;
 }
@@ -51,6 +51,10 @@ interface IAuthContext {
   setIsOpenModalSupplies: Dispatch<SetStateAction<boolean>>;
   isPageDonate: boolean;
   setIsPageDonate: Dispatch<SetStateAction<boolean>>;
+  data: IData[];
+  setData: Dispatch<SetStateAction<IData[]>>;
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -71,6 +75,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
   const [isOpenModalSupplies, setIsOpenModalSupplies] = useState(false);
   const [isPageDonate, setIsPageDonate] = useState<boolean>(true);
+  const [data, setData] = useState<IData[]>([]);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     getAnimals();
@@ -84,6 +90,8 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
           api.defaults.headers = {
             Authorization: `bearer ${token}`,
           } as ICommonHeaderProperties;
+
+          api.get("/supplies").then((res) => setData(res.data));
 
           getUsers().then((res: any) => {
             setUser(res);
@@ -103,7 +111,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
       setLoading(false);
     };
     loadUser();
-  }, [isShowModalPet, isOpenModalSupplies]);
+  }, [isShowModalPet, isOpenModalSupplies, isActive]);
 
   const loginUser = async (data: IUserLogin) => {
     loginUsers(data)
@@ -268,6 +276,10 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
         setIsPageDonate,
         filteredAnimals,
         setFilteredAnimals,
+        data,
+        setData,
+        isActive,
+        setIsActive,
       }}
     >
       {children}

@@ -94,9 +94,7 @@ const ProfileForAdoption = () => {
                     <div>
                       <h5>Animal: {elem.type}</h5>
                       <span>Gênero: {elem.genre}</span>
-                      <p>Descrição: {elem.description}</p>
                     </div>
-                    <button>Adotar</button>
                   </li>
                 ))}
               </Ul>
@@ -119,7 +117,7 @@ const ProfileForAdoption = () => {
                 <li key={element.id} className="li__supplies">
                   <div className="div__info--supplies">
                     <p>{element.product}</p>
-                    <p>{`${element.quantity}kg`}</p>
+                    <p>{element.quantity}</p>
                   </div>
                   <div className="div__line"></div>
                 </li>

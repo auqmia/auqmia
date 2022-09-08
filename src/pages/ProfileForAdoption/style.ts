@@ -133,15 +133,18 @@ export const DivMain = styled.div`
       overflow-x: auto;
       justify-content: flex-start;
       li {
-        max-height: 400px;
-        p {
-          display: none;
-        }
-        button {
-          display: none;
-        }
-        img {
+        figure {
           max-height: 200px;
+        }
+        max-height: 340px;
+        padding: 4px;
+        h1 {
+          padding: 0px;
+          margin: 0px 0px 20px 0px;
+        }
+
+        img {
+          max-height: 180px;
         }
       }
     }

@@ -16,7 +16,7 @@ export const ContainerModal = styled.div`
     width: 90%;
 
     max-width: 370px;
-    max-height: 6500px;
+    max-height: 650px;
     background-color: var(--gray-5);
     display: flex;
     flex-direction: column;
