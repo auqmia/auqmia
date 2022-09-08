@@ -94,7 +94,7 @@ export const ButtonHoverLogin = styled.button`
   max-width: max-content;
   padding: 0px 10px;
   border-radius: 25px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-third);
   font-size: 24px;
   font-family: var(--font-family);
   color: var(--gray-0);
@@ -139,7 +139,7 @@ export const ButtonHoverDonation = styled.a`
   max-width: max-content;
   padding: 0px 10px;
   border-radius: 25px;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
   font-size: 24px;
   font-family: var(--font-family);
   color: var(--gray-0);
