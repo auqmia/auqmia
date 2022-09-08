@@ -194,10 +194,6 @@ export const Main = styled.main`
 
           :hover {
             animation: pulse 1s;
-
-            > .card__img {
-              /* scale: 1.2; */
-            }
           }
 
           > .card__img {
