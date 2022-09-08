@@ -74,7 +74,7 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const [isShowModalPet, setIsShowModalPet] = useState<boolean>(false);
   const [listSupplies, setListSupplies] = useState<ISupplies[]>([]);
   const [isOpenModalSupplies, setIsOpenModalSupplies] = useState(false);
-  const [isPageDonate, setIsPageDonate] = useState<boolean>(true);
+  const [isPageDonate, setIsPageDonate] = useState<boolean>(false);
   const [data, setData] = useState<IData[]>([]);
   const [isActive, setIsActive] = useState(false);
 
@@ -204,7 +204,6 @@ const AuthProvider = ({ children }: IAuthContextProps) => {
   const updateUser = async (data: any) => {
     await upDateUserApi(data)
       .then((res: any) => {
-        console.log(res);
         setUser(res);
         setModalUpdateUser(!modalUpdateUser);
         toast.success("Usuário atualizado com sucesso!", {

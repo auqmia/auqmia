@@ -64,14 +64,14 @@ function Header() {
           )}
 
           {isPageDonate ? (
-            <ButtonHoverDonation onClick={() => donate()}>
-              <p className="donation">Quero ajudar</p>
-              <FaHandHoldingHeart className="form__button--icon" />
-            </ButtonHoverDonation>
-          ) : (
             <ButtonHoverDonation onClick={() => home()}>
               <p className="home">Home</p>
               <BiHomeHeart className="form__button--icon" />
+            </ButtonHoverDonation>
+          ) : (
+            <ButtonHoverDonation onClick={() => donate()}>
+              <p className="donation">Quero ajudar</p>
+              <FaHandHoldingHeart className="form__button--icon" />
             </ButtonHoverDonation>
           )}
         </div>

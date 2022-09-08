@@ -10,7 +10,7 @@ function Dashboard() {
   const token = localStorage.getItem("@AuqMia:token");
 
   useEffect(() => {
-    setIsPageDonate(true);
+    setIsPageDonate(false);
   }, []);
 
   return (

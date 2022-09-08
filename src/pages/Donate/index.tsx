@@ -16,7 +16,8 @@ export interface IData {
 
 const Donate = () => {
   const [donate, setDonate] = useState<IData>({} as IData);
-  const { isActive, setIsActive, setData, data } = useContext(AuthContext);
+  const { isActive, setIsActive, setData, data, setIsPageDonate } =
+    useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem("@AuqMia:token");
@@ -25,6 +26,7 @@ const Donate = () => {
         setData(res.data);
       });
     }
+    setIsPageDonate(true);
   }, [isActive, setData]);
 
   return (
