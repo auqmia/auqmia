@@ -1,6 +1,12 @@
 import api from "../../services/api";
-import { AiOutlineClose } from "react-icons/ai";
+
 import { ContainerModal } from "../modalRegisterPets/styles";
+import { ModalDonateStyle } from "./style";
+import { TitleForm } from "../titleForm/style";
+import { ButtonBack, ButtonCheck } from "../../pages/Login/styles";
+import { DivButton } from "../ModalUpUser/styles";
+import { MdArrowBack } from "react-icons/md";
+import { BsCheckLg } from "react-icons/bs";
 import { IData } from "../../pages/Donate";
 
 interface IDataProps {
@@ -22,26 +28,28 @@ const ModalDonate = ({ donate, setIsActive, isActive }: IDataProps) => {
 
   return (
     <ContainerModal>
-      <section>
+      <ModalDonateStyle>
         <div>
-          <p>Doar</p>
-          <button onClick={() => setIsActive(!isActive)}>
-            <AiOutlineClose />
-          </button>
+          <TitleForm>Doar</TitleForm>
         </div>
-        <div>
-          <span>{donate.product}</span>
-          <span>{donate.quantity}</span>
+        <div className="div__donate">
+          <p>{donate.product}</p>
+          <p>{donate.quantity}</p>
         </div>
-        <button
-          onClick={() => {
-            remove(donate.id);
-            setIsActive(!isActive);
-          }}
-        >
-          OK
-        </button>
-      </section>
+        <DivButton>
+          <ButtonBack onClick={() => setIsActive(!isActive)}>
+            <MdArrowBack className="icon__arrow" />
+          </ButtonBack>
+          <ButtonCheck
+            onClick={() => {
+              remove(donate.id);
+              setIsActive(!isActive);
+            }}
+          >
+            <BsCheckLg className="icon__check" />
+          </ButtonCheck>
+        </DivButton>
+      </ModalDonateStyle>
     </ContainerModal>
   );
 };

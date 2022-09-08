@@ -3,7 +3,7 @@ import { UlDonate, DivMainDonarte } from "./style";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import ModalDonate from "../../components/modalDonate";
-import { getUsersAll } from "../../services/getUsers";
+
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -15,30 +15,17 @@ export interface IData {
 }
 
 const Donate = () => {
-  const [isActive, setIsActive] = useState(false);
-  const [data, setData] = useState<IData[]>([]);
   const [donate, setDonate] = useState<IData>({} as IData);
-  const [users, setUsers] = useState([]);
-  const token = localStorage.getItem("@AuqMia:token");
-
-  const { setIsPageDonate } = useContext(AuthContext);
+  const { isActive, setIsActive, setData, data } = useContext(AuthContext);
 
   useEffect(() => {
-    setIsPageDonate(false);
-  }, []);
-
-  useEffect(() => {
+    const token = localStorage.getItem("@AuqMia:token");
     if (token) {
-      try {
-        api.get("/supplies").then((res) => setData(res.data));
-        getUsersAll().then((res) => {
-          setUsers(res);
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      api.get("/supplies").then((res) => {
+        setData(res.data);
+      });
     }
-  }, [token]);
+  }, [isActive, setData]);
 
   return (
     <>
@@ -49,24 +36,30 @@ const Donate = () => {
             <h1 className="title__help--users">Doações</h1>
           </div>
 
-          {users.map((elem: any) => (
+          {data.map((elem: any) => (
             <li key={elem.id} className="list__users">
               <div className="div__list--user">
                 <figure>
-                  <img src={elem.picture} alt="userpicture" />
+                  <img src={elem.userData?.picture} alt="userpicture" />
                 </figure>
                 <div className="div__info--users">
                   <div>
-                    <h2>{elem.name}</h2>
-                    <p>{`${elem.address.city}, ${elem.address.state}`}</p>
+                    <h2>{elem.userData?.name}</h2>
+                    <p>{`${elem.userData?.address?.city}, ${elem.userData?.address?.state}`}</p>
                   </div>
                   <div className="div__help--users">
-                    <h3>Pedido</h3>
+                    <p> {elem.product},</p>
+                    <p> {elem.quantity}</p>
                   </div>
                   <div className="div__button--help">
                     <button
                       onClick={() => {
-                        setIsActive(!isActive);
+                        setDonate({
+                          id: elem.id,
+                          product: elem.product,
+                          quantity: elem.quantity,
+                        });
+                        setIsActive(true);
                       }}
                     >
                       Ajudar <FaHandHoldingHeart />
