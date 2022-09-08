@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 function Dashboard() {
   const { setIsPageDonate } = useContext(AuthContext);
+  const token = localStorage.getItem("@AuqMia:token");
 
   useEffect(() => {
     setIsPageDonate(true);
@@ -15,7 +16,7 @@ function Dashboard() {
   return (
     <>
       <Header />
-      <LocationFilter />
+      {token && <LocationFilter />}
       <Ul>
         <Cards />
       </Ul>

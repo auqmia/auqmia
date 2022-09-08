@@ -3,11 +3,12 @@ import { FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
 
 interface ISelect {
+  showLabel: boolean;
   label: string;
   options: string[];
   onClick: (e: any) => void;
 }
-const Select = ({ label, options, onClick }: ISelect) => {
+const Select = ({ showLabel, label, options, onClick }: ISelect) => {
   const [isOptionsShowing, setIsOptionsShowing] = useState(false);
   const [selectText, setSelectText] = useState("Selecione uma opção:");
 
@@ -25,7 +26,7 @@ const Select = ({ label, options, onClick }: ISelect) => {
 
   return (
     <StyledSelect>
-      <h4 className="select__label">{label}</h4>
+      {showLabel && <h4 className="select__label">{label}</h4>}
       <div className="container__dropdown">
         <button
           className={`dropdown__select ${label}`}
