@@ -1,5 +1,5 @@
 import api from "../../services/api";
-
+import { toast } from "react-toastify";
 import { ContainerModal } from "../modalRegisterPets/styles";
 import { ModalDonateStyle } from "./style";
 import { TitleForm } from "../titleForm/style";
@@ -20,9 +20,22 @@ const ModalDonate = ({ donate, setIsActive, isActive }: IDataProps) => {
 
   function remove(id: number) {
     if (token) {
-      api.delete(`/supplies/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      api
+        .delete(`/supplies/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          toast.success("Doação feita com sucesso!", {
+            autoClose: 900,
+            theme: "dark",
+          });
+        })
+        .catch((err) => {
+          toast.success("Doação negada!", {
+            autoClose: 900,
+            theme: "dark",
+          });
+        });
     }
   }
 
