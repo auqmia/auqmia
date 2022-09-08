@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 export const FilterDiv = styled.div`
   width: 100%;
+  height: fit-content;
   margin: auto;
+  /* display: flex; */
   color: var(--gray-0);
 
   @media (min-width: 768px) {
-    width: 80%;
+    /* width: 80%; */
     margin-left: 40px;
   }
 
@@ -58,24 +60,61 @@ export const FilterDiv = styled.div`
       }
     }
 
-    > .filter__button {
-      height: 50px;
-      width: 50px;
+    > .filter__buttons {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
       margin: 0 auto 25px;
-      padding: 10px;
-      background-color: var(--color-secondary);
-      border-radius: 25px;
 
-      :hover {
-        animation: pulse 1s;
-        > svg {
-          animation: rubberBand 1s;
-          scale: 1.1;
+      @media (min-width: 768px) {
+        justify-content: flex-start;
+        margin-left: 20px;
+      }
+
+      > .filter__button.button--link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-third);
+        @media (min-width: 768px) {
+          width: fit-content;
+          padding: 0 15px;
         }
       }
-      > svg {
-        color: var(--gray-0);
-        font-size: 30px;
+
+      > .filter__button {
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        background-color: var(--color-secondary);
+        border-radius: 25px;
+
+        :hover {
+          animation: pulse 1s;
+          > svg {
+            animation: rubberBand 1s;
+            scale: 1.1;
+          }
+        }
+
+        > svg {
+          color: var(--gray-0);
+          font-size: 30px;
+        }
+
+        > .link__text {
+          display: none;
+          width: fit-content;
+          margin: 0;
+          color: var(--gray-0);
+          font-size: 20px;
+
+          @media (min-width: 768px) {
+            display: inline;
+            margin-left: 5px;
+          }
+        }
       }
     }
   }

@@ -4,7 +4,8 @@ import { getUsersAll } from "../../services/getUsers";
 import { IUserData } from "../../services/loginUserApi";
 import Select from "../Select";
 import { FilterDiv } from "./style";
-import { BiSearchAlt } from "react-icons/bi";
+import { BiSearchAlt, BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const LocationFilter = () => {
   const [usersStates, setUsersStates] = useState<string[]>([] as string[]);
@@ -65,9 +66,16 @@ const LocationFilter = () => {
           onClick={(e) => setInputCity(e.target.id)}
         />
 
-        <button className="filter__button" type="submit">
-          <BiSearchAlt />
-        </button>
+        <div className="filter__buttons">
+          <button className="filter__button" type="submit">
+            <BiSearchAlt />
+          </button>
+
+          <Link to="/profile" className="filter__button button--link">
+            <BiUserCircle />
+            <p className="link__text">Perfil</p>
+          </Link>
+        </div>
       </form>
     </FilterDiv>
   );
