@@ -7,7 +7,7 @@ import { IAnimals } from "../../services/getAnimalsApi";
 function Cards() {
   const navigate = useNavigate();
 
-  const { listAnimals, deleteAnimal, adopted, setAdopted } =
+  const { listAnimals, deleteAnimal, adopted, setAdopted, filteredAnimals } =
     useContext(AuthContext);
 
   const deleteCard = (id: string) => {
@@ -37,26 +37,47 @@ function Cards() {
 
   return (
     <>
-      {listAnimals.map((elem: IAnimals) => (
-        <li key={elem.id} className={`list${elem.id}`}>
-          <h1>{elem.name}</h1>
-          <figure>
-            <img src={elem.url} alt="foto" />
-          </figure>
-          <div>
-            <h4>
-              <span>Animal:</span> {elem.type}
-            </h4>
-            <h5>
-              <span>Gênero:</span> {elem.genre}
-            </h5>
-            <h6>
-              <span>Descrição:</span> {elem.description}
-            </h6>
-          </div>
-          <button onClick={() => deleteCard(elem.id)}>Adotar</button>
-        </li>
-      ))}
+      {filteredAnimals.length === 0
+        ? listAnimals.map((elem: IAnimals) => (
+            <li key={elem.id} className={`list${elem.id}`}>
+              <h1>{elem.name}</h1>
+              <figure>
+                <img src={elem.url} alt="foto" />
+              </figure>
+              <div>
+                <h4>
+                  <span>Animal:</span> {elem.type}
+                </h4>
+                <h5>
+                  <span>Gênero:</span> {elem.genre}
+                </h5>
+                <h6>
+                  <span>Descrição:</span> {elem.description}
+                </h6>
+              </div>
+              <button onClick={() => deleteCard(elem.id)}>Adotar</button>
+            </li>
+          ))
+        : filteredAnimals.map((elem: IAnimals) => (
+            <li key={elem.id} className={`list${elem.id}`}>
+              <h1>{elem.name}</h1>
+              <figure>
+                <img src={elem.url} alt="foto" />
+              </figure>
+              <div>
+                <h4>
+                  <span>Animal:</span> {elem.type}
+                </h4>
+                <h5>
+                  <span>Gênero:</span> {elem.genre}
+                </h5>
+                <h6>
+                  <span>Descrição:</span> {elem.description}
+                </h6>
+              </div>
+              <button onClick={() => deleteCard(elem.id)}>Adotar</button>
+            </li>
+          ))}
     </>
   );
 }

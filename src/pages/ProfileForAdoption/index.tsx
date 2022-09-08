@@ -17,7 +17,7 @@ const ProfileForAdoption = () => {
     listSupplies,
     modalUpdateUser,
     isOpenModalSupplies,
-    setIsOpenModalSupplis,
+    setIsOpenModalSupplies,
   } = useContext(AuthContext);
 
   const [isShowInfo, setIsShowInfo] = useState(false);
@@ -104,7 +104,7 @@ const ProfileForAdoption = () => {
             <div className="div-more-pets">
               <button
                 className="button-requests"
-                onClick={() => setIsOpenModalSupplis(!isOpenModalSupplies)}
+                onClick={() => setIsOpenModalSupplies(!isOpenModalSupplies)}
               >
                 <RiAddFill className="icon-button" />
               </button>
