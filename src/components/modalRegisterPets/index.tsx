@@ -11,11 +11,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { MdArrowBack } from "react-icons/md";
 
-
 const RegisterPets = () => {
   const { register, handleSubmit } = useForm();
 
-  const { registerPet, setIsShowModalPet, isShowModalPet } = useContext(AuthContext);
+  const { registerPet, setIsShowModalPet, isShowModalPet } =
+    useContext(AuthContext);
 
   return (
     <ContainerModal>
@@ -66,7 +66,7 @@ const RegisterPets = () => {
                   {...register("genre")}
                 />
               </RadioDiv>
-              <label>Fêmia</label>
+              <label>Fêmea</label>
             </div>
             <div className="custom-radio">
               <RadioDiv>
